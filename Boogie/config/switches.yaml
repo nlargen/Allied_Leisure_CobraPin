@@ -98,6 +98,7 @@ switches:
 
   s_tilt: 
     number: 39
+    tags: tilt
 
   s_drop_target_1:
     number: 40

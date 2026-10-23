@@ -8,6 +8,7 @@ config:
 
 modes:
   - base
+  - tilt
 
 machine:
   balls_installed: 1

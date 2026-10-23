@@ -187,4 +187,3 @@ coil_player:
   raise_target_d_complete: c_raise_target_d
   pop_bumper_complete: c_pop_bumper
   trigger_thumper: c_thumper_main 
-  
