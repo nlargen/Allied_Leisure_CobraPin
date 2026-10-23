@@ -65,19 +65,9 @@ variable_player:
       action: set
 
   # ten point targets at top of playfield                    
-  s_10_top_1_active:
+  s_10_top_active:
     score: 10
     10_top_1_hit:
-      int: 1
-      action: set
-  s_10_top_2_active:
-    score: 10
-    10_top_2_hit:
-      int: 1
-      action: set
-  s_10_top_3_active:
-    score: 10
-    10_top_3_hit:
       int: 1
       action: set
 
@@ -118,10 +108,15 @@ variable_player:
 
   # drop target scoring
 
-
   # tilt enabled 
   s_tilt_active: 
     score: -5000 
+
+  # ball in playfield
+  s_ball_in_playfield_active: 
+    s_ball_in_playfield_hit: 
+      int: 1
+      action: set  
 
 accruals: 
   left_bank: 
@@ -173,6 +168,14 @@ accruals:
     events_when_complete:
       - pop_bumper_complete
     reset_on_complete: true
+
+  #trigger ball in playfield for current ball
+  trigger_ball_in_play: 
+    events: 
+      - s_ball_in_playfield_active
+    events_when_complete: 
+      - trigger_thumper
+    reset_on_complete: true  
 
 coil_player: 
   open_gate_d: c_gate_open_d
