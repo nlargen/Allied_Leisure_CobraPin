@@ -1,0 +1,115 @@
+#config_version=6
+
+switches:
+  s_start:
+    number: 1
+    tags: start
+
+  s_500_ab_1: 
+    number: 3
+  s_500_ab_2: 
+    number: 4    
+  s_500_ab_3: 
+    number: 5
+  s_500_ab_4: 
+    number: 6  
+  s_500_ab_5: 
+    number: 7
+  s_500_ab_6: 
+    number: 8  
+  s_500_ab_7: 
+    number: 9
+  s_500_ab_8: 
+    number: 10  
+
+  s_50_rollover_1: 
+    number: 13 
+  s_50_rollover_2: 
+    number: 14 
+  s_50_rollover_3: 
+    number: 15   
+
+  s_10_top_1:
+    number: 16
+  s_10_top_2:
+    number: 17
+  s_10_top_3: 
+    number: 18
+
+  s_raise_target_d_og:
+    number: 19
+  s_raise_target_a_og: 
+    number: 20
+  s_raise_target_b: 
+    number: 21
+  s_raise_target_c:
+    number: 22
+
+  s_500_rollover_1: 
+    number: 23
+  s_500_rollover_2: 
+    number: 24      
+
+  s_pop_bumper: 
+    number: 25
+  s_pop_bumper_eos: 
+    number: 42      
+
+  s_close_gate_1:
+    number: 30
+
+  s_close_gate_2: 
+    number: 31           
+
+  s_target_a:
+    number: 26
+  s_target_b:
+    number: 27
+  s_target_c: 
+    number: 28
+  s_target_d: 
+    number: 29
+
+  s_ball_in_playfield: 
+    number: 11   
+
+  s_outhole_switch: 
+    number: 12       
+
+  s_flipper_left_eos: 
+    number: 32
+  s_flipper_right_eos: 
+    number: 33
+
+  s_flipper_left: 
+    number: 34
+  s_flipper_right: 
+    number: 35
+
+  s_slingshot_left:
+    number: 38
+  s_slingshot_right:
+    number: 39
+
+  s_slingshot_left_eos: 
+    number: 40
+  s_slingshot_right_eos:     
+    number: 41
+
+  s_credit_1: 
+    number: 36
+
+  s_credit_2: 
+    number: 37    
+
+  s_tilt: 
+    number: 43 
+
+  s_drop_target_1:
+    number: 44
+  s_drop_target_2: 
+    number: 45
+  s_drop_target_3:
+    number: 46
+  s_drop_target_4:
+    number: 47  

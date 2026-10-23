@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://rifstd5kh5u8"]
+
+[ext_resource type="Script" uid="uid://kre3uuxst2yg" path="res://BoogiePlayfield.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bfvhmv2eirpua" path="res://addons/mpf-gmc/classes/mpf_variable.gd" id="3_bmlbb"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2wod3"]
+load_path = "res://.godot/imported/boogie_playfield_photo.png-5e2080cc0bc6b4e37c61bef1badecec5.ctex"
+
+[node name="BoogiePlayfield" type="Control" unique_id=221557944]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+board_texture = SubResource("CompressedTexture2D_2wod3")
+
+[node name="MPFVariable" type="Label" parent="." unique_id=721381531]
+top_level = true
+layout_mode = 0
+offset_left = 42.0
+offset_top = 77.0
+offset_right = 329.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 52
+text = "score"
+max_lines_visible = 1
+visible_characters = 5
+script = ExtResource("3_bmlbb")
+variable_name = "score"
+comma_separate = true
+min_digits = 3
+initialize_empty = false
+min_players = 1
+max_players = 4
+metadata/_custom_type_script = "uid://bfvhmv2eirpua"

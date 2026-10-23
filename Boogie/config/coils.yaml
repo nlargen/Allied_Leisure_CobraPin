@@ -1,0 +1,90 @@
+
+#config_version=6
+
+# BOOGIE - COIL MAP
+# Driver numbers intentionally unassigned until CobraPin is installed.
+# Verify each output with the controller documentation before testing.
+
+coils:
+
+  # --- Flippers ---
+  # Confirm dual-wound wiring and separate main/hold output requirements.
+  c_flipper_left_main:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_flipper_left_hold:
+    # number: TODO
+    # default_hold_power: TODO
+
+  c_flipper_right_main:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_flipper_right_hold:
+    # number: TODO
+    # default_hold_power: TODO
+
+  # --- Slingshots ---
+  c_sling_left:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_sling_right:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Pop bumper ---
+  c_pop_bumper:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Drop-target reset ---
+  # Confirm whether these are four independent coils or a shared mechanism.
+  c_raise_target_a:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_raise_target_b:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_raise_target_c:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_raise_target_d:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Gates ---
+  c_gate_open_a:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_gate_open_d:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Outhole kicker ---
+  c_outhole_kicker:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Thumper ---
+  c_thumper_main:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  # --- Chimes ---
+  c_chime_1:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_chime_2:
+    # number: TODO
+    # default_pulse_ms: TODO
+
+  c_chime_3:
+    # number: TODO
+    # default_pulse_ms: TODO

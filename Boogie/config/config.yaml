@@ -1,0 +1,26 @@
+#config_version=6
+
+config: 
+ # - coils.yaml uncomment when coils defined
+ - switches.yaml
+ - playfields.yaml
+ - balldevices.yaml
+
+modes:
+  - base
+
+machine:
+  balls_installed: 1
+
+game:
+  balls_per_game: 5
+  max_players: 2
+
+virtual_platform_start_active_switches: 
+  s_outhole_switch
+
+hardware:
+  platform: smart_virtual
+
+smart_virtual:
+  simulate_manual_plunger: true  

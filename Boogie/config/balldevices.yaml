@@ -1,0 +1,8 @@
+#config_version=6
+
+ball_devices:
+  bd_drain:
+    ball_switches: s_outhole_switch
+    mechanical_eject: true
+    eject_timeouts: 3s
+    tags: drain, home, trough

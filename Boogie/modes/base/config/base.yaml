@@ -1,0 +1,186 @@
+#config_version=6
+
+mode:
+  start_events: ball_starting
+  priority: 100
+
+variable_player:
+  # left and right 500 point targets
+  s_500_ab_1_active:
+    score: 500
+    ab_1_hit: 
+      int: 1
+      action: set
+  s_500_ab_2_active:
+    score: 500
+    ab_2_hit: 
+      int: 1
+      action: set
+  s_500_ab_3_active:
+    score: 500
+    ab_3_hit: 
+      int: 1
+      action: set  
+  s_500_ab_4_active:
+    score: 500
+    ab_4_hit: 
+      int: 1
+      action: set    
+  s_500_ab_5_active:
+    score: 500
+    ab_5_hit: 
+      int: 1
+      action: set    
+  s_500_ab_6_active:
+    score: 500
+    ab_6_hit: 
+      int: 1
+      action: set    
+  s_500_ab_7_active:
+    score: 500
+    ab_7_hit: 
+      int: 1
+      action: set    
+  s_500_ab_8_active:
+    score: 500 
+    ab_8_hit: 
+      int: 1
+      action: set  
+
+  # top rollover switches       
+  s_50_rollover_1_active:
+    score: 50 
+    rollover_1_hit: 
+      int: 1
+      action: set 
+  s_50_rollover_2_active:
+    score: 50 
+    rollover_2_hit: 
+      int: 1
+      action: set  
+  s_50_rollover_3_active:
+    score: 50 
+    rollover_3_hit: 
+      int: 1
+      action: set
+
+  # ten point targets at top of playfield                    
+  s_10_top_1_active:
+    score: 10
+    10_top_1_hit:
+      int: 1
+      action: set
+  s_10_top_2_active:
+    score: 10
+    10_top_2_hit:
+      int: 1
+      action: set
+  s_10_top_3_active:
+    score: 10
+    10_top_3_hit:
+      int: 1
+      action: set
+
+  #drop target rollover switch
+  s_raise_target_a_og_active: 
+    score: 50
+    raise_target_a_og_hit: 
+      int: 1
+      action: set    
+  s_raise_target_d_og_active: 
+    score: 50
+    raise_target_d_og_hit: 
+      int: 1
+      action: set  
+  s_raise_target_b_active: 
+    score: 50
+    s_raise_target_b_hit: 
+      int: 1 
+      action: set 
+  s_raise_target_c_active: 
+    score: 50
+    s_raise_target_c_hit:
+      int: 1
+      action: set
+
+  # rollover target scoring
+  s_500_rollover_1_active:
+    score: 500
+  s_500_rollover_2_active: 
+    score: 500      
+
+  # pop bumper hit
+  s_pop_bumper_active: 
+    score: 50
+    s_pop_bumper_hit: 
+      int: 1
+      action: set
+
+  # drop target scoring
+
+
+  # tilt enabled 
+  s_tilt_active: 
+    score: -5000 
+
+accruals: 
+  left_bank: 
+    events: 
+      - s_500_ab_1_active
+      - s_500_ab_2_active
+      - s_500_ab_3_active
+      - s_500_ab_4_active
+    events_when_complete: left_bank_complete
+    reset_on_complete: false
+  right_bank:
+    events: 
+      - s_500_ab_5_active
+      - s_500_ab_6_active
+      - s_500_ab_7_active
+      - s_500_ab_8_active
+    events_when_complete: right_bank_complete
+    reset_on_complete: false  
+  
+  #when rollover target a og hit raise target
+  raise_target_a:
+    events: 
+      - s_raise_target_a_og_active
+    events_when_complete: 
+      - raise_target_a_complete
+      - open_gate_a  
+    reset_on_complete: false 
+  raise_target_b:
+    events:
+      - s_raise_target_b_active
+    events_when_complete:
+      - raise_target_b_complete
+  raise_target_c:
+    events:
+      - s_raise_target_c_active
+    events_when_complete: 
+      - raise_target_c_complete       
+  raise_target_d:
+    events: 
+      - s_raise_target_d_og_active
+    events_when_complete: 
+      - raise_target_d_complete
+      - open_gate_d  
+    reset_on_complete: false
+  # pop bumper trigger  
+  trigger_pop_bumper: 
+    events: 
+      - s_pop_bumper_active
+    events_when_complete:
+      - pop_bumper_complete
+    reset_on_complete: true
+
+coil_player: 
+  open_gate_d: c_gate_open_d
+  open_gate_a: c_gate_open_a
+  raise_target_a_complete: c_raise_target_a  
+  raise_target_b_complete: c_raise_target_b
+  raise_target_c_complete: c_raise_target_c 
+  raise_target_d_complete: c_raise_target_d
+  pop_bumper_complete: c_pop_bumper
+  trigger_thumper: c_thumper_main 
+  
