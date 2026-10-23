@@ -136,7 +136,7 @@ accruals:
     events_when_complete: right_bank_complete
     reset_on_complete: false  
   
-  #when rollover target a og hit raise target
+  #when rollover hit raise target
   raise_target_a:
     events: 
       - s_raise_target_a_og_active
@@ -161,6 +161,7 @@ accruals:
       - raise_target_d_complete
       - open_gate_d  
     reset_on_complete: false
+
   # pop bumper trigger  
   trigger_pop_bumper: 
     events: 
