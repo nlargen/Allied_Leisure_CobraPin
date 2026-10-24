@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://ds4gduf8660uj"]
+
+[ext_resource type="Script" uid="uid://b7l2vx2o7yb2q" path="res://addons/mpf-gmc/classes/mpf_window.gd" id="1_ixxnq"]
+[ext_resource type="Shader" uid="uid://2ol6tp0k5xjg" path="res://addons/mpf-gmc/resources/virtual_dmd.gdshader" id="2_cbmcr"]
+[ext_resource type="Script" uid="uid://cnc7dblwai6nd" path="res://addons/mpf-gmc/classes/mpf_display.gd" id="2_clr31"]
+[ext_resource type="PackedScene" uid="uid://42yuo8xuwweh" path="res://BoogieSlide.tscn" id="3_n501s"]
+[ext_resource type="Shader" uid="uid://dkgx27pr57puc" path="res://addons/mpf-gmc/resources/dmd_dots.gdshader" id="5_0sixv"]
+[ext_resource type="Shader" uid="uid://jeotwb7jhaxr" path="res://addons/mpf-gmc/resources/pixelate.gdshader" id="5_m6y8w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vnlqf"]
+shader = ExtResource("2_cbmcr")
+shader_parameter/color = Color(0.101961, 0, 0, 1)
+shader_parameter/hardness = 5.0
+shader_parameter/spacing = 2.0
+shader_parameter/columns = 98.0
+shader_parameter/rows = 36.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gmaen"]
+shader = ExtResource("5_m6y8w")
+shader_parameter/columns = 128.0
+shader_parameter/rows = 32.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bkj2"]
+shader = ExtResource("5_0sixv")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/hardness = 5.0
+shader_parameter/spacing = 2.0
+shader_parameter/columns = 98.0
+shader_parameter/rows = 36.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t6y31"]
+
+[node name="MPFWindow" type="Control" unique_id=1727691398]
+custom_minimum_size = Vector2(1920, 720)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ixxnq")
+
+[node name="DefaultDisplay" type="Control" parent="." unique_id=1040403395]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_clr31")
+is_default = true
+initial_slide = ExtResource("3_n501s")
+
+[node name="filters" type="Control" parent="." unique_id=820264266]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="virtual_dmd" type="ColorRect" parent="filters" unique_id=834809390]
+z_index = 4096
+material = SubResource("ShaderMaterial_vnlqf")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pixelate" type="ColorRect" parent="filters" unique_id=741613194]
+visible = false
+z_index = 4096
+material = SubResource("ShaderMaterial_gmaen")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="dmd_dots" type="ColorRect" parent="filters" unique_id=585980446]
+visible = false
+top_level = true
+z_index = 4096
+material = SubResource("ShaderMaterial_4bkj2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="custom" type="ColorRect" parent="filters" unique_id=1007062807]
+visible = false
+top_level = true
+z_index = 4096
+material = SubResource("ShaderMaterial_t6y31")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

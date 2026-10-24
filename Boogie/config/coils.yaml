@@ -1,0 +1,122 @@
+#config_version=6
+# Boogie initial coil configuration — MPF 0.80.1 / CobraPin
+# Conservative commissioning draft. Verify wiring and driver limits before energizing.
+# All driver numbers are intentionally left as placeholders.
+
+coils:
+  # Allied 264-1-155 — dual-wound flippers.
+  # Main winding previously reported as approximately 2 ohm.
+  # Verify actual resistance and driver capability before powering.
+  c_flipper_left_main:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_pulse_power: 0.25
+    max_pulse_power: 1.0
+    
+  c_flipper_right_main:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_pulse_power: 0.25
+    max_pulse_power: 1.0
+
+  # Separate 17-ohm hold windings. Confirm hold-power support and safe operation.
+  # 25% is only a cautious initial software request, not a validated safe setting.
+  c_flipper_left_hold:
+    # number: TODO_COBRAPIN_DRIVER
+    default_hold_power: 0.25
+    max_hold_power: 0.25
+
+  c_flipper_right_hold:
+    # number: TODO_COBRAPIN_DRIVER
+    default_hold_power: 0.25
+    max_hold_power: 0.25
+
+  # Allied 264-1-43 pop bumper; reference says 9 ohm.
+  c_pop_bumper:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  # Allied 264-1-102 outhole kicker.
+  c_outhole_kicker:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  # Allied 264-1-102 chime.
+  c_chime_10:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+  c_chime_50:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+  c_chime_100:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true      
+
+  #drop targets
+  c_drop_target_1:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  c_drop_target_2:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  c_drop_target_3:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  c_drop_target_4:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  #slingshots 
+  # Allied 264-1-46 slingshots.
+  c_slingshot_left:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  c_slingshot_right:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  # Allied 264-1-137 thumper.
+  c_thumper:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    default_recycle: true
+
+  # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
+  c_gate_a:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5
+    # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
+  c_gate_b:
+    # number: TODO_COBRAPIN_DRIVER
+    default_pulse_ms: 3
+    max_pulse_ms: 5  
