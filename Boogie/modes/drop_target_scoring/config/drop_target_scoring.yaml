@@ -1,0 +1,7 @@
+#config_version=6
+
+mode:
+  start_events: ball_starting
+  priority: 100
+  game_mode: true
+  code: drop_target_scoring.DropTargetScoring

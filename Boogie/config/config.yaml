@@ -9,6 +9,7 @@ config:
 modes:
   - base
   - tilt
+  - drop_target_scoring
 
 machine:
   balls_installed: 1
