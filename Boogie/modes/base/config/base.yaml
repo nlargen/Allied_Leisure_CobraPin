@@ -102,11 +102,16 @@ variable_player:
   # pop bumper hit
   s_pop_bumper_active: 
     score: 50
-    s_pop_bumper_hit: 
-      int: 1
-      action: set
+
+  #slingshot scoring
+  s_slingshot_left_active: 
+    score: 50
+
+  s_slingshot_right_active: 
+    score: 50
 
   # drop target scoring
+  # see python    
 
   # tilt enabled 
   s_tilt_active: 
@@ -140,7 +145,7 @@ accruals:
       - s_500_ab_8_active
     events_when_complete: right_bank_complete
     reset_on_complete: false  
-  
+
   #when rollover hit raise target
   raise_target_a:
     events: 
@@ -167,14 +172,6 @@ accruals:
       - open_gate_d  
     reset_on_complete: false
 
-  # pop bumper trigger  
-  trigger_pop_bumper: 
-    events: 
-      - s_pop_bumper_active
-    events_when_complete:
-      - pop_bumper_complete
-    reset_on_complete: true
-
   #trigger ball in playfield for current ball
   trigger_ball_in_play: 
     events: 
@@ -190,5 +187,4 @@ coil_player:
   raise_target_b_complete: c_raise_target_b
   raise_target_c_complete: c_raise_target_c 
   raise_target_d_complete: c_raise_target_d
-  pop_bumper_complete: c_pop_bumper
   trigger_thumper: c_thumper_main 

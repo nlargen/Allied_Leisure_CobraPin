@@ -21,8 +21,22 @@ game:
 virtual_platform_start_active_switches: 
   s_outhole_switch
 
+autofire_coils:
+  left_slingshot:
+    coil: c_slingshot_left
+    switch: s_slingshot_left
+
+  right_slingshot:
+    coil: c_slingshot_right
+    switch: s_slingshot_right
+  
+  pop_bumper:
+    coil: c_pop_bumper
+    switch: s_pop_bumper   
+
 hardware:
   platform: smart_virtual
 
 smart_virtual:
   simulate_manual_plunger: true  
+
