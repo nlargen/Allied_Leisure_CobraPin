@@ -1,0 +1,26 @@
+#config_version=6
+
+# Dual-wound flippers:
+# - 2 ohm / 24 V winding is the main (high-power) coil.
+# - 17 ohm / 24 V winding is the hold coil.
+# Confirm coil-to-driver wiring and safe timing/power settings before enabling.
+
+flippers:
+  f_flipper_left:
+    main_coil: c_flipper_left_main
+    hold_coil: c_flipper_left_hold
+    activation_switch: s_flipper_left
+    eos_switch: s_flipper_left_eos
+    use_eos: true
+
+  f_flipper_right:
+    main_coil: c_flipper_right_main
+    hold_coil: c_flipper_right_hold
+    activation_switch: s_flipper_right
+    eos_switch: s_flipper_right_eos
+    use_eos: true
+
+# Before loading this file from config.yaml:
+# - Set the actual driver numbers and safe coil settings in coils.yaml.
+# - Confirm the EOS switches and dual-wound coil wiring for each flipper.
+# - Test the flipper rules on the installed controller before normal play.

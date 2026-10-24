@@ -22,7 +22,7 @@ switches:
   s_500_ab_8: 
     number: 9
 
-  s_50_rollover: 
+  s_50_rollover_1: 
     number: 10
   s_50_rollover_2: 
     number: 11

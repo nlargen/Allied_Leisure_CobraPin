@@ -117,6 +117,11 @@ variable_player:
     s_ball_in_playfield_hit: 
       int: 1
       action: set  
+  # credit accrual
+  s_credit_1_active: 
+    s_credit_1_hit: 
+      int: 1
+      action: set
 
 accruals: 
   left_bank: 
