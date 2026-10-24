@@ -11,11 +11,15 @@ coils:
     # number: TODO_COBRAPIN_DRIVER
     default_pulse_ms: 3
     max_pulse_ms: 5
-
+    default_pulse_power: 0.25
+    max_pulse_power: 1.0
+    
   c_flipper_right_main:
     # number: TODO_COBRAPIN_DRIVER
     default_pulse_ms: 3
     max_pulse_ms: 5
+    default_pulse_power: 0.25
+    max_pulse_power: 1.0
 
   # Separate 17-ohm hold windings. Confirm hold-power support and safe operation.
   # 25% is only a cautious initial software request, not a validated safe setting.
