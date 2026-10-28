@@ -1,0 +1,60 @@
+#config_version=6
+
+# Sequential logical positions for the 25 playfield LEDs.
+# These remain on smart_virtual until the physical CobraPin/WS2812 platform
+# output mapping is commissioned.
+lights:
+  l_special_left:
+    number: 1
+  l_special_right:
+    number: 2
+
+  l_bonus_1000:
+    number: 3
+  l_bonus_2000:
+    number: 4
+  l_bonus_3000:
+    number: 5
+  l_bonus_4000:
+    number: 6
+  l_bonus_5000:
+    number: 7
+  l_bonus_6000:
+    number: 8
+  l_bonus_7000:
+    number: 9
+  l_bonus_8000:
+    number: 10
+  l_bonus_9000:
+    number: 11
+  l_bonus_10000:
+    number: 12
+
+  l_double_bonus:
+    number: 13
+  l_gates_open:
+    number: 14
+
+  l_bonus_advance_1:
+    number: 15
+  l_bonus_advance_2:
+    number: 16
+  l_bonus_advance_3:
+    number: 17
+  l_bonus_advance_4:
+    number: 18
+  l_bonus_advance_5:
+    number: 19
+  l_bonus_advance_6:
+    number: 20
+  l_bonus_advance_7:
+    number: 21
+  l_bonus_advance_8:
+    number: 22
+
+  l_500_when_lit_1:
+    number: 23
+  l_500_when_lit_2:
+    number: 24
+  l_500_when_lit_3:
+    number: 25

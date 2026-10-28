@@ -34,8 +34,9 @@ The MPF machine configuration is in [`Boogie/config/`](./Boogie/config/), with
 game modes in [`Boogie/modes/`](./Boogie/modes/).
 
 - [`config.yaml`](./Boogie/config/config.yaml) sets up a five-ball game for up
-  to two players, loads the base, tilt, and drop-target-scoring modes, and
-  currently selects MPF's `smart_virtual` platform for development.
+  to two players, loads the base, tilt, drop-target-scoring, and playfield
+  lights modes, and currently selects MPF's `smart_virtual` platform for
+  development.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and
   cabinet switches to logical switch names. CobraPin switch addresses still
   need to be entered for the physical installation.
@@ -47,9 +48,20 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   switch-driven scoring and playfield logic. It awards points for configured
   targets, rollovers, pop bumper, and slingshots, tracks completion of target
   banks, and applies the current -5000-point tilt penalty.
+- [`lights.yaml`](./Boogie/config/lights.yaml) defines 25 sequential logical
+  playfield lights. The `playfield_lights` mode controls the bonus ladder,
+  target-progress indicators, random 500-when-lit rollover indicator, double
+  bonus, gate-open, and special lamps per ball. Each special lamp follows its
+  corresponding gate independently of double bonus; the gates-open lamp is on
+  only while both gates are open. Each of the three 50-point
+  rollover switches scores an additional 500 points once per ball when its
+  matching randomly selected 500-when-lit lamp is lit. Accumulated bonus is
+  awarded at ball end and doubled when double bonus is active. These logical
+  light numbers are currently virtual; the CobraPin WS2812 output mapping
+  still needs commissioning.
 - The built-in MPF `tilt` mode is enabled. The physical tilt switch is tagged
   as `tilt`, allowing MPF to handle tilt behavior and ball ending.
-- [`drop_target_scoring.py`](./Boogie/modes/drop_target_scoring/drop_target_scoring.py)
+- [`drop_target_scoring.py`](./Boogie/modes/drop_target_scoring/code/drop_target_scoring.py)
   scores 1000 points when one of the four drop targets falls after being
   detected in its raised state.
 - [`coils.yaml`](./Boogie/config/coils.yaml) and
@@ -58,10 +70,10 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   the current pulse/hold values are unvalidated commissioning drafts, not
   factory specifications or confirmed safe settings.
 
-The physical CobraPin platform and the coil/flipper files are not currently
-enabled in the machine config. The checked-in machine config remains on
-`smart_virtual`; the coil config include is commented out, and the flipper
-config is not included. Complete and verify the hardware mappings and driver
+The physical CobraPin platform and flipper config are not currently enabled.
+The checked-in machine config remains on `smart_virtual`; `coils.yaml` is
+loaded so virtual coil devices can be validated, but its physical driver
+numbers are unset. Complete and verify the hardware mappings and driver
 settings before switching to CobraPin or energizing coils. The current
 configuration should not be treated as a ready-to-run physical machine setup.
 
@@ -85,17 +97,22 @@ machine hardware.
 
 ```text
 Boogie/
-  config/                  MPF machine, switch, coil, ball-device, and playfield config
+  config/                  MPF machine, switch, coil, light, ball-device, and playfield config
   data/                    MPF machine variables and audit data
   modes/
     base/                  Main scoring and playfield event logic
     drop_target_scoring/   Python drop-target scoring mode
+    playfield_lights/      Per-ball playfield LED control
   boogie-gmc/              Godot front end and MPF-GMC integration
 ```
 
 ## Development and next steps
 
 The current setup is for virtual development. Before physical play:
+
+Run the playfield light and device-reference regression tests from `Boogie/`
+with the project's MPF Python environment:
+`python -m unittest discover -s tests -v`.
 
 1. Confirm the Boogie wiring and the CobraPin output limits, including the
    flipper EOS behavior and the two windings of Allied coil 264-1-155.

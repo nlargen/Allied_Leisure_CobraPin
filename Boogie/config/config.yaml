@@ -1,15 +1,18 @@
 #config_version=6
 
 config: 
- # - coils.yaml uncomment when coils defined
+ # Coil outputs remain virtual until their physical mappings are commissioned.
+ - coils.yaml
  - switches.yaml
  - playfields.yaml
  - balldevices.yaml
+ - lights.yaml
 
 modes:
   - base
   - tilt
   - drop_target_scoring
+  - playfield_lights
 
 machine:
   balls_installed: 1
@@ -39,4 +42,3 @@ hardware:
 
 smart_virtual:
   simulate_manual_plunger: true  
-

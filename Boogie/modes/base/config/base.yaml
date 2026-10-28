@@ -49,17 +49,14 @@ variable_player:
 
   # top rollover switches       
   s_50_rollover_1_active:
-    score: 50 
     rollover_1_hit: 
       int: 1
       action: set 
   s_50_rollover_2_active:
-    score: 50 
     rollover_2_hit: 
       int: 1
       action: set  
   s_50_rollover_3_active:
-    score: 50 
     rollover_3_hit: 
       int: 1
       action: set
@@ -181,10 +178,10 @@ accruals:
     reset_on_complete: true  
 
 coil_player: 
-  open_gate_d: c_gate_open_d
-  open_gate_a: c_gate_open_a
-  raise_target_a_complete: c_raise_target_a  
-  raise_target_b_complete: c_raise_target_b
-  raise_target_c_complete: c_raise_target_c 
-  raise_target_d_complete: c_raise_target_d
-  trigger_thumper: c_thumper_main 
+  open_gate_d: c_gate_b
+  open_gate_a: c_gate_a
+  raise_target_a_complete: c_drop_target_1
+  raise_target_b_complete: c_drop_target_2
+  raise_target_c_complete: c_drop_target_3
+  raise_target_d_complete: c_drop_target_4
+  trigger_thumper: c_thumper
