@@ -35,11 +35,17 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
 
 - [`config.yaml`](./Boogie/config/config.yaml) sets up a five-ball game for up
   to two players, loads the base, tilt, drop-target-scoring, and playfield
-  lights modes, and currently selects MPF's `smart_virtual` platform for
-  development.
+  lights modes, and selects the OPP platform with Gen2 driver boards for
+  CobraPin. The `opp.ports` entry is OS-specific: use the COM ports Windows
+  assigns to the boards when MPF runs on Windows (currently `COM7, COM8` as
+  temporary values), or the verified `/dev/ttyACM*` paths when MPF runs on a
+  Raspberry Pi/Linux. Update this one setting when changing hosts; the example
+  port values must be confirmed on the machine that runs MPF.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and
-  cabinet switches to logical switch names. CobraPin switch addresses still
-  need to be entered for the physical installation.
+  cabinet switches to logical switch names. Hardware address values follow the
+  requested `0-0-N` pattern, with dedicated `1-0-N` addresses for the start,
+  flipper, tilt, and credit switches; verify and replace these placeholders
+  with the actual CobraPin addresses.
 - [`balldevices.yaml`](./Boogie/config/balldevices.yaml) and
   [`playfields.yaml`](./Boogie/config/playfields.yaml) describe Boogie's
   documented EM-style, no-trough ball flow. Preserve this machine-specific
@@ -66,16 +72,27 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   detected in its raised state.
 - [`coils.yaml`](./Boogie/config/coils.yaml) and
   [`flippers.yaml`](./Boogie/config/flippers.yaml) describe draft coil and
-  dual-wound flipper configurations. The coil addresses are placeholders, and
-  the current pulse/hold values are unvalidated commissioning drafts, not
-  factory specifications or confirmed safe settings.
+  dual-wound flipper configurations. Coil hardware addresses follow the
+  requested `0-0-N` placeholder pattern. The current pulse/hold values are
+  unvalidated commissioning drafts, not factory specifications or confirmed
+  safe settings.
 
-The physical CobraPin platform and flipper config are not currently enabled.
-The checked-in machine config remains on `smart_virtual`; `coils.yaml` is
-loaded so virtual coil devices can be validated, but its physical driver
-numbers are unset. Complete and verify the hardware mappings and driver
-settings before switching to CobraPin or energizing coils. The current
-configuration should not be treated as a ready-to-run physical machine setup.
+The checked-in machine config selects the physical OPP platform, but this
+configuration is not ready to energize hardware until the switch and coil
+addresses and coil settings have been verified against the actual CobraPin
+boards and machine wiring. The dual-wound flipper config is loaded; its
+activation/EOS switches, main/hold coil addresses, and pulse/hold settings must
+be verified before testing flippers. Playfield light hardware mappings still
+need commissioning.
+
+MPF does not automatically choose between Windows COM names and Linux
+`/dev/tty*` paths from a single static `opp.ports` value. For now, set that
+value for the computer running MPF before startup. To avoid editing the
+shared config when switching hosts, use separate Windows/Linux OPP config
+overrides and a platform-specific launcher that selects the appropriate
+override. OPP also supports identifying CobraPin boards by their configured
+serial numbers to avoid dependence on which port each board is assigned; this
+does not remove the need to use the appropriate OS-specific connection setup.
 
 ### Godot / MPF-GMC
 
@@ -114,13 +131,14 @@ Run the playfield light and device-reference regression tests from `Boogie/`
 with the project's MPF Python environment:
 `python -m unittest discover -s tests -v`.
 
-1. Confirm the Boogie wiring and the CobraPin output limits, including the
-   flipper EOS behavior and the two windings of Allied coil 264-1-155.
+1. Verify the OPP serial port names on the host running MPF: Windows COM ports
+   on the development PC, or `/dev/ttyACM*` paths on the Raspberry Pi.
 2. Replace the placeholder coil and switch addresses with verified CobraPin
    assignments; validate all pulse, hold, fuse, and driver settings against
    reliable hardware documentation.
-3. Enable the appropriate coil and flipper configuration files and change the
-   platform from `smart_virtual` to CobraPin's OPP platform configuration.
+3. Confirm the Boogie wiring and CobraPin output limits, including flipper EOS
+   behavior and both windings of Allied coil 264-1-155. The flipper config is
+   loaded; test it only after verifying its coil and switch mappings.
 4. Validate the documented no-trough ball flow, tilt handling, switches,
    actuators, scoring, and game lifecycle on the machine.
 5. Connect Godot/GMC to MPF and implement any desired interactive display or

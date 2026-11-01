@@ -18,8 +18,7 @@ missing_switches:
   s_ball_in_playfield: 7
   s_close_gate_1: 10
   s_close_gate_2: 10
-  s_credit_1: 10
-  s_credit_2: 10
+  s_credit: 10
   s_flipper_left: 10
   s_flipper_left_eos: 10
   s_flipper_right: 10
@@ -66,8 +65,7 @@ switches:
   s_ball_in_playfield: 28
   s_close_gate_1: 0
   s_close_gate_2: 0
-  s_credit_1: 0
-  s_credit_2: 0
+  s_credit: 0
   s_flipper_left: 0
   s_flipper_left_eos: 0
   s_flipper_right: 0

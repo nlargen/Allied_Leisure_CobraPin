@@ -1,110 +1,115 @@
 #config_version=6
 
 switches:
+  # Direct switches
   s_start:
-    number: 1
+    number: "1-0-3"
     tags: start
 
+  # Matrix switches (4 rows x 7 columns; placeholder addresses)
   s_500_ab_1: 
-    number: 2
+    number: "1-0-32"
   s_500_ab_2: 
-    number: 3
+    number: "1-0-33"
   s_500_ab_3: 
-    number: 4
+    number: "1-0-34"
   s_500_ab_4: 
-    number: 5
+    number: "1-0-35"
   s_500_ab_5: 
-    number: 6
+    number: "1-0-36"
   s_500_ab_6: 
-    number: 7
+    number: "1-0-37"
   s_500_ab_7: 
-    number: 8
+    number: "1-0-38"
   s_500_ab_8: 
-    number: 9
+    number: "1-0-39"
 
   s_50_rollover_1: 
-    number: 10
+    number: "1-0-40"
   s_50_rollover_2: 
-    number: 11
+    number: "1-0-41"
   s_50_rollover_3: 
-    number: 12
+    number: "1-0-42"
 
+  # Direct switches
   s_10_top:
-    number: 13
+    number: "0-0-1"
 
+  # Matrix switches
   s_raise_target_d_og:
-    number: 14
+    number: "1-0-43"
   s_raise_target_a_og: 
-    number: 15
+    number: "1-0-44"
   s_raise_target_b: 
-    number: 16
+    number: "1-0-45"
   s_raise_target_c:
-    number: 17
+    number: "1-0-46"
 
   s_500_rollover_1: 
-    number: 18
+    number: "1-0-47"
   s_500_rollover_2: 
-    number: 19
+    number: "1-0-48"
 
+  # Direct switches
   s_pop_bumper: 
-    number: 20
+    number: "0-0-8"
 
+  # Matrix switches
   s_close_gate_1:
-    number: 21
+    number: "1-0-49"
 
   s_close_gate_2: 
-    number: 22
+    number: "1-0-50"
 
   s_target_a:
-    number: 23
+    number: "1-0-51"
   s_target_b:
-    number: 24
+    number: "1-0-52"
   s_target_c: 
-    number: 25
+    number: "1-0-53"
   s_target_d: 
-    number: 26
+    number: "1-0-54"
 
   s_ball_in_playfield: 
-    number: 27
+    number: "1-0-55"
 
+  # Direct switches
   s_outhole_switch: 
-    number: 28
+    number: "0-0-17"
 
   s_flipper_left_eos: 
-    number: 29
+    number: "0-0-3"
   s_flipper_right_eos: 
-    number: 30
+    number: "0-0-18"
 
   s_flipper_left: 
-    number: 31
+    number: "1-0-1"
   s_flipper_right: 
-    number: 32
+    number: "1-0-2"
 
   s_slingshot_left:
-    number: 33
+    number: "0-0-25"
   s_slingshot_right:
-    number: 34
+    number: "0-0-24"
 
   s_slingshot_left_eos: 
-    number: 35
+    number: "0-0-26"
   s_slingshot_right_eos:     
-    number: 36
+    number: "0-0-19"
 
-  s_credit_1: 
-    number: 37
+  # Direct switches not connected yet.
+  # s_credit:
+  #   number: "1-0-9"
+  # s_tilt:
+  #   number: "1-0-8"
+  #   tags: tilt
 
-  s_credit_2: 
-    number: 38
-
-  s_tilt: 
-    number: 39
-    tags: tilt
-
+  # Matrix switches
   s_drop_target_1:
-    number: 40
+    number: "1-0-56"
   s_drop_target_2: 
-    number: 41
+    number: "1-0-57"
   s_drop_target_3:
-    number: 42
+    number: "1-0-58"
   s_drop_target_4:
-    number: 43
+    number: "1-0-59"

@@ -1,16 +1,16 @@
 #config_version=6
 
 config: 
- # Coil outputs remain virtual until their physical mappings are commissioned.
  - coils.yaml
  - switches.yaml
  - playfields.yaml
  - balldevices.yaml
  - lights.yaml
+ - flippers.yaml
 
 modes:
   - base
-  - tilt
+  # - tilt  # Re-enable with the tilt switch and handler when connected.
   - drop_target_scoring
   - playfield_lights
 
@@ -21,8 +21,8 @@ game:
   balls_per_game: 5
   max_players: 2
 
-virtual_platform_start_active_switches: 
-  s_outhole_switch
+credits:
+  free_play: true
 
 autofire_coils:
   left_slingshot:
@@ -38,7 +38,11 @@ autofire_coils:
     switch: s_pop_bumper   
 
 hardware:
-  platform: smart_virtual
+  platform: opp
+  driverboards: gen2
 
-smart_virtual:
-  simulate_manual_plunger: true  
+opp:
+  ports: COM7, COM8 # Replace with the COM ports Windows assigns to your boards.
+
+ #opp:
+ # ports: /dev/ttyACM0, /dev/ttyACM1 # Verify the device paths after connecting the CobraPin boards.

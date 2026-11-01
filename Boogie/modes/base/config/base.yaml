@@ -110,20 +110,21 @@ variable_player:
   # drop target scoring
   # see python    
 
-  # tilt enabled 
-  s_tilt_active: 
-    score: -5000 
+  # Re-enable when the tilt switch is connected and the tilt mode is restored.
+  # s_tilt_active:
+  #   score: -5000
 
   # ball in playfield
   s_ball_in_playfield_active: 
     s_ball_in_playfield_hit: 
       int: 1
       action: set  
-  # credit accrual
-  s_credit_1_active: 
-    s_credit_1_hit: 
-      int: 1
-      action: set
+
+  # Re-enable when the credit switch is connected.
+  # s_credit_active:
+  #   s_credit_hit:
+  #     int: 1
+  #     action: set
 
 accruals: 
   left_bank: 
@@ -169,13 +170,13 @@ accruals:
       - open_gate_d  
     reset_on_complete: false
 
-  #trigger ball in playfield for current ball
-  trigger_ball_in_play: 
-    events: 
-      - s_ball_in_playfield_active
-    events_when_complete: 
-      - trigger_thumper
-    reset_on_complete: true  
+  # Disabled while the thumper is disconnected.
+  # trigger_ball_in_play:
+  #   events:
+  #     - s_ball_in_playfield_active
+  #   events_when_complete:
+  #     - trigger_thumper
+  #   reset_on_complete: true
 
 coil_player: 
   open_gate_d: c_gate_b
@@ -184,4 +185,5 @@ coil_player:
   raise_target_b_complete: c_drop_target_2
   raise_target_c_complete: c_drop_target_3
   raise_target_d_complete: c_drop_target_4
-  trigger_thumper: c_thumper
+  # Disabled while the thumper is disconnected.
+  # trigger_thumper: c_thumper
