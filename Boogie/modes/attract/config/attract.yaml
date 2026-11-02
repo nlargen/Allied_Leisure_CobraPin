@@ -1,0 +1,116 @@
+#config_version=6
+
+mode:
+  start_events: machine_reset_phase_3, game_ended
+  stop_events: game_started
+  priority: 10
+  game_mode: false
+  stop_on_ball_end: false
+
+show_player:
+  mode_attract_started:
+    attract_lights:
+      loops: -1
+
+shows:
+  attract_lights:
+    - time: 0
+      lights:
+        l_500_when_lit_3: off
+        l_special_left: white
+    - time: +250ms
+      lights:
+        l_special_left: off
+        l_special_right: white
+    - time: +250ms
+      lights:
+        l_special_right: off
+        l_bonus_1000: white
+    - time: +250ms
+      lights:
+        l_bonus_1000: off
+        l_bonus_2000: white
+    - time: +250ms
+      lights:
+        l_bonus_2000: off
+        l_bonus_3000: white
+    - time: +250ms
+      lights:
+        l_bonus_3000: off
+        l_bonus_4000: white
+    - time: +250ms
+      lights:
+        l_bonus_4000: off
+        l_bonus_5000: white
+    - time: +250ms
+      lights:
+        l_bonus_5000: off
+        l_bonus_6000: white
+    - time: +250ms
+      lights:
+        l_bonus_6000: off
+        l_bonus_7000: white
+    - time: +250ms
+      lights:
+        l_bonus_7000: off
+        l_bonus_8000: white
+    - time: +250ms
+      lights:
+        l_bonus_8000: off
+        l_bonus_9000: white
+    - time: +250ms
+      lights:
+        l_bonus_9000: off
+        l_bonus_10000: white
+    - time: +250ms
+      lights:
+        l_bonus_10000: off
+        l_double_bonus: white
+    - time: +250ms
+      lights:
+        l_double_bonus: off
+        l_gates_open: white
+    - time: +250ms
+      lights:
+        l_gates_open: off
+        l_bonus_advance_1: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_1: off
+        l_bonus_advance_2: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_2: off
+        l_bonus_advance_3: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_3: off
+        l_bonus_advance_4: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_4: off
+        l_bonus_advance_5: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_5: off
+        l_bonus_advance_6: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_6: off
+        l_bonus_advance_7: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_7: off
+        l_bonus_advance_8: white
+    - time: +250ms
+      lights:
+        l_bonus_advance_8: off
+        l_500_when_lit_1: white
+    - time: +250ms
+      lights:
+        l_500_when_lit_1: off
+        l_500_when_lit_2: white
+    - time: +250ms
+      lights:
+        l_500_when_lit_2: off
+        l_500_when_lit_3: white

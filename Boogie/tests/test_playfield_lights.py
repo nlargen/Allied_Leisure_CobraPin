@@ -289,6 +289,14 @@ class PlayfieldLightsTest(unittest.TestCase):
             0.8, coil_player["open_gate_d"]["c_gate_b"]["hold_power"]
         )
         self.assertEqual(
+            {"c_gate_a": "disable"},
+            coil_player["s_close_gate_1_active"],
+        )
+        self.assertEqual(
+            {"c_gate_b": "disable"},
+            coil_player["s_close_gate_2_active"],
+        )
+        self.assertEqual(
             {"c_gate_a": "disable", "c_gate_b": "disable"},
             coil_player["ball_drain"],
         )
@@ -303,6 +311,7 @@ class BoogieMachineStartupTest(MpfTestCase):
         return "config.yaml"
 
     def test_all_configured_modes_load(self):
+        self.assertIn("attract", self.machine.modes)
         self.assertIn("drop_target_scoring", self.machine.modes)
         self.assertIn("playfield_lights", self.machine.modes)
 

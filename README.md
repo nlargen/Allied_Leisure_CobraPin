@@ -34,7 +34,7 @@ The MPF machine configuration is in [`Boogie/config/`](./Boogie/config/), with
 game modes in [`Boogie/modes/`](./Boogie/modes/).
 
 - [`config.yaml`](./Boogie/config/config.yaml) sets up a five-ball game for up
-  to two players, loads the base, tilt, drop-target-scoring, and playfield
+  to two players, loads the attract, base, tilt, drop-target-scoring, and playfield
   lights modes, and selects the OPP platform with Gen2 driver boards for
   CobraPin. The `opp.ports` entry is OS-specific: use the COM ports Windows
   assigns to the boards when MPF runs on Windows (currently `COM7, COM8` as
@@ -56,7 +56,8 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   targets, rollovers, pop bumper, and slingshots, tracks completion of target
   banks, and applies the current -5000-point tilt penalty.
 - [`lights.yaml`](./Boogie/config/lights.yaml) defines 25 sequential logical
-  playfield lights. The `playfield_lights` mode controls the bonus ladder,
+  playfield lights. The attract mode cycles through all of them while no game
+  is active. The `playfield_lights` mode controls the bonus ladder,
   target-progress indicators, random 500-when-lit rollover indicator, double
   bonus, gate-open, and special lamps per ball. Each special lamp follows its
   corresponding gate independently of double bonus; the gates-open lamp is on

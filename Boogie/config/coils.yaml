@@ -10,15 +10,15 @@ coils:
   # Verify actual resistance and driver capability before powering.
   c_flipper_left_main:
     number: "1-0-0"
-    default_pulse_ms: 55
-    max_pulse_ms: 65
+    default_pulse_ms: 75
+    max_pulse_ms: 80
     default_pulse_power: 1
     max_pulse_power: 1.0
     
   c_flipper_right_main:
     number: "1-0-7"
-    default_pulse_ms: 55
-    max_pulse_ms: 65
+    default_pulse_ms: 75
+    max_pulse_ms: 80
     default_pulse_power: 1
     max_pulse_power: 1.0
 
@@ -37,7 +37,7 @@ coils:
   # Allied 264-1-43 pop bumper; reference says 9 ohm.
   c_pop_bumper:
     number: "0-0-13"
-    default_pulse_ms: 50
+    default_pulse_ms: 60
     max_pulse_ms: 65
     default_recycle: true
 

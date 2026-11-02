@@ -9,6 +9,7 @@ config:
  - flippers.yaml
 
 modes:
+  - attract
   - base
   # - tilt  # Re-enable with the tilt switch and handler when connected.
   - drop_target_scoring

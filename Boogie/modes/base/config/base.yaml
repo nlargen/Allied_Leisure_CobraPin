@@ -187,6 +187,10 @@ coil_player:
     c_gate_a:
       action: enable
       hold_power: 0.8
+  s_close_gate_1_active:
+    c_gate_a: disable
+  s_close_gate_2_active:
+    c_gate_b: disable
   ball_drain:
     c_gate_a: disable
     c_gate_b: disable

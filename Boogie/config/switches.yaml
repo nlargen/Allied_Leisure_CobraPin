@@ -56,10 +56,10 @@ switches:
 
   # Matrix switches
   s_close_gate_1:
-    number: "1-0-49"
+    number: "1-0-81"
 
   s_close_gate_2: 
-    number: "1-0-50"
+    number: "1-0-82"
 
   s_target_a:
     number: "1-0-51"
@@ -150,10 +150,6 @@ switches:
     number: "1-0-78"
   s_matrix_79:
     number: "1-0-79"
-  s_matrix_81:
-    number: "1-0-81"
-  s_matrix_82:
-    number: "1-0-82"
   s_matrix_83:
     number: "1-0-83"
   s_matrix_84:
