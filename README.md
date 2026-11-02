@@ -50,6 +50,7 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   [`playfields.yaml`](./Boogie/config/playfields.yaml) describe Boogie's
   documented EM-style, no-trough ball flow. Preserve this machine-specific
   arrangement rather than assuming a modern trough and shooter-lane layout.
+  The drain device ejects its ball using `c_outhole_kicker`.
 - [`base.yaml`](./Boogie/modes/base/config/base.yaml) contains the main
   switch-driven scoring and playfield logic. It awards points for configured
   targets, rollovers, pop bumper, and slingshots, tracks completion of target
@@ -81,9 +82,12 @@ The checked-in machine config selects the physical OPP platform, but this
 configuration is not ready to energize hardware until the switch and coil
 addresses and coil settings have been verified against the actual CobraPin
 boards and machine wiring. The dual-wound flipper config is loaded; its
-activation/EOS switches, main/hold coil addresses, and pulse/hold settings must
-be verified before testing flippers. Playfield light hardware mappings still
-need commissioning.
+activation switches, main/hold coil addresses, and pulse/hold settings must be
+verified before testing flippers. MPF 0.80.1's OPP platform does not implement
+the flipper EOS cutoff hardware rule, so the current flipper config does not
+use EOS rules. OPP hardware rules also require the activation switch and coil
+to be on the same board. Playfield light hardware mappings still need
+commissioning.
 
 MPF does not automatically choose between Windows COM names and Linux
 `/dev/tty*` paths from a single static `opp.ports` value. For now, set that

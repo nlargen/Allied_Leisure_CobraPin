@@ -6,28 +6,28 @@ switches:
     number: "1-0-3"
     tags: start
 
-  # Matrix switches (4 rows x 7 columns; placeholder addresses)
+  # Matrix switches (8x8; addresses are placeholders pending switch testing)
   s_500_ab_1: 
-    number: "1-0-32"
+    number: "1-0-72"
   s_500_ab_2: 
-    number: "1-0-33"
+    number: "1-0-64"
   s_500_ab_3: 
-    number: "1-0-34"
+    number: "1-0-40"
   s_500_ab_4: 
     number: "1-0-35"
   s_500_ab_5: 
     number: "1-0-36"
   s_500_ab_6: 
-    number: "1-0-37"
+    number: "1-0-43"
   s_500_ab_7: 
-    number: "1-0-38"
+    number: "1-0-67"
   s_500_ab_8: 
-    number: "1-0-39"
+    number: "1-0-75"
 
   s_50_rollover_1: 
-    number: "1-0-40"
+    number: "1-0-48"
   s_50_rollover_2: 
-    number: "1-0-41"
+    number: "1-0-47"
   s_50_rollover_3: 
     number: "1-0-42"
 
@@ -37,18 +37,18 @@ switches:
 
   # Matrix switches
   s_raise_target_d_og:
-    number: "1-0-43"
+    number: "1-0-32"
   s_raise_target_a_og: 
-    number: "1-0-44"
+    number: "1-0-80"
   s_raise_target_b: 
-    number: "1-0-45"
+    number: "1-0-89"
   s_raise_target_c:
-    number: "1-0-46"
+    number: "1-0-90"
 
   s_500_rollover_1: 
-    number: "1-0-47"
+    number: "1-0-88"
   s_500_rollover_2: 
-    number: "1-0-48"
+    number: "1-0-41"
 
   # Direct switches
   s_pop_bumper: 
@@ -75,12 +75,14 @@ switches:
 
   # Direct switches
   s_outhole_switch: 
-    number: "0-0-17"
+    number: "0-0-26"
 
   s_flipper_left_eos: 
     number: "0-0-3"
+    type: NC
   s_flipper_right_eos: 
-    number: "0-0-18"
+    number: "0-0-25"
+    type: NC
 
   s_flipper_left: 
     number: "1-0-1"
@@ -88,14 +90,25 @@ switches:
     number: "1-0-2"
 
   s_slingshot_left:
-    number: "0-0-25"
+    number: "0-0-18"
   s_slingshot_right:
-    number: "0-0-24"
+    number: "0-0-19"
 
   s_slingshot_left_eos: 
-    number: "0-0-26"
+    number: "0-0-17"
   s_slingshot_right_eos:     
-    number: "0-0-19"
+    number: "0-0-24"
+
+ 
+  # direct switches
+  s_drop_target_1:
+    number: "0-0-9"
+  s_drop_target_2: 
+    number: "0-0-10"
+  s_drop_target_3:
+    number: "0-0-11"
+  s_drop_target_4:
+    number: "0-0-2"
 
   # Direct switches not connected yet.
   # s_credit:
@@ -104,12 +117,60 @@ switches:
   #   number: "1-0-8"
   #   tags: tilt
 
-  # Matrix switches
-  s_drop_target_1:
-    number: "1-0-56"
-  s_drop_target_2: 
-    number: "1-0-57"
-  s_drop_target_3:
-    number: "1-0-58"
-  s_drop_target_4:
-    number: "1-0-59"
+  # Unassigned matrix inputs; replace placeholder names after switch testing.
+  s_matrix_60:
+    number: "1-0-60"
+  s_matrix_61:
+    number: "1-0-61"
+  s_matrix_62:
+    number: "1-0-62"
+  s_matrix_63:
+    number: "1-0-63"
+  s_matrix_65:
+    number: "1-0-65"
+  s_matrix_66:
+    number: "1-0-66"
+  s_matrix_68:
+    number: "1-0-68"
+  s_matrix_69:
+    number: "1-0-69"
+  s_matrix_70:
+    number: "1-0-70"
+  s_matrix_71:
+    number: "1-0-71"
+  s_matrix_73:
+    number: "1-0-73"
+  s_matrix_74:
+    number: "1-0-74"
+  s_matrix_76:
+    number: "1-0-76"
+  s_matrix_77:
+    number: "1-0-77"
+  s_matrix_78:
+    number: "1-0-78"
+  s_matrix_79:
+    number: "1-0-79"
+  s_matrix_81:
+    number: "1-0-81"
+  s_matrix_82:
+    number: "1-0-82"
+  s_matrix_83:
+    number: "1-0-83"
+  s_matrix_84:
+    number: "1-0-84"
+  s_matrix_85:
+    number: "1-0-85"
+  s_matrix_86:
+    number: "1-0-86"
+  s_matrix_87:
+    number: "1-0-87"
+  s_matrix_91:
+    number: "1-0-91"
+  s_matrix_92:
+    number: "1-0-92"
+  s_matrix_93:
+    number: "1-0-93"
+  s_matrix_94:
+    number: "1-0-94"
+  s_matrix_95:
+    number: "1-0-95"

@@ -42,7 +42,8 @@ hardware:
   driverboards: gen2
 
 opp:
-  ports: COM7, COM8 # Replace with the COM ports Windows assigns to your boards.
+  ports: COM9, COM10 # Replace with the COM ports Windows assigns to your boards.
+  debug: true # OPP debug logging applies globally, including matrix switches.
 
  #opp:
  # ports: /dev/ttyACM0, /dev/ttyACM1 # Verify the device paths after connecting the CobraPin boards.

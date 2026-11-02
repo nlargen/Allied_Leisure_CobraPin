@@ -9,43 +9,43 @@ coils:
   # Main winding previously reported as approximately 2 ohm.
   # Verify actual resistance and driver capability before powering.
   c_flipper_left_main:
-    number: "0-0-4"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
-    default_pulse_power: 0.25
+    number: "1-0-0"
+    default_pulse_ms: 55
+    max_pulse_ms: 65
+    default_pulse_power: 1
     max_pulse_power: 1.0
     
   c_flipper_right_main:
-    number: "0-0-2"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
-    default_pulse_power: 0.25
+    number: "1-0-7"
+    default_pulse_ms: 55
+    max_pulse_ms: 65
+    default_pulse_power: 1
     max_pulse_power: 1.0
 
   # Separate 17-ohm hold windings. Confirm hold-power support and safe operation.
   # 25% is only a cautious initial software request, not a validated safe setting.
   c_flipper_left_hold:
-    number: "0-0-5"
-    default_hold_power: 0.25
-    max_hold_power: 0.25
+    number: "1-0-5"
+    default_hold_power: 1
+    max_hold_power: 1
 
   c_flipper_right_hold:
-    number: "0-0-3"
-    default_hold_power: 0.25
-    max_hold_power: 0.25
+    number: "1-0-6"
+    default_hold_power: 1
+    max_hold_power: 1
 
   # Allied 264-1-43 pop bumper; reference says 9 ohm.
   c_pop_bumper:
     number: "0-0-13"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 50
+    max_pulse_ms: 65
     default_recycle: true
 
   # Allied 264-1-102 outhole kicker.
   c_outhole_kicker:
     number: "0-0-14"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 100
+    max_pulse_ms: 125
     default_recycle: true
 
   # Chimes are not connected yet.
@@ -68,40 +68,40 @@ coils:
   #drop targets
   c_drop_target_1:
     number: "0-0-8"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 55  
+    max_pulse_ms: 65  
     default_recycle: true
 
   c_drop_target_2:
     number: "0-0-9"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 55
+    max_pulse_ms: 65
     default_recycle: true
 
   c_drop_target_3:
     number: "0-0-10"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 55
+    max_pulse_ms: 65
     default_recycle: true
 
   c_drop_target_4:
     number: "0-0-6"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 55
+    max_pulse_ms: 65
     default_recycle: true
 
   #slingshots 
   # Allied 264-1-46 slingshots.
   c_slingshot_left:
     number: "0-0-11"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 45  
+    max_pulse_ms: 50
     default_recycle: true
 
   c_slingshot_right:
     number: "0-0-12"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 45
+    max_pulse_ms: 50
     default_recycle: true
 
   # The thumper is not connected yet.
@@ -114,10 +114,12 @@ coils:
   # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_a:
     number: "0-0-0"
-    default_pulse_ms: 3
-    max_pulse_ms: 5
+    default_pulse_ms: 30
+    max_pulse_ms: 35
+    max_hold_power: .8
     # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_b:
     number: "0-0-1"
-    default_pulse_ms: 3
-    max_pulse_ms: 5  
+    default_pulse_ms: 30
+    max_pulse_ms: 35
+    max_hold_power: .8

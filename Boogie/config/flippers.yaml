@@ -4,6 +4,8 @@
 # - 2 ohm / 24 V winding is the main (high-power) coil.
 # - 17 ohm / 24 V winding is the hold coil.
 # Confirm coil-to-driver wiring and safe timing/power settings before enabling.
+# OPP does not implement EOS cutoff rules; these flippers use the activation
+# switch to pulse the main winding and enable the separate hold winding.
 
 flippers:
   f_flipper_left:
@@ -11,16 +13,16 @@ flippers:
     hold_coil: c_flipper_left_hold
     activation_switch: s_flipper_left
     eos_switch: s_flipper_left_eos
-    use_eos: true
+    use_eos: false
 
   f_flipper_right:
     main_coil: c_flipper_right_main
     hold_coil: c_flipper_right_hold
     activation_switch: s_flipper_right
     eos_switch: s_flipper_right_eos
-    use_eos: true
+    use_eos: false
 
 # Before testing these flippers:
 # - Set the actual driver numbers and safe coil settings in coils.yaml.
-# - Confirm the EOS switches and dual-wound coil wiring for each flipper.
-# - Test the flipper rules on the installed controller before normal play.
+# - Keep each activation switch and its coils on the same OPP board.
+# - Confirm the dual-wound coil wiring and safe settings before testing.

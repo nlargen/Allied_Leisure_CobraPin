@@ -3,6 +3,6 @@
 ball_devices:
   bd_drain:
     ball_switches: s_outhole_switch
-    mechanical_eject: true
+    eject_coil: c_outhole_kicker
     eject_timeouts: 3s
     tags: drain, home, trough

@@ -250,7 +250,12 @@ class PlayfieldLightsTest(unittest.TestCase):
             ).read_text(encoding="utf-8")
         )
         declared_coils = set(coil_config["coils"])
-        referenced_coils = set(base_config["coil_player"].values())
+        referenced_coils = set()
+        for action in base_config["coil_player"].values():
+            if isinstance(action, dict):
+                referenced_coils.update(action)
+            else:
+                referenced_coils.add(action)
         referenced_coils.update(
             settings["coil"]
             for settings in machine_config["autofire_coils"].values()
@@ -270,6 +275,23 @@ class PlayfieldLightsTest(unittest.TestCase):
 
         self.assertEqual(set(), referenced_coils - declared_coils)
         self.assertEqual(set(), referenced_switches - declared_switches)
+        coil_player = base_config["coil_player"]
+        self.assertEqual(
+            "enable", coil_player["open_gate_a"]["c_gate_a"]["action"]
+        )
+        self.assertEqual(
+            0.8, coil_player["open_gate_a"]["c_gate_a"]["hold_power"]
+        )
+        self.assertEqual(
+            "enable", coil_player["open_gate_d"]["c_gate_b"]["action"]
+        )
+        self.assertEqual(
+            0.8, coil_player["open_gate_d"]["c_gate_b"]["hold_power"]
+        )
+        self.assertEqual(
+            {"c_gate_a": "disable", "c_gate_b": "disable"},
+            coil_player["ball_drain"],
+        )
 
 
 class BoogieMachineStartupTest(MpfTestCase):

@@ -1,60 +1,109 @@
 #config_version=6
 
-# Sequential logical positions for the 25 playfield LEDs.
-# These remain on smart_virtual until the physical CobraPin/WS2812 platform
-# output mapping is commissioned.
+# OPP Neo1 LED addresses for the 25 playfield LEDs.
+# Verify the physical output and LED order before commissioning.
 lights:
   l_special_left:
-    number: 1
+    number: "1-0-0"
+    subtype: led
+    default_on_color: ffffff
   l_special_right:
-    number: 2
+    number: "1-0-1"
+    subtype: led
+    default_on_color: ffffff
 
   l_bonus_1000:
-    number: 3
+    number: "1-0-2"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_2000:
-    number: 4
+    number: "1-0-3"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_3000:
-    number: 5
+    number: "1-0-4"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_4000:
-    number: 6
+    number: "1-0-5"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_5000:
-    number: 7
+    number: "1-0-6"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_6000:
-    number: 8
+    number: "1-0-7"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_7000:
-    number: 9
+    number: "1-0-8"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_8000:
-    number: 10
+    number: "1-0-9"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_9000:
-    number: 11
+    number: "1-0-10"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_10000:
-    number: 12
+    number: "1-0-11"
+    subtype: led
+    default_on_color: ffffff
 
   l_double_bonus:
-    number: 13
+    number: "1-0-12"
+    subtype: led
+    default_on_color: ffffff
   l_gates_open:
-    number: 14
+    number: "1-0-13"
+    subtype: led
+    default_on_color: ffffff
 
   l_bonus_advance_1:
-    number: 15
+    number: "1-0-14"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_2:
-    number: 16
+    number: "1-0-15"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_3:
-    number: 17
+    number: "1-0-16"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_4:
-    number: 18
+    number: "1-0-17"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_5:
-    number: 19
+    number: "1-0-18"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_6:
-    number: 20
+    number: "1-0-19"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_7:
-    number: 21
+    number: "1-0-20"
+    subtype: led
+    default_on_color: ffffff
   l_bonus_advance_8:
-    number: 22
+    number: "1-0-21"
+    subtype: led
+    default_on_color: ffffff
 
   l_500_when_lit_1:
-    number: 23
+    number: "1-0-22"
+    subtype: led
+    default_on_color: ffffff
   l_500_when_lit_2:
-    number: 24
+    number: "1-0-23"
+    subtype: led
+    default_on_color: ffffff
   l_500_when_lit_3:
-    number: 25
+    number: "1-0-24"
+    subtype: led
+    default_on_color: ffffff

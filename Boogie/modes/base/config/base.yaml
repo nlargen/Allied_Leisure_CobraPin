@@ -178,9 +178,21 @@ accruals:
   #     - trigger_thumper
   #   reset_on_complete: true
 
-coil_player: 
-  open_gate_d: c_gate_b
-  open_gate_a: c_gate_a
+coil_player:
+  open_gate_d:
+    c_gate_b:
+      action: enable
+      hold_power: 0.8
+  open_gate_a:
+    c_gate_a:
+      action: enable
+      hold_power: 0.8
+  ball_drain:
+    c_gate_a: disable
+    c_gate_b: disable
+  ball_will_end:
+    c_gate_a: disable
+    c_gate_b: disable
   raise_target_a_complete: c_drop_target_1
   raise_target_b_complete: c_drop_target_2
   raise_target_c_complete: c_drop_target_3
