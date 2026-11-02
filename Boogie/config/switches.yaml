@@ -14,9 +14,9 @@ switches:
   s_500_ab_3: 
     number: "1-0-40"
   s_500_ab_4: 
-    number: "1-0-35"
+    number: "1-0-56"
   s_500_ab_5: 
-    number: "1-0-36"
+    number: "1-0-59"
   s_500_ab_6: 
     number: "1-0-43"
   s_500_ab_7: 
@@ -118,6 +118,30 @@ switches:
   #   tags: tilt
 
   # Unassigned matrix inputs; replace placeholder names after switch testing.
+  s_matrix_33:
+    number: "1-0-33"
+  s_matrix_34:
+    number: "1-0-34"
+  s_matrix_37:
+    number: "1-0-37"
+  s_matrix_38:
+    number: "1-0-38"
+  s_matrix_39:
+    number: "1-0-39"
+  s_matrix_44:
+    number: "1-0-44"
+  s_matrix_45:
+    number: "1-0-45"
+  s_matrix_46:
+    number: "1-0-46"
+  s_matrix_49:
+    number: "1-0-49"
+  s_matrix_50:
+    number: "1-0-50"
+  s_matrix_57:
+    number: "1-0-57"
+  s_matrix_58:
+    number: "1-0-58"
   s_matrix_60:
     number: "1-0-60"
   s_matrix_61:
