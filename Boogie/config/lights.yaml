@@ -108,12 +108,3 @@ lights:
     number: "1-0-24"
     subtype: led
     default_on_color: ffffff
-
-light_stripes:
-  l_j12_available:
-    number_start: 25
-    number_template: "1-0-{}"
-    count: 231
-    light_template:
-      subtype: led
-      default_on_color: ffffff
