@@ -14,15 +14,15 @@ lights:
     default_on_color: ffffff
 
   l_bonus_1000:
-    number: "1-0-2"
+    number: "1-0-10"
     subtype: led
     default_on_color: ffffff
   l_bonus_2000:
-    number: "1-0-3"
+    number: "1-0-11"
     subtype: led
     default_on_color: ffffff
   l_bonus_3000:
-    number: "1-0-4"
+    number: "1-0-12"
     subtype: led
     default_on_color: ffffff
   l_bonus_4000:
@@ -64,15 +64,15 @@ lights:
     default_on_color: ffffff
 
   l_bonus_advance_1:
-    number: "1-0-10"
+    number: "1-0-21"
     subtype: led
     default_on_color: ffffff
   l_bonus_advance_2:
-    number: "1-0-11"
+    number: "1-0-20"
     subtype: led
     default_on_color: ffffff
   l_bonus_advance_3:
-    number: "1-0-12"
+    number: "1-0-19"
     subtype: led
     default_on_color: ffffff
   l_bonus_advance_4:
