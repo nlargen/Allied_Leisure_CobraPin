@@ -70,20 +70,23 @@ switches:
   s_target_d: 
     number: "1-0-54"
 
-  s_ball_in_playfield: 
-    number: "1-0-55"
+
+  # not needed as the ball in playfield switch is not used
+  # s_ball_in_playfield: 
+  #   number: "1-0-55"
 
   # Direct switches
   s_outhole_switch: 
     number: "0-0-26"
 
-  s_flipper_left_eos: 
-    number: "0-0-3"
-    type: NC
-  s_flipper_right_eos: 
-    number: "0-0-25"
-    type: NC
-
+  # not using these switches so their location will be repurposed
+  # s_flipper_left_eos: 
+  #   number: "0-0-3"
+  #   type: NC
+  # s_flipper_right_eos: 
+  #   number: "0-0-25"
+  #   type: NC
+ 
   s_flipper_left: 
     number: "1-0-1"
   s_flipper_right: 
