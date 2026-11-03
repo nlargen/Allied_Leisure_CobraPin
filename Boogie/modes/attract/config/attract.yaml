@@ -16,101 +16,289 @@ shows:
   attract_lights:
     - time: 0
       lights:
+        l_500_when_lit_1: off
+        l_500_when_lit_2: off
         l_500_when_lit_3: off
-        l_special_left: white
+        l_gates_open: white
     - time: +250ms
       lights:
-        l_special_left: off
-        l_special_right: white
+        l_gates_open: off
+        l_double_bonus: white
     - time: +250ms
       lights:
-        l_special_right: off
-        l_bonus_1000: white
-    - time: +250ms
-      lights:
-        l_bonus_1000: off
-        l_bonus_2000: white
-    - time: +250ms
-      lights:
-        l_bonus_2000: off
-        l_bonus_3000: white
-    - time: +250ms
-      lights:
-        l_bonus_3000: off
-        l_bonus_4000: white
-    - time: +250ms
-      lights:
-        l_bonus_4000: off
+        l_double_bonus: off
         l_bonus_5000: white
     - time: +250ms
       lights:
         l_bonus_5000: off
+        l_bonus_4000: white
         l_bonus_6000: white
     - time: +250ms
       lights:
+        l_bonus_4000: off
         l_bonus_6000: off
+        l_bonus_3000: white
         l_bonus_7000: white
     - time: +250ms
       lights:
+        l_bonus_3000: off
         l_bonus_7000: off
+        l_bonus_2000: white
         l_bonus_8000: white
     - time: +250ms
       lights:
+        l_bonus_2000: off
         l_bonus_8000: off
+        l_bonus_1000: white
         l_bonus_9000: white
     - time: +250ms
       lights:
+        l_bonus_1000: off
         l_bonus_9000: off
         l_bonus_10000: white
     - time: +250ms
       lights:
         l_bonus_10000: off
-        l_double_bonus: white
+        l_special_left: white
+        l_special_right: white
     - time: +250ms
       lights:
-        l_double_bonus: off
-        l_gates_open: white
-    - time: +250ms
-      lights:
-        l_gates_open: off
+        l_special_left: off
+        l_special_right: off
         l_bonus_advance_1: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_1: off
         l_bonus_advance_2: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_2: off
         l_bonus_advance_3: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_3: off
         l_bonus_advance_4: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_4: off
         l_bonus_advance_5: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_5: off
         l_bonus_advance_6: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_6: off
         l_bonus_advance_7: white
-    - time: +250ms
-      lights:
-        l_bonus_advance_7: off
         l_bonus_advance_8: white
     - time: +250ms
       lights:
+        l_bonus_advance_1: off
+        l_bonus_advance_2: off
+        l_bonus_advance_3: off
+        l_bonus_advance_4: off
+        l_bonus_advance_5: off
+        l_bonus_advance_6: off
+        l_bonus_advance_7: off
         l_bonus_advance_8: off
         l_500_when_lit_1: white
+        l_500_when_lit_2: white
+        l_500_when_lit_3: white
     - time: +250ms
       lights:
         l_500_when_lit_1: off
-        l_500_when_lit_2: white
+        l_500_when_lit_2: off
+        l_500_when_lit_3: off
+        l_gates_open: ff0000
     - time: +250ms
       lights:
+        l_gates_open: off
+        l_double_bonus: ff0000
+    - time: +250ms
+      lights:
+        l_double_bonus: off
+        l_bonus_5000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_5000: off
+        l_bonus_4000: ff0000
+        l_bonus_6000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_4000: off
+        l_bonus_6000: off
+        l_bonus_3000: ff0000
+        l_bonus_7000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_3000: off
+        l_bonus_7000: off
+        l_bonus_2000: ff0000
+        l_bonus_8000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_2000: off
+        l_bonus_8000: off
+        l_bonus_1000: ff0000
+        l_bonus_9000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_1000: off
+        l_bonus_9000: off
+        l_bonus_10000: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_10000: off
+        l_special_left: ff0000
+        l_special_right: ff0000
+    - time: +250ms
+      lights:
+        l_special_left: off
+        l_special_right: off
+        l_bonus_advance_1: ff0000
+        l_bonus_advance_2: ff0000
+        l_bonus_advance_3: ff0000
+        l_bonus_advance_4: ff0000
+        l_bonus_advance_5: ff0000
+        l_bonus_advance_6: ff0000
+        l_bonus_advance_7: ff0000
+        l_bonus_advance_8: ff0000
+    - time: +250ms
+      lights:
+        l_bonus_advance_1: off
+        l_bonus_advance_2: off
+        l_bonus_advance_3: off
+        l_bonus_advance_4: off
+        l_bonus_advance_5: off
+        l_bonus_advance_6: off
+        l_bonus_advance_7: off
+        l_bonus_advance_8: off
+        l_500_when_lit_1: ff0000
+        l_500_when_lit_2: ff0000
+        l_500_when_lit_3: ff0000
+    - time: +250ms
+      lights:
+        l_500_when_lit_1: off
         l_500_when_lit_2: off
-        l_500_when_lit_3: white
+        l_500_when_lit_3: off
+        l_gates_open: 00ff00
+    - time: +250ms
+      lights:
+        l_gates_open: off
+        l_double_bonus: 00ff00
+    - time: +250ms
+      lights:
+        l_double_bonus: off
+        l_bonus_5000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_5000: off
+        l_bonus_4000: 00ff00
+        l_bonus_6000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_4000: off
+        l_bonus_6000: off
+        l_bonus_3000: 00ff00
+        l_bonus_7000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_3000: off
+        l_bonus_7000: off
+        l_bonus_2000: 00ff00
+        l_bonus_8000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_2000: off
+        l_bonus_8000: off
+        l_bonus_1000: 00ff00
+        l_bonus_9000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_1000: off
+        l_bonus_9000: off
+        l_bonus_10000: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_10000: off
+        l_special_left: 00ff00
+        l_special_right: 00ff00
+    - time: +250ms
+      lights:
+        l_special_left: off
+        l_special_right: off
+        l_bonus_advance_1: 00ff00
+        l_bonus_advance_2: 00ff00
+        l_bonus_advance_3: 00ff00
+        l_bonus_advance_4: 00ff00
+        l_bonus_advance_5: 00ff00
+        l_bonus_advance_6: 00ff00
+        l_bonus_advance_7: 00ff00
+        l_bonus_advance_8: 00ff00
+    - time: +250ms
+      lights:
+        l_bonus_advance_1: off
+        l_bonus_advance_2: off
+        l_bonus_advance_3: off
+        l_bonus_advance_4: off
+        l_bonus_advance_5: off
+        l_bonus_advance_6: off
+        l_bonus_advance_7: off
+        l_bonus_advance_8: off
+        l_500_when_lit_1: 00ff00
+        l_500_when_lit_2: 00ff00
+        l_500_when_lit_3: 00ff00
+    - time: +250ms
+      lights:
+        l_500_when_lit_1: off
+        l_500_when_lit_2: off
+        l_500_when_lit_3: off
+        l_gates_open: 0000ff
+    - time: +250ms
+      lights:
+        l_gates_open: off
+        l_double_bonus: 0000ff
+    - time: +250ms
+      lights:
+        l_double_bonus: off
+        l_bonus_5000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_5000: off
+        l_bonus_4000: 0000ff
+        l_bonus_6000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_4000: off
+        l_bonus_6000: off
+        l_bonus_3000: 0000ff
+        l_bonus_7000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_3000: off
+        l_bonus_7000: off
+        l_bonus_2000: 0000ff
+        l_bonus_8000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_2000: off
+        l_bonus_8000: off
+        l_bonus_1000: 0000ff
+        l_bonus_9000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_1000: off
+        l_bonus_9000: off
+        l_bonus_10000: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_10000: off
+        l_special_left: 0000ff
+        l_special_right: 0000ff
+    - time: +250ms
+      lights:
+        l_special_left: off
+        l_special_right: off
+        l_bonus_advance_1: 0000ff
+        l_bonus_advance_2: 0000ff
+        l_bonus_advance_3: 0000ff
+        l_bonus_advance_4: 0000ff
+        l_bonus_advance_5: 0000ff
+        l_bonus_advance_6: 0000ff
+        l_bonus_advance_7: 0000ff
+        l_bonus_advance_8: 0000ff
+    - time: +250ms
+      lights:
+        l_bonus_advance_1: off
+        l_bonus_advance_2: off
+        l_bonus_advance_3: off
+        l_bonus_advance_4: off
+        l_bonus_advance_5: off
+        l_bonus_advance_6: off
+        l_bonus_advance_7: off
+        l_bonus_advance_8: off
+        l_500_when_lit_1: 0000ff
+        l_500_when_lit_2: 0000ff
+        l_500_when_lit_3: 0000ff
