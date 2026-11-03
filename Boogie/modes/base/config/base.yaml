@@ -151,24 +151,30 @@ accruals:
     events_when_complete: 
       - raise_target_a_complete
       - open_gate_a  
-    reset_on_complete: false 
+    reset_on_complete: true
+    disable_on_complete: false
   raise_target_b:
     events:
       - s_raise_target_b_active
     events_when_complete:
       - raise_target_b_complete
+    reset_on_complete: true
+    disable_on_complete: false
   raise_target_c:
     events:
       - s_raise_target_c_active
     events_when_complete: 
       - raise_target_c_complete       
+    reset_on_complete: true
+    disable_on_complete: false
   raise_target_d:
     events: 
       - s_raise_target_d_og_active
     events_when_complete: 
       - raise_target_d_complete
       - open_gate_d  
-    reset_on_complete: false
+    reset_on_complete: true
+    disable_on_complete: false
 
   # Disabled while the thumper is disconnected.
   # trigger_ball_in_play:
@@ -182,11 +188,11 @@ coil_player:
   open_gate_d:
     c_gate_b:
       action: enable
-      hold_power: 0.8
+      hold_power: 0.38
   open_gate_a:
     c_gate_a:
       action: enable
-      hold_power: 0.8
+      hold_power: 0.38
   s_close_gate_1_active:
     c_gate_a: disable
   s_close_gate_2_active:

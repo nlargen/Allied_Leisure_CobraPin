@@ -1,7 +1,8 @@
 #config_version=6
 
-# OPP Neo1 LED addresses for the 25 playfield LEDs.
-# Verify the physical output and LED order before commissioning.
+# CobraPin J12 / NEO 1 supports 256 addressable pixels: 1-0-0 through 1-0-255.
+# The named lights below are the game's assigned pixels; the stripe defines
+# the remaining outputs as placeholders for light testing and later mapping.
 lights:
   l_special_left:
     number: "1-0-0"
@@ -107,3 +108,12 @@ lights:
     number: "1-0-24"
     subtype: led
     default_on_color: ffffff
+
+light_stripes:
+  l_j12_available:
+    number_start: 25
+    number_template: "1-0-{}"
+    count: 231
+    light_template:
+      subtype: led
+      default_on_color: ffffff

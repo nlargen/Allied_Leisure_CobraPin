@@ -55,9 +55,11 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   switch-driven scoring and playfield logic. It awards points for configured
   targets, rollovers, pop bumper, and slingshots, tracks completion of target
   banks, and applies the current -5000-point tilt penalty.
-- [`lights.yaml`](./Boogie/config/lights.yaml) defines 25 sequential logical
-  playfield lights. The attract mode cycles through all of them while no game
-  is active. The `playfield_lights` mode controls the bonus ladder,
+- [`lights.yaml`](./Boogie/config/lights.yaml) defines the 25 named game
+  lights and all 256 pixels available on CobraPin J12 / NEO 1 (`1-0-0` through
+  `1-0-255`); the remaining 231 are generated as placeholders for testing and
+  later mapping. The attract mode cycles through the named game lights while
+  no game is active. The `playfield_lights` mode controls the bonus ladder,
   target-progress indicators, random 500-when-lit rollover indicator, double
   bonus, gate-open, and special lamps per ball. Each special lamp follows its
   corresponding gate independently of double bonus; the gates-open lamp is on

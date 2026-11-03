@@ -280,13 +280,13 @@ class PlayfieldLightsTest(unittest.TestCase):
             "enable", coil_player["open_gate_a"]["c_gate_a"]["action"]
         )
         self.assertEqual(
-            0.8, coil_player["open_gate_a"]["c_gate_a"]["hold_power"]
+            0.38, coil_player["open_gate_a"]["c_gate_a"]["hold_power"]
         )
         self.assertEqual(
             "enable", coil_player["open_gate_d"]["c_gate_b"]["action"]
         )
         self.assertEqual(
-            0.8, coil_player["open_gate_d"]["c_gate_b"]["hold_power"]
+            0.38, coil_player["open_gate_d"]["c_gate_b"]["hold_power"]
         )
         self.assertEqual(
             {"c_gate_a": "disable"},
@@ -300,6 +300,22 @@ class PlayfieldLightsTest(unittest.TestCase):
             {"c_gate_a": "disable", "c_gate_b": "disable"},
             coil_player["ball_drain"],
         )
+        for number, target in enumerate("abcd", start=1):
+            self.assertEqual(
+                f"c_drop_target_{number}",
+                coil_player[f"raise_target_{target}_complete"],
+            )
+        for target in "abcd":
+            self.assertTrue(
+                base_config["accruals"][f"raise_target_{target}"][
+                    "reset_on_complete"
+                ]
+            )
+            self.assertFalse(
+                base_config["accruals"][f"raise_target_{target}"][
+                    "disable_on_complete"
+                ]
+            )
 
 
 class BoogieMachineStartupTest(MpfTestCase):
@@ -314,6 +330,10 @@ class BoogieMachineStartupTest(MpfTestCase):
         self.assertIn("attract", self.machine.modes)
         self.assertIn("drop_target_scoring", self.machine.modes)
         self.assertIn("playfield_lights", self.machine.modes)
+        j12_lights = self.machine.light_stripes["l_j12_available"].lights
+        self.assertEqual(231, len(j12_lights))
+        self.assertEqual("1-0-25", j12_lights[0].config["number"])
+        self.assertEqual("1-0-255", j12_lights[-1].config["number"])
 
 
 if __name__ == "__main__":
