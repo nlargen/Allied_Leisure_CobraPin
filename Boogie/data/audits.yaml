@@ -1,73 +1,75 @@
 events:
   game_ended: 4
-  game_started: 79
+  game_started: 80
 missing_switches:
-  s_10_top: 24
   s_10_top_1: 10
   s_10_top_2: 10
   s_10_top_3: 10
-  s_500_rollover_1: 4
-  s_50_rollover_1: 25
+  s_500_rollover_1: 5
   s_ball_in_playfield: 43
   s_credit: 10
-  s_direct_16: 2
-  s_direct_27: 2
-  s_drop_target_1: 4
+  s_direct_16: 3
+  s_direct_27: 3
   s_matrix_33: 17
   s_matrix_34: 17
-  s_matrix_35: 2
-  s_matrix_36: 2
-  s_matrix_37: 19
-  s_matrix_38: 19
-  s_matrix_39: 19
-  s_matrix_44: 19
-  s_matrix_45: 19
-  s_matrix_46: 19
-  s_matrix_49: 19
-  s_matrix_50: 19
-  s_matrix_55: 2
-  s_matrix_57: 19
-  s_matrix_58: 19
-  s_matrix_60: 40
-  s_matrix_61: 40
-  s_matrix_62: 40
-  s_matrix_63: 40
+  s_matrix_35: 3
+  s_matrix_36: 3
+  s_matrix_37: 20
+  s_matrix_38: 20
+  s_matrix_39: 20
+  s_matrix_44: 20
+  s_matrix_45: 20
+  s_matrix_46: 20
+  s_matrix_49: 20
+  s_matrix_50: 20
+  s_matrix_55: 3
+  s_matrix_57: 20
+  s_matrix_58: 20
+  s_matrix_60: 41
+  s_matrix_61: 41
+  s_matrix_62: 41
+  s_matrix_63: 41
   s_matrix_64: 2
-  s_matrix_65: 40
-  s_matrix_66: 40
+  s_matrix_65: 41
+  s_matrix_66: 41
   s_matrix_67: 2
-  s_matrix_68: 40
-  s_matrix_69: 40
-  s_matrix_70: 40
-  s_matrix_71: 40
+  s_matrix_68: 41
+  s_matrix_69: 41
+  s_matrix_70: 41
+  s_matrix_71: 41
   s_matrix_72: 2
-  s_matrix_73: 40
-  s_matrix_74: 40
+  s_matrix_73: 41
+  s_matrix_74: 41
   s_matrix_75: 2
-  s_matrix_76: 40
-  s_matrix_77: 40
-  s_matrix_78: 40
-  s_matrix_79: 40
+  s_matrix_76: 41
+  s_matrix_77: 41
+  s_matrix_78: 41
+  s_matrix_79: 41
   s_matrix_80: 2
-  s_matrix_83: 40
-  s_matrix_84: 40
-  s_matrix_85: 40
-  s_matrix_86: 40
-  s_matrix_87: 40
+  s_matrix_83: 41
+  s_matrix_84: 41
+  s_matrix_85: 41
+  s_matrix_86: 41
+  s_matrix_87: 41
   s_matrix_88: 2
   s_matrix_89: 2
   s_matrix_90: 2
-  s_matrix_91: 40
-  s_matrix_92: 40
-  s_matrix_93: 40
-  s_matrix_94: 40
-  s_matrix_95: 40
+  s_matrix_91: 41
+  s_matrix_92: 41
+  s_matrix_93: 41
+  s_matrix_94: 41
+  s_matrix_95: 41
   s_pop_bumper_eos: 10
+  s_raise_target_a_og: 1
+  s_raise_target_b: 1
+  s_raise_target_c: 1
+  s_raise_target_d_og: 1
   s_slingshot_right_eos: 18
-  s_start: 18
-  s_target_b: 50
-  s_target_c: 50
-  s_target_d: 50
+  s_start: 19
+  s_target_a: 1
+  s_target_b: 51
+  s_target_c: 51
+  s_target_d: 51
   s_tilt: 7
 player:
   score:
@@ -79,36 +81,36 @@ player:
     - 5000
     total: 4
 switches:
-  s_10_top: 46
+  s_10_top: 47
   s_10_top_1: 0
   s_10_top_2: 0
   s_10_top_3: 0
-  s_500_ab_1: 349
-  s_500_ab_2: 45
-  s_500_ab_3: 40
-  s_500_ab_4: 26
-  s_500_ab_5: 22
-  s_500_ab_6: 15
-  s_500_ab_7: 15
-  s_500_ab_8: 14
+  s_500_ab_1: 350
+  s_500_ab_2: 46
+  s_500_ab_3: 41
+  s_500_ab_4: 27
+  s_500_ab_5: 23
+  s_500_ab_6: 16
+  s_500_ab_7: 16
+  s_500_ab_8: 15
   s_500_rollover_1: 23
-  s_500_rollover_2: 6
-  s_50_rollover_1: 2
-  s_50_rollover_2: 13
-  s_50_rollover_3: 23
+  s_500_rollover_2: 7
+  s_50_rollover_1: 8
+  s_50_rollover_2: 18
+  s_50_rollover_3: 30
   s_ball_in_playfield: 28
-  s_close_gate_1: 50
-  s_close_gate_2: 106
+  s_close_gate_1: 51
+  s_close_gate_2: 108
   s_credit: 0
   s_direct_16: 0
   s_direct_27: 0
-  s_drop_target_1: 147
-  s_drop_target_2: 51
-  s_drop_target_3: 27
-  s_drop_target_4: 1
-  s_flipper_left: 600
+  s_drop_target_1: 148
+  s_drop_target_2: 55
+  s_drop_target_3: 28
+  s_drop_target_4: 2
+  s_flipper_left: 605
   s_flipper_left_eos: 323
-  s_flipper_right: 554
+  s_flipper_right: 560
   s_flipper_right_eos: 494
   s_matrix_33: 0
   s_matrix_34: 0
@@ -161,17 +163,17 @@ switches:
   s_matrix_93: 0
   s_matrix_94: 0
   s_matrix_95: 0
-  s_outhole_switch: 114
+  s_outhole_switch: 118
   s_plunger: 41
-  s_pop_bumper: 145
+  s_pop_bumper: 152
   s_pop_bumper_eos: 0
   s_raise_target_a_og: 83
   s_raise_target_b: 125
   s_raise_target_c: 98
   s_raise_target_d_og: 9
-  s_slingshot_left: 73
-  s_slingshot_left_eos: 72
-  s_slingshot_right: 123
+  s_slingshot_left: 75
+  s_slingshot_left_eos: 74
+  s_slingshot_right: 126
   s_slingshot_right_eos: 103
   s_start: 134
   s_target_a: 24
