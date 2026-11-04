@@ -8,28 +8,28 @@ switches:
 
   # Matrix switches (8x8; addresses are placeholders pending switch testing)
   s_500_ab_1: 
-    number: "1-0-72"
+    number: "1-0-48"
   s_500_ab_2: 
-    number: "1-0-64"
-  s_500_ab_3: 
-    number: "1-0-40"
-  s_500_ab_4: 
     number: "1-0-56"
+  s_500_ab_3: 
+    number: "1-0-64"
+  s_500_ab_4: 
+    number: "1-0-72"
   s_500_ab_5: 
-    number: "1-0-59"
-  s_500_ab_6: 
-    number: "1-0-43"
-  s_500_ab_7: 
-    number: "1-0-67"
-  s_500_ab_8: 
     number: "1-0-75"
+  s_500_ab_6: 
+    number: "1-0-67"
+  s_500_ab_7: 
+    number: "1-0-59"
+  s_500_ab_8: 
+    number: "1-0-51"
 
   s_50_rollover_1: 
-    number: "1-0-48"
+    number: "1-0-81"
   s_50_rollover_2: 
     number: "1-0-47"
   s_50_rollover_3: 
-    number: "1-0-42"
+    number: "1-0-82"
 
   # Direct switches
   s_10_top:
@@ -37,18 +37,18 @@ switches:
 
   # Matrix switches
   s_raise_target_d_og:
-    number: "1-0-32"
+    number: "1-0-88"
   s_raise_target_a_og: 
-    number: "1-0-80"
+    number: "1-0-40"
   s_raise_target_b: 
-    number: "1-0-89"
+    number: "1-0-33"
   s_raise_target_c:
-    number: "1-0-90"
+    number: "1-0-34"
 
   s_500_rollover_1: 
-    number: "1-0-88"
+    number: "1-0-32"
   s_500_rollover_2: 
-    number: "1-0-41"
+    number: "1-0-43"
 
   # Direct switches
   s_pop_bumper: 
@@ -56,13 +56,13 @@ switches:
 
   # Matrix switches
   s_close_gate_1:
-    number: "1-0-81"
+    number: "1-0-41"
 
   s_close_gate_2: 
-    number: "1-0-82"
+    number: "1-0-42"
 
   s_target_a:
-    number: "1-0-51"
+    number: "1-0-80"
   s_target_b:
     number: "1-0-52"
   s_target_c: 
@@ -86,7 +86,7 @@ switches:
   # s_flipper_right_eos: 
   #   number: "0-0-25"
   #   type: NC
- 
+  #direct switches
   s_flipper_left: 
     number: "1-0-1"
   s_flipper_right: 
@@ -121,10 +121,10 @@ switches:
   #   tags: tilt
 
   # Unassigned matrix inputs; replace placeholder names after switch testing.
-  s_matrix_33:
-    number: "1-0-33"
-  s_matrix_34:
-    number: "1-0-34"
+  s_matrix_35:
+    number: "1-0-35"
+  s_matrix_36:
+    number: "1-0-36"
   s_matrix_37:
     number: "1-0-37"
   s_matrix_38:
@@ -141,6 +141,8 @@ switches:
     number: "1-0-49"
   s_matrix_50:
     number: "1-0-50"
+  s_matrix_55:
+    number: "1-0-55"
   s_matrix_57:
     number: "1-0-57"
   s_matrix_58:
