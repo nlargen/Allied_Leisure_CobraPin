@@ -10,15 +10,15 @@ coils:
   # Verify actual resistance and driver capability before powering.
   c_flipper_left_main:
     number: "1-0-0"
-    default_pulse_ms: 75
-    max_pulse_ms: 80
+    default_pulse_ms: 250
+    max_pulse_ms: 250
     default_pulse_power: 1
     max_pulse_power: 1.0
     
   c_flipper_right_main:
     number: "1-0-7"
-    default_pulse_ms: 75
-    max_pulse_ms: 80
+    default_pulse_ms: 250
+    max_pulse_ms: 250
     default_pulse_power: 1
     max_pulse_power: 1.0
 
