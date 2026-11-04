@@ -25,7 +25,7 @@ switches:
     number: "1-0-51"
 
   s_50_rollover_1: 
-    number: "1-0-81"
+    number: "1-0-80"
   s_50_rollover_2: 
     number: "0-0-25"
   s_50_rollover_3: 
@@ -62,7 +62,7 @@ switches:
     number: "1-0-42"
 
   s_target_a:
-    number: "1-0-80"
+    number: "1-0-81"
   s_target_b:
     number: "1-0-52"
   s_target_c: 
