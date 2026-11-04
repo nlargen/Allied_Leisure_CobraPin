@@ -27,9 +27,9 @@ switches:
   s_50_rollover_1: 
     number: "1-0-81"
   s_50_rollover_2: 
-    number: "1-0-47"
+    number: "0-0-25"
   s_50_rollover_3: 
-    number: "1-0-82"
+    number: "0-0-3"
 
   # Direct switches
   s_10_top:
@@ -37,7 +37,7 @@ switches:
 
   # Matrix switches
   s_raise_target_d_og:
-    number: "1-0-88"
+    number: "0-0-24"
   s_raise_target_a_og: 
     number: "1-0-40"
   s_raise_target_b: 
@@ -99,8 +99,6 @@ switches:
 
   s_slingshot_left_eos: 
     number: "0-0-17"
-  s_slingshot_right_eos:     
-    number: "0-0-24"
 
  
   # direct switches
@@ -119,6 +117,12 @@ switches:
   # s_tilt:
   #   number: "1-0-8"
   #   tags: tilt
+
+  # Unassigned direct inputs; replace placeholder names after switch testing.
+  s_direct_16:
+    number: "0-0-16"
+  s_direct_27:
+    number: "0-0-27"
 
   # Unassigned matrix inputs; replace placeholder names after switch testing.
   s_matrix_35:
