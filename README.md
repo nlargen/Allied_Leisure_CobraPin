@@ -36,11 +36,12 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
 - [`config.yaml`](./Boogie/config/config.yaml) sets up a five-ball game for up
   to two players, loads the attract, base, tilt, drop-target-scoring, and playfield
   lights modes, and selects the OPP platform with Gen2 driver boards for
-  CobraPin. The `opp.ports` entry is OS-specific: use the COM ports Windows
-  assigns to the boards when MPF runs on Windows (currently `COM7, COM8` as
-  temporary values), or the verified `/dev/ttyACM*` paths when MPF runs on a
-  Raspberry Pi/Linux. Update this one setting when changing hosts; the example
-  port values must be confirmed on the machine that runs MPF.
+  CobraPin. It retains the Windows `COM9, COM10` ports.
+- [`config_raspberry_pi.yaml`](./Boogie/config/config_raspberry_pi.yaml)
+  overrides only `opp.ports` for Linux, leaving the shared game config and
+  Windows COM ports unchanged. It uses the two Raspberry Pi
+  `/dev/serial/by-id/` device paths; replace them if the connected controllers
+  change.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and
   cabinet switches to logical switch names. Hardware address values follow the
   requested `0-0-N` pattern, with dedicated `1-0-N` addresses for the start,
@@ -92,14 +93,17 @@ use EOS rules. OPP hardware rules also require the activation switch and coil
 to be on the same board. Playfield light hardware mappings still need
 commissioning.
 
-MPF does not automatically choose between Windows COM names and Linux
-`/dev/tty*` paths from a single static `opp.ports` value. For now, set that
-value for the computer running MPF before startup. To avoid editing the
-shared config when switching hosts, use separate Windows/Linux OPP config
-overrides and a platform-specific launcher that selects the appropriate
-override. OPP also supports identifying CobraPin boards by their configured
-serial numbers to avoid dependence on which port each board is assigned; this
-does not remove the need to use the appropriate OS-specific connection setup.
+Launch MPF game only with [`run_windows.bat`](./Boogie/run_windows.bat) on
+Windows. On Raspberry Pi/Linux, run `bash run_raspberry_pi.sh` from any
+directory; the script changes to `Boogie/` and runs MPF game only. It passes
+`config.yaml,config_raspberry_pi.yaml` to MPF, which merges the Linux port
+override after the shared configuration. The Windows launcher uses `config.yaml`
+and retains `COM9, COM10`. The Linux user needs permission to open the serial
+devices (commonly by being in the `dialout` group; log out and back in after
+changing group membership). OPP supports identifying CobraPin boards by their
+configured serial numbers as an alternative to relying on which port each
+board is assigned. On Linux, `/dev/serial/by-id/` paths identify the attached
+USB serial devices consistently even if `/dev/ttyACM*` numbers change.
 
 ### Godot / MPF-GMC
 

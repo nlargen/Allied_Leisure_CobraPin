@@ -1,0 +1,6 @@
+#config_version=6
+
+# Override this only on Linux; config.yaml retains the Windows COM9/COM10 ports.
+# by-id paths keep each board mapped consistently if ttyACM numbering changes.
+opp:
+  ports: /dev/serial/by-id/usb-STMicroelectronics_STM32_Virtual_ComPort_4EC852793400-if00, /dev/serial/by-id/usb-STMicroelectronics_STM32_Virtual_ComPort_565552AE5100-if00
