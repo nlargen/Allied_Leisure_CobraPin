@@ -68,26 +68,26 @@ coils:
   #drop targets
   c_drop_target_1:
     number: "0-0-8"
-    default_pulse_ms: 55  
-    max_pulse_ms: 65  
+    default_pulse_ms: 75  
+    max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_2:
     number: "0-0-9"
-    default_pulse_ms: 55
-    max_pulse_ms: 65
+    default_pulse_ms: 75
+    max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_3:
     number: "0-0-10"
     default_pulse_ms: 75
-    max_pulse_ms: 85
+    max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_4:
     number: "0-0-6"
-    default_pulse_ms: 65
-    max_pulse_ms: 85
+    default_pulse_ms: 75
+    max_pulse_ms: 75
     default_recycle: true
 
   #slingshots 
