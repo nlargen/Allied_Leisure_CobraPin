@@ -33,6 +33,32 @@ class FakeCoil:
         self.pulse_count += 1
 
 
+class FakeDelay:
+
+    def __init__(self):
+        self.pending = []
+
+    def add(self, ms, callback, name=None):
+        self.pending.append((ms, callback, name))
+
+    def run_next(self):
+        ms, callback, name = self.pending.pop(0)
+        callback()
+        return ms, name
+
+
+class FakeQueue:
+
+    def __init__(self):
+        self.waiting = False
+
+    def wait(self):
+        self.waiting = True
+
+    def clear(self):
+        self.waiting = False
+
+
 class PlayfieldLightsTest(unittest.TestCase):
 
     def setUp(self):
@@ -76,6 +102,7 @@ class PlayfieldLightsTest(unittest.TestCase):
             ),
         )
         self.mode.player = SimpleNamespace(score=0, chime_10000_played=False)
+        self.mode.delay = FakeDelay()
         self.mode.info_log = Mock()
         self.mode.handlers = []
         self.mode.add_mode_event_handler = (
@@ -183,17 +210,41 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertFalse(self.lights["l_bonus_advance_1"].is_on)
         self.assertFalse(self.lights["l_special_left"].is_on)
 
-    def test_ball_will_end_awards_accumulated_bonus_once(self):
+    def test_ball_ending_counts_bonus_down_and_chimes_each_thousand(self):
         self.start_mode(selected_rollover=3)
         self.post("s_50_rollover_1_active")
         self.post("s_500_ab_1_active")
         self.assertEqual(50, self.mode.player.score)
         self.assertEqual(3000, self.mode._bonus_value)
 
-        self.post("ball_will_end")
-        self.assertEqual(3050, self.mode.player.score)
-        self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
-        self.post("ball_will_end")
+        queue = FakeQueue()
+        self.post("ball_ending", queue=queue)
+        self.assertTrue(queue.waiting)
+        self.assertEqual(50, self.mode.player.score)
+        self.assertTrue(self.lights["l_bonus_3000"].is_on)
+
+        for remaining in (2000, 1000, 0):
+            delay_ms, delay_name = self.mode.delay.run_next()
+            self.assertEqual(
+                self.mode.BONUS_COUNTDOWN_INTERVAL_MS, delay_ms
+            )
+            self.assertEqual("bonus_countdown", delay_name)
+            self.assertEqual(3050 - remaining, self.mode.player.score)
+            self.assertEqual(
+                3 - remaining // 1000,
+                self.coils["c_chime_100"].pulse_count,
+            )
+            if remaining:
+                self.assertTrue(self.lights[f"l_bonus_{remaining}"].is_on)
+
+        self.assertFalse(queue.waiting)
+        self.assertFalse(any(light.is_on for light in (
+            self.lights[f"l_bonus_{value}"]
+            for value in range(1000, 11000, 1000)
+        )))
+        self.assertEqual([], self.mode.delay.pending)
+
+        self.post("ball_ending", queue=FakeQueue())
         self.assertEqual(3050, self.mode.player.score)
         self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
 
@@ -202,9 +253,17 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.mode._bonus_value = 7000
         self.mode._double_bonus_active = True
 
-        self.post("ball_will_end")
+        queue = FakeQueue()
+        self.post("ball_ending", queue=queue)
+        self.assertTrue(queue.waiting)
+        self.assertEqual(0, self.mode.player.score)
+
+        while self.mode.delay.pending:
+            self.mode.delay.run_next()
 
         self.assertEqual(14, self.coils["c_chime_100"].pulse_count)
+        self.assertEqual(14000, self.mode.player.score)
+        self.assertFalse(queue.waiting)
         self.assertTrue(self.mode._bonus_awarded)
 
     def test_bonus_advances_from_rollovers_and_500_targets_and_caps(self):

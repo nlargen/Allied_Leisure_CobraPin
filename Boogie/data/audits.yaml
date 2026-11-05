@@ -66,7 +66,6 @@ missing_switches:
   s_matrix_95: 62
   s_pop_bumper_eos: 10
   s_slingshot_right_eos: 18
-  s_start: 6
   s_target_a: 22
   s_target_b: 72
   s_target_c: 72
@@ -182,7 +181,7 @@ switches:
   s_slingshot_left_eos: 181
   s_slingshot_right: 296
   s_slingshot_right_eos: 103
-  s_start: 134
+  s_start: 135
   s_target_a: 24
   s_target_b: 0
   s_target_c: 0

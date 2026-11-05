@@ -5,6 +5,7 @@ from mpf.core.mode import Mode
 
 class PlayfieldLights(Mode):
 
+    BONUS_COUNTDOWN_INTERVAL_MS = 300
     BONUS_ROLLOVER_SWITCHES = (
         "s_50_rollover_1",
         "s_50_rollover_2",
@@ -51,8 +52,9 @@ class PlayfieldLights(Mode):
             self._check_score_milestone,
         )
         self.add_mode_event_handler(
-            "ball_will_end",
-            self._award_bonus,
+            "ball_ending",
+            self._start_bonus_countdown,
+            priority=1000,
         )
 
         for number, switch in enumerate(self.BONUS_ROLLOVER_SWITCHES, start=1):
@@ -138,27 +140,59 @@ class PlayfieldLights(Mode):
             else:
                 light.off()
 
-    def _award_bonus(self, **kwargs):
+    def _start_bonus_countdown(self, queue, **kwargs):
         del kwargs
         if self._bonus_awarded:
             return
 
         multiplier = 2 if self._double_bonus_active else 1
-        bonus_total = self._bonus_value * multiplier
-        thousands, remainder = divmod(bonus_total, 1000)
-        for _ in range(thousands):
-            self.player.score += 1000
-            self.machine.coils["c_chime_100"].pulse()
-        if remainder:
-            self.player.score += remainder
-
         self._bonus_awarded = True
+        self._bonus_remaining = self._bonus_value * multiplier
+        if not self._bonus_remaining:
+            return
+
+        self._bonus_queue = queue
+        queue.wait()
+        self._show_bonus_remaining()
+        self.delay.add(
+            ms=self.BONUS_COUNTDOWN_INTERVAL_MS,
+            callback=self._bonus_countdown_step,
+            name="bonus_countdown",
+        )
         self.info_log(
-            "Awarded %s bonus points (%s x %s)",
-            bonus_total,
+            "Counting down %s bonus points (%s x %s)",
+            self._bonus_remaining,
             self._bonus_value,
             multiplier,
         )
+
+    def _bonus_countdown_step(self, **kwargs):
+        del kwargs
+        points = min(1000, self._bonus_remaining)
+        self._bonus_remaining -= points
+        self.player.score += points
+        self.machine.coils["c_chime_100"].pulse()
+        self._show_bonus_remaining()
+
+        if self._bonus_remaining:
+            self.delay.add(
+                ms=self.BONUS_COUNTDOWN_INTERVAL_MS,
+                callback=self._bonus_countdown_step,
+                name="bonus_countdown",
+            )
+            return
+
+        self._bonus_queue.clear()
+        self._bonus_queue = None
+
+    def _show_bonus_remaining(self):
+        lit_value = min(self._bonus_remaining, 10000)
+        for value in range(1000, 11000, 1000):
+            light = self.machine.lights[f"l_bonus_{value}"]
+            if value == lit_value:
+                light.on()
+            else:
+                light.off()
 
     def _drop_target_raised(self, target, **kwargs):
         del kwargs
