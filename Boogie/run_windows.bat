@@ -1,4 +1,4 @@
 @echo off
 cd /d "%~dp0"
-mpf game -c config.yaml
+mpf game -b -c config.yaml
 if errorlevel 1 pause

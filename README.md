@@ -95,15 +95,18 @@ commissioning.
 
 Launch MPF game only with [`run_windows.bat`](./Boogie/run_windows.bat) on
 Windows. On Raspberry Pi/Linux, run `bash run_raspberry_pi.sh` from any
-directory; the script changes to `Boogie/` and runs MPF game only. It passes
-`config.yaml,config_raspberry_pi.yaml` to MPF, which merges the Linux port
-override after the shared configuration. The Windows launcher uses `config.yaml`
-and retains `COM9, COM10`. The Linux user needs permission to open the serial
-devices (commonly by being in the `dialout` group; log out and back in after
-changing group membership). OPP supports identifying CobraPin boards by their
-configured serial numbers as an alternative to relying on which port each
-board is assigned. On Linux, `/dev/serial/by-id/` paths identify the attached
-USB serial devices consistently even if `/dev/ttyACM*` numbers change.
+directory; the script changes to `Boogie/` and runs MPF game only. Both
+launchers use MPF's `-b` option to skip the BCP connection attempt, so they do
+not wait for a media controller and Godot/GMC will not connect during that
+run. The Linux launcher passes `config.yaml,config_raspberry_pi.yaml` to MPF,
+which merges the Linux port override after the shared configuration. The
+Windows launcher uses `config.yaml` and retains `COM9, COM10`. The Linux user
+needs permission to open the serial devices (commonly by being in the
+`dialout` group; log out and back in after changing group membership). OPP
+supports identifying CobraPin boards by their configured serial numbers as an
+alternative to relying on which port each board is assigned. On Linux,
+`/dev/serial/by-id/` paths identify the attached USB serial devices
+consistently even if `/dev/ttyACM*` numbers change.
 
 ### Godot / MPF-GMC
 
