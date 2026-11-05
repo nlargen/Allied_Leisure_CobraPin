@@ -10,14 +10,14 @@ coils:
   # Verify actual resistance and driver capability before powering.
   c_flipper_left_main:
     number: "1-0-0"
-    default_pulse_ms: 250
+    default_pulse_ms: 200
     max_pulse_ms: 250
     default_pulse_power: 1
     max_pulse_power: 1.0
     
   c_flipper_right_main:
     number: "1-0-7"
-    default_pulse_ms: 250
+    default_pulse_ms: 200
     max_pulse_ms: 250
     default_pulse_power: 1
     max_pulse_power: 1.0
@@ -37,8 +37,8 @@ coils:
   # Allied 264-1-43 pop bumper; reference says 9 ohm.
   c_pop_bumper:
     number: "0-0-13"
-    default_pulse_ms: 60
-    max_pulse_ms: 65
+    default_pulse_ms: 180
+    max_pulse_ms: 254
     default_recycle: true
 
   # Allied 264-1-102 outhole kicker.
@@ -49,21 +49,21 @@ coils:
     default_recycle: true
 
   # Chimes are not connected yet.
-  # c_chime_10:
-  #   number: "0-0-7"
-  #   default_pulse_ms: 3
-  #   max_pulse_ms: 5
-  #   default_recycle: true
-  # c_chime_50:
-  #   number: "0-0-8"
-  #   default_pulse_ms: 3
-  #   max_pulse_ms: 5
-  #   default_recycle: true
-  # c_chime_100:
-  #   number: "0-0-9"
-  #   default_pulse_ms: 3
-  #   max_pulse_ms: 5
-  #   default_recycle: true
+  c_chime_10:
+     number: "0-0-15"
+     default_pulse_ms: 35
+     max_pulse_ms: 200  
+     default_recycle: true
+  c_chime_50:
+     number: "0-0-7"
+     default_pulse_ms: 35
+     max_pulse_ms: 200
+     default_recycle: true
+  c_chime_100:
+     number: "0-0-5"
+     default_pulse_ms: 35
+     max_pulse_ms: 200
+     default_recycle: true
 
   #drop targets
   c_drop_target_1:
@@ -94,14 +94,14 @@ coils:
   # Allied 264-1-46 slingshots.
   c_slingshot_left:
     number: "0-0-11"
-    default_pulse_ms: 45  
-    max_pulse_ms: 50
+    default_pulse_ms: 80  
+    max_pulse_ms: 100
     default_recycle: true
 
   c_slingshot_right:
     number: "0-0-12"
-    default_pulse_ms: 45
-    max_pulse_ms: 50
+    default_pulse_ms: 80
+    max_pulse_ms: 100
     default_recycle: true
 
   # The thumper is not connected yet.

@@ -185,6 +185,29 @@ accruals:
   #   reset_on_complete: true
 
 coil_player:
+  s_10_top_active: c_chime_10
+
+  # 50-point awards
+  s_raise_target_a_og_active: c_chime_10
+  s_raise_target_d_og_active: c_chime_10
+  s_raise_target_b_active: c_chime_10
+  s_raise_target_c_active: c_chime_10
+  s_pop_bumper_active: c_chime_10
+  s_slingshot_left_active: c_chime_10
+  s_slingshot_right_active: c_chime_10
+
+  # 500-point awards
+  s_500_ab_1_active: c_chime_100
+  s_500_ab_2_active: c_chime_50
+  s_500_ab_3_active: c_chime_100
+  s_500_ab_4_active: c_chime_50
+  s_500_ab_5_active: c_chime_100
+  s_500_ab_6_active: c_chime_50
+  s_500_ab_7_active: c_chime_100
+  s_500_ab_8_active: c_chime_50
+  s_500_rollover_1_active: c_chime_50
+  s_500_rollover_2_active: c_chime_50
+
   open_gate_d:
     c_gate_b:
       action: enable

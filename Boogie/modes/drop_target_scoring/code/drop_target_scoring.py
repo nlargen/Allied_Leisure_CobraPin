@@ -36,8 +36,9 @@ class DropTargetScoring(Mode):
             return
 
         self.armed[target] = False
-        self.player.score += 1000
+        self.player.score += 500
+        self.machine.coils["c_chime_50"].pulse()
 
         self.machine.log.info(
-            "Drop target %s scored 1000 points", target
+            "Drop target %s scored 500 points", target
         )

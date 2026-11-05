@@ -47,6 +47,10 @@ class PlayfieldLights(Mode):
 
     def _register_switch_handlers(self):
         self.add_mode_event_handler(
+            "player_score",
+            self._check_score_milestone,
+        )
+        self.add_mode_event_handler(
             "ball_will_end",
             self._award_bonus,
         )
@@ -99,12 +103,24 @@ class PlayfieldLights(Mode):
         self._advance_bonus()
         if rollover_number == self._selected_500_rollover:
             self.player.score += 500
+            self.machine.coils["c_chime_50"].pulse()
             self.machine.lights[
                 f"l_500_when_lit_{rollover_number}"
             ].off()
             self._selected_500_rollover = None
         else:
             self.player.score += 50
+            self.machine.coils["c_chime_10"].pulse()
+
+    def _check_score_milestone(self, value, prev_value, **kwargs):
+        del kwargs
+        if (
+            prev_value < 10000 <= value
+            and not self.player.chime_10000_played
+        ):
+            self.player.chime_10000_played = True
+            self.machine.coils["c_chime_50"].pulse()
+            self.machine.coils["c_chime_100"].pulse()
 
     def _bonus_advance_target_hit(self, target_number, **kwargs):
         del kwargs
@@ -128,11 +144,18 @@ class PlayfieldLights(Mode):
             return
 
         multiplier = 2 if self._double_bonus_active else 1
-        self.player.score += self._bonus_value * multiplier
+        bonus_total = self._bonus_value * multiplier
+        thousands, remainder = divmod(bonus_total, 1000)
+        for _ in range(thousands):
+            self.player.score += 1000
+            self.machine.coils["c_chime_100"].pulse()
+        if remainder:
+            self.player.score += remainder
+
         self._bonus_awarded = True
         self.info_log(
             "Awarded %s bonus points (%s x %s)",
-            self._bonus_value * multiplier,
+            bonus_total,
             self._bonus_value,
             multiplier,
         )

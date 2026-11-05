@@ -5,6 +5,7 @@ from unittest.mock import Mock, patch
 
 from mpf.file_interfaces.yaml_interface import YamlInterface
 from mpf.tests.MpfTestCase import MpfTestCase
+from modes.drop_target_scoring.code.drop_target_scoring import DropTargetScoring
 from modes.playfield_lights.code.playfield_lights import PlayfieldLights
 
 
@@ -21,6 +22,15 @@ class FakeLight:
 
     def off(self):
         self.is_on = False
+
+
+class FakeCoil:
+
+    def __init__(self):
+        self.pulse_count = 0
+
+    def pulse(self):
+        self.pulse_count += 1
 
 
 class PlayfieldLightsTest(unittest.TestCase):
@@ -48,10 +58,15 @@ class PlayfieldLightsTest(unittest.TestCase):
                 "l_gates_open",
             )
         })
+        self.coils = {
+            name: FakeCoil()
+            for name in ("c_chime_10", "c_chime_50", "c_chime_100")
+        }
 
         self.mode = PlayfieldLights.__new__(PlayfieldLights)
         self.mode.machine = SimpleNamespace(
             lights=self.lights,
+            coils=self.coils,
             switches={
                 f"s_drop_target_{number}": f"s_drop_target_{number}"
                 for number in range(1, 5)
@@ -60,7 +75,7 @@ class PlayfieldLightsTest(unittest.TestCase):
                 is_active=lambda switch: switch in self.active_switches
             ),
         )
-        self.mode.player = SimpleNamespace(score=0)
+        self.mode.player = SimpleNamespace(score=0, chime_10000_played=False)
         self.mode.info_log = Mock()
         self.mode.handlers = []
         self.mode.add_mode_event_handler = (
@@ -75,10 +90,10 @@ class PlayfieldLightsTest(unittest.TestCase):
         ):
             self.mode.mode_start()
 
-    def post(self, event):
+    def post(self, event, **event_kwargs):
         for registered_event, handler, kwargs in self.mode.handlers:
             if registered_event == event:
-                handler(**kwargs)
+                handler(**kwargs, **event_kwargs)
 
     def test_selected_rollover_scores_500_once(self):
         self.start_mode(selected_rollover=2)
@@ -94,14 +109,32 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.post("s_50_rollover_1_active")
         self.assertEqual(50, self.mode.player.score)
         self.assertEqual(2000, self.mode._bonus_value)
+        self.assertEqual(1, self.coils["c_chime_10"].pulse_count)
 
         self.post("s_50_rollover_2_active")
         self.assertEqual(550, self.mode.player.score)
         self.assertFalse(self.lights["l_500_when_lit_2"].is_on)
         self.assertEqual(3000, self.mode._bonus_value)
+        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
 
         self.post("s_50_rollover_2_active")
         self.assertEqual(600, self.mode.player.score)
+        self.assertEqual(2, self.coils["c_chime_10"].pulse_count)
+
+    def test_ten_thousand_score_milestone_plays_both_chimes_once(self):
+        self.start_mode()
+
+        self.post("player_score", value=9999, prev_value=9000)
+        self.assertEqual(0, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(0, self.coils["c_chime_100"].pulse_count)
+
+        self.post("player_score", value=10000, prev_value=9999)
+        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(1, self.coils["c_chime_100"].pulse_count)
+
+        self.post("player_score", value=20000, prev_value=10000)
+        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(1, self.coils["c_chime_100"].pulse_count)
 
     def test_base_mode_does_not_add_duplicate_rollover_scoring(self):
         base_config = YamlInterface.process(
@@ -159,8 +192,10 @@ class PlayfieldLightsTest(unittest.TestCase):
 
         self.post("ball_will_end")
         self.assertEqual(3050, self.mode.player.score)
+        self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
         self.post("ball_will_end")
         self.assertEqual(3050, self.mode.player.score)
+        self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
 
     def test_ball_will_end_doubles_bonus_when_double_bonus_is_lit(self):
         self.start_mode()
@@ -169,7 +204,7 @@ class PlayfieldLightsTest(unittest.TestCase):
 
         self.post("ball_will_end")
 
-        self.assertEqual(14000, self.mode.player.score)
+        self.assertEqual(14, self.coils["c_chime_100"].pulse_count)
         self.assertTrue(self.mode._bonus_awarded)
 
     def test_bonus_advances_from_rollovers_and_500_targets_and_caps(self):
@@ -300,6 +335,27 @@ class PlayfieldLightsTest(unittest.TestCase):
             {"c_gate_a": "disable", "c_gate_b": "disable"},
             coil_player["ball_drain"],
         )
+        self.assertEqual("c_chime_10", coil_player["s_10_top_active"])
+        self.assertEqual("c_chime_10", coil_player["s_pop_bumper_active"])
+        self.assertEqual(
+            "c_chime_50", coil_player["s_500_ab_1_active"]
+        )
+        for event in (
+            "s_raise_target_a_og_active",
+            "s_raise_target_d_og_active",
+            "s_raise_target_b_active",
+            "s_raise_target_c_active",
+            "s_pop_bumper_active",
+            "s_slingshot_left_active",
+            "s_slingshot_right_active",
+        ):
+            self.assertEqual("c_chime_10", coil_player[event])
+        for event in (
+            *(f"s_500_ab_{number}_active" for number in range(1, 9)),
+            "s_500_rollover_1_active",
+            "s_500_rollover_2_active",
+        ):
+            self.assertEqual("c_chime_50", coil_player[event])
         for number, target in enumerate("abcd", start=1):
             self.assertEqual(
                 f"c_drop_target_{number}",
@@ -316,6 +372,47 @@ class PlayfieldLightsTest(unittest.TestCase):
                     "disable_on_complete"
                 ]
             )
+
+
+class DropTargetScoringTest(unittest.TestCase):
+
+    def test_raised_then_hit_drop_target_scores_500_once(self):
+        coils = {"c_chime_50": FakeCoil()}
+        active_switches = set()
+        handlers = []
+        mode = DropTargetScoring.__new__(DropTargetScoring)
+        mode.player = SimpleNamespace(score=0)
+        mode.machine = SimpleNamespace(
+            coils=coils,
+            switches={
+                f"s_drop_target_{number}": f"s_drop_target_{number}"
+                for number in range(1, 5)
+            },
+            switch_controller=SimpleNamespace(
+                is_active=lambda switch: switch in active_switches
+            ),
+            log=SimpleNamespace(info=Mock()),
+        )
+        mode.add_mode_event_handler = (
+            lambda event, handler, **kwargs:
+            handlers.append((event, handler, kwargs))
+        )
+        mode.mode_start()
+
+        def post(event):
+            for registered_event, handler, kwargs in handlers:
+                if registered_event == event:
+                    handler(**kwargs)
+
+        post("s_drop_target_1_inactive")
+        self.assertEqual(0, mode.player.score)
+
+        post("s_drop_target_1_active")
+        post("s_drop_target_1_inactive")
+        post("s_drop_target_1_inactive")
+
+        self.assertEqual(500, mode.player.score)
+        self.assertEqual(1, coils["c_chime_50"].pulse_count)
 
 
 class BoogieMachineStartupTest(MpfTestCase):
