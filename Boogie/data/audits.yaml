@@ -1,122 +1,121 @@
 events:
-  game_ended: 14
-  game_started: 101
+  game_ended: 23
+  game_started: 111
 missing_switches:
-  s_10_top: 1
+  s_10_top: 3
   s_10_top_1: 10
   s_10_top_2: 10
   s_10_top_3: 10
-  s_500_ab_5: 1
-  s_500_ab_6: 1
-  s_500_ab_7: 1
-  s_500_ab_8: 2
-  s_500_rollover_1: 3
+  s_500_ab_1: 1
+  s_500_ab_5: 3
   s_ball_in_playfield: 43
   s_credit: 10
-  s_direct_16: 24
-  s_direct_27: 24
+  s_direct_16: 34
+  s_direct_27: 34
+  s_drop_target_4: 3
   s_matrix_33: 17
   s_matrix_34: 17
-  s_matrix_35: 24
-  s_matrix_36: 24
-  s_matrix_37: 41
-  s_matrix_38: 41
-  s_matrix_39: 41
-  s_matrix_44: 41
-  s_matrix_45: 41
-  s_matrix_46: 41
-  s_matrix_49: 41
-  s_matrix_50: 41
-  s_matrix_55: 24
-  s_matrix_57: 41
-  s_matrix_58: 41
-  s_matrix_60: 62
-  s_matrix_61: 62
-  s_matrix_62: 62
-  s_matrix_63: 62
+  s_matrix_35: 34
+  s_matrix_36: 34
+  s_matrix_37: 51
+  s_matrix_38: 51
+  s_matrix_39: 51
+  s_matrix_44: 51
+  s_matrix_45: 51
+  s_matrix_46: 51
+  s_matrix_49: 51
+  s_matrix_50: 51
+  s_matrix_55: 34
+  s_matrix_57: 51
+  s_matrix_58: 51
+  s_matrix_60: 72
+  s_matrix_61: 72
+  s_matrix_62: 72
+  s_matrix_63: 72
   s_matrix_64: 2
-  s_matrix_65: 62
-  s_matrix_66: 62
+  s_matrix_65: 72
+  s_matrix_66: 72
   s_matrix_67: 2
-  s_matrix_68: 62
-  s_matrix_69: 62
-  s_matrix_70: 62
-  s_matrix_71: 62
+  s_matrix_68: 72
+  s_matrix_69: 72
+  s_matrix_70: 72
+  s_matrix_71: 72
   s_matrix_72: 2
-  s_matrix_73: 62
-  s_matrix_74: 62
+  s_matrix_73: 72
+  s_matrix_74: 72
   s_matrix_75: 2
-  s_matrix_76: 62
-  s_matrix_77: 62
-  s_matrix_78: 62
-  s_matrix_79: 62
+  s_matrix_76: 72
+  s_matrix_77: 72
+  s_matrix_78: 72
+  s_matrix_79: 72
   s_matrix_80: 2
-  s_matrix_83: 62
-  s_matrix_84: 62
-  s_matrix_85: 62
-  s_matrix_86: 62
-  s_matrix_87: 62
+  s_matrix_83: 72
+  s_matrix_84: 72
+  s_matrix_85: 72
+  s_matrix_86: 72
+  s_matrix_87: 72
   s_matrix_88: 2
   s_matrix_89: 2
   s_matrix_90: 2
-  s_matrix_91: 62
-  s_matrix_92: 62
-  s_matrix_93: 62
-  s_matrix_94: 62
-  s_matrix_95: 62
+  s_matrix_91: 72
+  s_matrix_92: 72
+  s_matrix_93: 72
+  s_matrix_94: 72
+  s_matrix_95: 72
   s_pop_bumper_eos: 10
   s_slingshot_right_eos: 18
-  s_target_a: 22
-  s_target_b: 72
-  s_target_c: 72
-  s_target_d: 72
+  s_start: 1
+  s_target_a: 32
+  s_target_b: 82
+  s_target_c: 82
+  s_target_d: 82
   s_tilt: 7
 player:
   score:
-    average: 26778
+    average: 30868
     top:
+    - 79800
+    - 72060
     - 45100
+    - 40650
     - 39150
+    - 38600
     - 36410
     - 34700
     - 30750
     - 28800
-    - 28700
-    - 28100
-    - 26160
-    - 21600
-    total: 14
+    total: 23
 switches:
-  s_10_top: 123
+  s_10_top: 124
   s_10_top_1: 0
   s_10_top_2: 0
   s_10_top_3: 0
-  s_500_ab_1: 365
-  s_500_ab_2: 65
-  s_500_ab_3: 58
-  s_500_ab_4: 45
-  s_500_ab_5: 41
-  s_500_ab_6: 23
-  s_500_ab_7: 25
-  s_500_ab_8: 33
-  s_500_rollover_1: 32
-  s_500_rollover_2: 33
-  s_50_rollover_1: 22
-  s_50_rollover_2: 45
-  s_50_rollover_3: 58
+  s_500_ab_1: 370
+  s_500_ab_2: 83
+  s_500_ab_3: 82
+  s_500_ab_4: 69
+  s_500_ab_5: 47
+  s_500_ab_6: 28
+  s_500_ab_7: 37
+  s_500_ab_8: 38
+  s_500_rollover_1: 35
+  s_500_rollover_2: 53
+  s_50_rollover_1: 29
+  s_50_rollover_2: 67
+  s_50_rollover_3: 69
   s_ball_in_playfield: 28
-  s_close_gate_1: 128
-  s_close_gate_2: 160
+  s_close_gate_1: 201
+  s_close_gate_2: 181
   s_credit: 0
   s_direct_16: 0
   s_direct_27: 0
-  s_drop_target_1: 216
-  s_drop_target_2: 102
-  s_drop_target_3: 34
-  s_drop_target_4: 15
-  s_flipper_left: 1604
+  s_drop_target_1: 231
+  s_drop_target_2: 130
+  s_drop_target_3: 111
+  s_drop_target_4: 20
+  s_flipper_left: 1796
   s_flipper_left_eos: 323
-  s_flipper_right: 1028
+  s_flipper_right: 1218
   s_flipper_right_eos: 494
   s_matrix_33: 0
   s_matrix_34: 0
@@ -169,19 +168,19 @@ switches:
   s_matrix_93: 0
   s_matrix_94: 0
   s_matrix_95: 0
-  s_outhole_switch: 232
+  s_outhole_switch: 309
   s_plunger: 41
-  s_pop_bumper: 332
+  s_pop_bumper: 474
   s_pop_bumper_eos: 0
-  s_raise_target_a_og: 103
-  s_raise_target_b: 176
-  s_raise_target_c: 150
-  s_raise_target_d_og: 51
-  s_slingshot_left: 159
-  s_slingshot_left_eos: 181
-  s_slingshot_right: 296
+  s_raise_target_a_og: 115
+  s_raise_target_b: 198
+  s_raise_target_c: 169
+  s_raise_target_d_og: 77
+  s_slingshot_left: 228
+  s_slingshot_left_eos: 269
+  s_slingshot_right: 495
   s_slingshot_right_eos: 103
-  s_start: 135
+  s_start: 138
   s_target_a: 24
   s_target_b: 0
   s_target_c: 0
