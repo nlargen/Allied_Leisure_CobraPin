@@ -41,7 +41,7 @@ coils:
     max_pulse_ms: 254
     default_recycle: true
     default_pulse_power: .8
-    max_pulse_power: 1.0ss
+    max_pulse_power: 1.0
 
   # Allied 264-1-102 outhole kicker.
   c_outhole_kicker:
