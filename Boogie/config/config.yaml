@@ -51,5 +51,5 @@ opp:
 bcp:
   servers:
     hdmi_scoreboard:
-      type: mpf.core.bcp.bcp_socket_client.BCPClientSocket
+      ip: 127.0.0.1
       port: 5052
