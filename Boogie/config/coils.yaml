@@ -37,7 +37,7 @@ coils:
   # Allied 264-1-43 pop bumper; reference says 9 ohm.
   c_pop_bumper:
     number: "0-0-13"
-    default_pulse_ms: 180
+    default_pulse_ms: 45
     max_pulse_ms: 254
     default_recycle: true
 
@@ -116,10 +116,10 @@ coils:
     number: "0-0-0"
     default_pulse_ms: 30
     max_pulse_ms: 35
-    max_hold_power: .8
+    max_hold_power: .75
     # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_b:
     number: "0-0-1"
     default_pulse_ms: 30
     max_pulse_ms: 35
-    max_hold_power: .8
+    max_hold_power: .75
