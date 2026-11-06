@@ -48,3 +48,8 @@ opp:
 
  #opp:
  # ports: /dev/ttyACM0, /dev/ttyACM1 # Verify the device paths after connecting the CobraPin boards.
+bcp:
+  servers:
+    hdmi_scoreboard:
+      type: mpf.core.bcp.bcp_socket_client.BCPClientSocket
+      port: 5052
