@@ -53,17 +53,17 @@ coils:
   # Chimes are not connected yet.
   c_chime_10:
      number: "0-0-7"
-     default_pulse_ms: 30
+     default_pulse_ms: 15
      max_pulse_ms: 200  
      default_recycle: true
   c_chime_50:
      number: "0-0-15"
-     default_pulse_ms: 30
+     default_pulse_ms: 20
      max_pulse_ms: 200
      default_recycle: true
   c_chime_100:
      number: "0-0-5"
-     default_pulse_ms: 30
+     default_pulse_ms: 25
      max_pulse_ms: 200
      default_recycle: true
 
@@ -96,7 +96,7 @@ coils:
   # Allied 264-1-46 slingshots.
   c_slingshot_left:
     number: "0-0-11"
-    default_pulse_ms: 55
+    default_pulse_ms: 35
     max_pulse_ms: 100
     default_pulse_power: .9
     max_pulse_power: 1
@@ -104,7 +104,7 @@ coils:
 
   c_slingshot_right:
     number: "0-0-12"
-    default_pulse_ms: 55 
+    default_pulse_ms: 35 
     max_pulse_ms: 100
     default_pulse_power: .9
     max_pulse_power: 1
@@ -120,14 +120,14 @@ coils:
   # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_a:
     number: "0-0-0"
-    default_pulse_ms: 29
+    default_pulse_ms: 25
     max_pulse_ms: 35
-    default_hold_power: .50
+    default_hold_power: .4
     max_hold_power: .50
     # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_b:
     number: "0-0-1"
-    default_pulse_ms: 29
+    default_pulse_ms: 25
     max_pulse_ms: 35
-    default_hold_power: .50
+    default_hold_power: .40
     max_hold_power: .50
