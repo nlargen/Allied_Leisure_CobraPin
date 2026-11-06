@@ -7,104 +7,104 @@ lights:
   l_special_left:
     number: "1-0-0"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_special_right:
     number: "1-0-13"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
 
   l_bonus_1000:
     number: "1-0-10"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_2000:
     number: "1-0-11"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_3000:
     number: "1-0-12"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_4000:
     number: "1-0-7"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_5000:
     number: "1-0-6"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_6000:
     number: "1-0-4"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_7000:
     number: "1-0-3"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_8000:
     number: "1-0-2"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_9000:
     number: "1-0-1"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_10000:
     number: "1-0-9"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
 
   l_double_bonus:
     number: "1-0-8"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_gates_open:
     number: "1-0-5"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
 
   l_bonus_advance_1:
     number: "1-0-21"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_2:
     number: "1-0-20"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_3:
     number: "1-0-19"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_4:
     number: "1-0-18"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_5:
     number: "1-0-17"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_6:
     number: "1-0-16"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_7:
     number: "1-0-15"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_bonus_advance_8:
     number: "1-0-14"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
 
   l_500_when_lit_1:
     number: "1-0-22"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_500_when_lit_2:
     number: "1-0-23"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
   l_500_when_lit_3:
     number: "1-0-24"
     subtype: led
-    default_on_color: ffffff
+    default_on_color: ffbf00
