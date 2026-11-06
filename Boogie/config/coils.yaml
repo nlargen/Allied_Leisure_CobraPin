@@ -70,25 +70,25 @@ coils:
   #drop targets
   c_drop_target_1:
     number: "0-0-8"
-    default_pulse_ms: 75  
+    default_pulse_ms: 65  
     max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_2:
     number: "0-0-9"
-    default_pulse_ms: 75
+    default_pulse_ms: 65
     max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_3:
     number: "0-0-10"
-    default_pulse_ms: 75
+    default_pulse_ms: 65
     max_pulse_ms: 75
     default_recycle: true
 
   c_drop_target_4:
     number: "0-0-6"
-    default_pulse_ms: 75
+    default_pulse_ms: 65
     max_pulse_ms: 75
     default_recycle: true
 
@@ -120,12 +120,14 @@ coils:
   # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_a:
     number: "0-0-0"
-    default_pulse_ms: 30
+    default_pulse_ms: 29
     max_pulse_ms: 35
-    max_hold_power: .75
+    default_hold_power: .50
+    max_hold_power: .50
     # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_b:
     number: "0-0-1"
-    default_pulse_ms: 30
+    default_pulse_ms: 29
     max_pulse_ms: 35
-    max_hold_power: .75
+    default_hold_power: .50
+    max_hold_power: .50
