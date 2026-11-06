@@ -53,3 +53,4 @@ bcp:
     hdmi_scoreboard:
       ip: 127.0.0.1
       port: 5052
+      type: mpf.core.bcp.bcp_socket_client.BCPClientSocket
