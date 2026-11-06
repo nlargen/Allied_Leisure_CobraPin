@@ -37,10 +37,10 @@ coils:
   # Allied 264-1-43 pop bumper; reference says 9 ohm.
   c_pop_bumper:
     number: "0-0-13"
-    default_pulse_ms: 35
+    default_pulse_ms: 30
     max_pulse_ms: 254
     default_recycle: true
-    default_pulse_power: .8
+    default_pulse_power: 1
     max_pulse_power: 1.0
 
   # Allied 264-1-102 outhole kicker.
@@ -53,17 +53,17 @@ coils:
   # Chimes are not connected yet.
   c_chime_10:
      number: "0-0-7"
-     default_pulse_ms: 35
+     default_pulse_ms: 30
      max_pulse_ms: 200  
      default_recycle: true
   c_chime_50:
      number: "0-0-15"
-     default_pulse_ms: 35
+     default_pulse_ms: 30
      max_pulse_ms: 200
      default_recycle: true
   c_chime_100:
      number: "0-0-5"
-     default_pulse_ms: 35
+     default_pulse_ms: 30
      max_pulse_ms: 200
      default_recycle: true
 
@@ -96,14 +96,18 @@ coils:
   # Allied 264-1-46 slingshots.
   c_slingshot_left:
     number: "0-0-11"
-    default_pulse_ms: 80  
+    default_pulse_ms: 55
     max_pulse_ms: 100
+    default_pulse_power: .9
+    max_pulse_power: 1
     default_recycle: true
 
   c_slingshot_right:
     number: "0-0-12"
-    default_pulse_ms: 80
+    default_pulse_ms: 55 
     max_pulse_ms: 100
+    default_pulse_power: .9
+    max_pulse_power: 1
     default_recycle: true
 
   # The thumper is not connected yet.
