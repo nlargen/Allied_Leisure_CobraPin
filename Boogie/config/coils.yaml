@@ -121,13 +121,13 @@ coils:
   c_gate_a:
     number: "0-0-0"
     default_pulse_ms: 35
-    max_pulse_ms: 35
+    max_pulse_ms: 40
     default_hold_power: .30
     max_hold_power: .50
     # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
   c_gate_b:
     number: "0-0-1"
     default_pulse_ms: 35
-    max_pulse_ms: 35
+    max_pulse_ms: 40
     default_hold_power: .30
     max_hold_power: .50
