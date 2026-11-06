@@ -19,60 +19,60 @@ shows:
         l_500_when_lit_1: off
         l_500_when_lit_2: off
         l_500_when_lit_3: off
-        l_gates_open: amber
+        l_gates_open: &light_color ffbf00 # amber
     - time: +250ms
       lights:
         l_gates_open: off
-        l_double_bonus: amber
+        l_double_bonus: *light_color
     - time: +250ms
       lights:
         l_double_bonus: off
-        l_bonus_5000: amber
+        l_bonus_5000: *light_color
     - time: +250ms
       lights:
         l_bonus_5000: off
-        l_bonus_4000: amber
-        l_bonus_6000: amber
+        l_bonus_4000: *light_color
+        l_bonus_6000: *light_color
     - time: +250ms
       lights:
         l_bonus_4000: off
         l_bonus_6000: off
-        l_bonus_3000: amber
-        l_bonus_7000: amber
+        l_bonus_3000: *light_color
+        l_bonus_7000: *light_color
     - time: +250ms
       lights:
         l_bonus_3000: off
         l_bonus_7000: off
-        l_bonus_2000: amber
-        l_bonus_8000: amber
+        l_bonus_2000: *light_color
+        l_bonus_8000: *light_color
     - time: +250ms
       lights:
         l_bonus_2000: off
         l_bonus_8000: off
-        l_bonus_1000: amber
-        l_bonus_9000: amber
+        l_bonus_1000: *light_color
+        l_bonus_9000: *light_color
     - time: +250ms
       lights:
         l_bonus_1000: off
         l_bonus_9000: off
-        l_bonus_10000: amber
+        l_bonus_10000: *light_color
     - time: +250ms
       lights:
         l_bonus_10000: off
-        l_special_left: amber
-        l_special_right: amber
+        l_special_left: *light_color
+        l_special_right: *light_color
     - time: +250ms
       lights:
         l_special_left: off
         l_special_right: off
-        l_bonus_advance_1: amber
-        l_bonus_advance_2: amber
-        l_bonus_advance_3: amber
-        l_bonus_advance_4: amber
-        l_bonus_advance_5: amber
-        l_bonus_advance_6: amber
-        l_bonus_advance_7: amber
-        l_bonus_advance_8: amber
+        l_bonus_advance_1: *light_color
+        l_bonus_advance_2: *light_color
+        l_bonus_advance_3: *light_color
+        l_bonus_advance_4: *light_color
+        l_bonus_advance_5: *light_color
+        l_bonus_advance_6: *light_color
+        l_bonus_advance_7: *light_color
+        l_bonus_advance_8: *light_color
     - time: +250ms
       lights:
         l_bonus_advance_1: off
@@ -83,68 +83,68 @@ shows:
         l_bonus_advance_6: off
         l_bonus_advance_7: off
         l_bonus_advance_8: off
-        l_500_when_lit_1: amber
-        l_500_when_lit_2: amber
-        l_500_when_lit_3: amber
+        l_500_when_lit_1: *light_color
+        l_500_when_lit_2: *light_color
+        l_500_when_lit_3: *light_color
     - time: +250ms
       lights:
         l_500_when_lit_1: off
         l_500_when_lit_2: off
         l_500_when_lit_3: off
-        l_gates_open: ffbf00
+        l_gates_open: *light_color
     - time: +250ms
       lights:
         l_gates_open: off
-        l_double_bonus: ffbf00
+        l_double_bonus: *light_color
     - time: +250ms
       lights:
         l_double_bonus: off
-        l_bonus_5000: ffbf00
+        l_bonus_5000: *light_color
     - time: +250ms
       lights:
         l_bonus_5000: off
-        l_bonus_4000: ffbf00
-        l_bonus_6000: ffbf00
+        l_bonus_4000: *light_color
+        l_bonus_6000: *light_color
     - time: +250ms
       lights:
         l_bonus_4000: off
         l_bonus_6000: off
-        l_bonus_3000: ffbf00
-        l_bonus_7000: ffbf00
+        l_bonus_3000: *light_color
+        l_bonus_7000: *light_color
     - time: +250ms
       lights:
         l_bonus_3000: off
         l_bonus_7000: off
-        l_bonus_2000: ffbf00
-        l_bonus_8000: ffbf00
+        l_bonus_2000: *light_color
+        l_bonus_8000: *light_color
     - time: +250ms
       lights:
         l_bonus_2000: off
         l_bonus_8000: off
-        l_bonus_1000: ffbf00
-        l_bonus_9000: ffbf00
+        l_bonus_1000: *light_color
+        l_bonus_9000: *light_color
     - time: +250ms
       lights:
         l_bonus_1000: off
         l_bonus_9000: off
-        l_bonus_10000: ffbf00
+        l_bonus_10000: *light_color
     - time: +250ms
       lights:
         l_bonus_10000: off
-        l_special_left: ffbf00
-        l_special_right: ffbf00
+        l_special_left: *light_color
+        l_special_right: *light_color
     - time: +250ms
       lights:
         l_special_left: off
         l_special_right: off
-        l_bonus_advance_1: ffbf00
-        l_bonus_advance_2: ffbf00
-        l_bonus_advance_3: ffbf00
-        l_bonus_advance_4: ffbf00
-        l_bonus_advance_5: ffbf00
-        l_bonus_advance_6: ffbf00
-        l_bonus_advance_7: ffbf00
-        l_bonus_advance_8: ffbf00
+        l_bonus_advance_1: *light_color
+        l_bonus_advance_2: *light_color
+        l_bonus_advance_3: *light_color
+        l_bonus_advance_4: *light_color
+        l_bonus_advance_5: *light_color
+        l_bonus_advance_6: *light_color
+        l_bonus_advance_7: *light_color
+        l_bonus_advance_8: *light_color
     - time: +250ms
       lights:
         l_bonus_advance_1: off
@@ -155,68 +155,68 @@ shows:
         l_bonus_advance_6: off
         l_bonus_advance_7: off
         l_bonus_advance_8: off
-        l_500_when_lit_1: ffbf00
-        l_500_when_lit_2: ffbf00
-        l_500_when_lit_3: ffbf00
+        l_500_when_lit_1: *light_color
+        l_500_when_lit_2: *light_color
+        l_500_when_lit_3: *light_color
     - time: +250ms
       lights:
         l_500_when_lit_1: off
         l_500_when_lit_2: off
         l_500_when_lit_3: off
-        l_gates_open: 00ff00
+        l_gates_open: *light_color
     - time: +250ms
       lights:
         l_gates_open: off
-        l_double_bonus: 00ff00
+        l_double_bonus: *light_color
     - time: +250ms
       lights:
         l_double_bonus: off
-        l_bonus_5000: 00ff00
+        l_bonus_5000: *light_color
     - time: +250ms
       lights:
         l_bonus_5000: off
-        l_bonus_4000: 00ff00
-        l_bonus_6000: 00ff00
+        l_bonus_4000: *light_color
+        l_bonus_6000: *light_color
     - time: +250ms
       lights:
         l_bonus_4000: off
         l_bonus_6000: off
-        l_bonus_3000: 00ff00
-        l_bonus_7000: 00ff00
+        l_bonus_3000: *light_color
+        l_bonus_7000: *light_color
     - time: +250ms
       lights:
         l_bonus_3000: off
         l_bonus_7000: off
-        l_bonus_2000: 00ff00
-        l_bonus_8000: 00ff00
+        l_bonus_2000: *light_color
+        l_bonus_8000: *light_color
     - time: +250ms
       lights:
         l_bonus_2000: off
         l_bonus_8000: off
-        l_bonus_1000: 00ff00
-        l_bonus_9000: 00ff00
+        l_bonus_1000: *light_color
+        l_bonus_9000: *light_color
     - time: +250ms
       lights:
         l_bonus_1000: off
         l_bonus_9000: off
-        l_bonus_10000: 00ff00
+        l_bonus_10000: *light_color
     - time: +250ms
       lights:
         l_bonus_10000: off
-        l_special_left: 00ff00
-        l_special_right: 00ff00
+        l_special_left: *light_color
+        l_special_right: *light_color
     - time: +250ms
       lights:
         l_special_left: off
         l_special_right: off
-        l_bonus_advance_1: 00ff00
-        l_bonus_advance_2: 00ff00
-        l_bonus_advance_3: 00ff00
-        l_bonus_advance_4: 00ff00
-        l_bonus_advance_5: 00ff00
-        l_bonus_advance_6: 00ff00
-        l_bonus_advance_7: 00ff00
-        l_bonus_advance_8: 00ff00
+        l_bonus_advance_1: *light_color
+        l_bonus_advance_2: *light_color
+        l_bonus_advance_3: *light_color
+        l_bonus_advance_4: *light_color
+        l_bonus_advance_5: *light_color
+        l_bonus_advance_6: *light_color
+        l_bonus_advance_7: *light_color
+        l_bonus_advance_8: *light_color
     - time: +250ms
       lights:
         l_bonus_advance_1: off
@@ -227,68 +227,68 @@ shows:
         l_bonus_advance_6: off
         l_bonus_advance_7: off
         l_bonus_advance_8: off
-        l_500_when_lit_1: 00ff00
-        l_500_when_lit_2: 00ff00
-        l_500_when_lit_3: 00ff00
+        l_500_when_lit_1: *light_color
+        l_500_when_lit_2: *light_color
+        l_500_when_lit_3: *light_color
     - time: +250ms
       lights:
         l_500_when_lit_1: off
         l_500_when_lit_2: off
         l_500_when_lit_3: off
-        l_gates_open: 0000ff
+        l_gates_open: *light_color
     - time: +250ms
       lights:
         l_gates_open: off
-        l_double_bonus: 0000ff
+        l_double_bonus: *light_color
     - time: +250ms
       lights:
         l_double_bonus: off
-        l_bonus_5000: 0000ff
+        l_bonus_5000: *light_color
     - time: +250ms
       lights:
         l_bonus_5000: off
-        l_bonus_4000: 0000ff
-        l_bonus_6000: 0000ff
+        l_bonus_4000: *light_color
+        l_bonus_6000: *light_color
     - time: +250ms
       lights:
         l_bonus_4000: off
         l_bonus_6000: off
-        l_bonus_3000: 0000ff
-        l_bonus_7000: 0000ff
+        l_bonus_3000: *light_color
+        l_bonus_7000: *light_color
     - time: +250ms
       lights:
         l_bonus_3000: off
         l_bonus_7000: off
-        l_bonus_2000: 0000ff
-        l_bonus_8000: 0000ff
+        l_bonus_2000: *light_color
+        l_bonus_8000: *light_color
     - time: +250ms
       lights:
         l_bonus_2000: off
         l_bonus_8000: off
-        l_bonus_1000: 0000ff
-        l_bonus_9000: 0000ff
+        l_bonus_1000: *light_color
+        l_bonus_9000: *light_color
     - time: +250ms
       lights:
         l_bonus_1000: off
         l_bonus_9000: off
-        l_bonus_10000: 0000ff
+        l_bonus_10000: *light_color
     - time: +250ms
       lights:
         l_bonus_10000: off
-        l_special_left: 0000ff
-        l_special_right: 0000ff
+        l_special_left: *light_color
+        l_special_right: *light_color
     - time: +250ms
       lights:
         l_special_left: off
         l_special_right: off
-        l_bonus_advance_1: 0000ff
-        l_bonus_advance_2: 0000ff
-        l_bonus_advance_3: 0000ff
-        l_bonus_advance_4: 0000ff
-        l_bonus_advance_5: 0000ff
-        l_bonus_advance_6: 0000ff
-        l_bonus_advance_7: 0000ff
-        l_bonus_advance_8: 0000ff
+        l_bonus_advance_1: *light_color
+        l_bonus_advance_2: *light_color
+        l_bonus_advance_3: *light_color
+        l_bonus_advance_4: *light_color
+        l_bonus_advance_5: *light_color
+        l_bonus_advance_6: *light_color
+        l_bonus_advance_7: *light_color
+        l_bonus_advance_8: *light_color
     - time: +250ms
       lights:
         l_bonus_advance_1: off
@@ -299,6 +299,6 @@ shows:
         l_bonus_advance_6: off
         l_bonus_advance_7: off
         l_bonus_advance_8: off
-        l_500_when_lit_1: 0000ff
-        l_500_when_lit_2: 0000ff
-        l_500_when_lit_3: 0000ff
+        l_500_when_lit_1: *light_color
+        l_500_when_lit_2: *light_color
+        l_500_when_lit_3: *light_color
