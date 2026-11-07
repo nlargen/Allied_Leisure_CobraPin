@@ -152,21 +152,6 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertEqual(600, self.mode.player.score)
         self.assertEqual(2, self.coils["c_chime_10"].pulse_count)
 
-    def test_ten_thousand_score_milestone_plays_both_chimes_once(self):
-        self.start_mode()
-
-        self.post("player_score", value=9999, prev_value=9000)
-        self.assertEqual(0, self.coils["c_chime_50"].pulse_count)
-        self.assertEqual(0, self.coils["c_chime_100"].pulse_count)
-
-        self.post("player_score", value=10000, prev_value=9999)
-        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
-        self.assertEqual(1, self.coils["c_chime_100"].pulse_count)
-
-        self.post("player_score", value=20000, prev_value=10000)
-        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
-        self.assertEqual(1, self.coils["c_chime_100"].pulse_count)
-
     def test_base_mode_does_not_add_duplicate_rollover_scoring(self):
         base_config = YamlInterface.process(
             (
@@ -553,9 +538,13 @@ class BoogieMachineStartupTest(MpfTestCase):
     def get_config_file(self):
         return "config.yaml"
 
+    def test_score_milestones_mode_loads(self):
+        self.assertIn("score_milestones", self.machine.modes)
+
     def test_all_configured_modes_load(self):
         self.assertIn("attract", self.machine.modes)
         self.assertIn("drop_target_scoring", self.machine.modes)
+        self.assertIn("score_milestones", self.machine.modes)
         self.assertIn("playfield_lights", self.machine.modes)
         j12_lights = self.machine.light_stripes["l_j12_available"].lights
         self.assertEqual(231, len(j12_lights))

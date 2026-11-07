@@ -1,0 +1,8 @@
+#config_version=6
+
+mode:
+  start_events: game_starting
+  stop_events: game_ending
+  priority: 105
+  game_mode: true
+  code: score_milestones.ScoreMilestones

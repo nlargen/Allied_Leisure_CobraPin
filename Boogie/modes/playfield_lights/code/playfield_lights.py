@@ -59,10 +59,6 @@ class PlayfieldLights(Mode):
 
     def _register_switch_handlers(self):
         self.add_mode_event_handler(
-            "player_score",
-            self._check_score_milestone,
-        )
-        self.add_mode_event_handler(
             "ball_ending",
             self._start_bonus_countdown,
             priority=1000,
@@ -127,16 +123,6 @@ class PlayfieldLights(Mode):
         else:
             self.player.score += 50
             self.machine.coils["c_chime_50"].pulse()
-
-    def _check_score_milestone(self, value, prev_value, **kwargs):
-        del kwargs
-        if (
-            prev_value < 10000 <= value
-            and not self.player.chime_10000_played
-        ):
-            self.player.chime_10000_played = True
-            self.machine.coils["c_chime_50"].pulse()
-            self.machine.coils["c_chime_100"].pulse()
 
     def _bonus_advance_target_hit(self, target_number, **kwargs):
         del kwargs

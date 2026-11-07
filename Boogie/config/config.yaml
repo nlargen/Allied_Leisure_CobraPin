@@ -13,6 +13,7 @@ modes:
   - base
   # - tilt  # Re-enable with the tilt switch and handler when connected.
   - drop_target_scoring
+  - score_milestones
   - playfield_lights
 
 machine:
