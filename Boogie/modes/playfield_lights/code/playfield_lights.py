@@ -11,6 +11,14 @@ class PlayfieldLights(Mode):
         "s_50_rollover_2",
         "s_50_rollover_3",
     )
+    SPECIAL_ROLLOVERS = {
+        "left": "s_500_rollover_1",
+        "right": "s_500_rollover_2",
+    }
+    SPECIAL_TARGET_BANKS = {
+        "left": frozenset(range(1, 5)),
+        "right": frozenset(range(5, 9)),
+    }
     DROP_TARGETS = tuple(f"drop_target_{number}" for number in range(1, 5))
 
     def mode_start(self, **kwargs):
@@ -30,6 +38,9 @@ class PlayfieldLights(Mode):
         self._bonus_value = 1000
         self._bonus_awarded = False
         self._double_bonus_active = False
+        self._completed_special_targets = {
+            gate: set() for gate in self.SPECIAL_TARGET_BANKS
+        }
         self._completed_drop_targets = set()
         self._raised_drop_targets = {
             target
@@ -71,6 +82,13 @@ class PlayfieldLights(Mode):
                 target_number=number,
             )
 
+        for gate, switch in self.SPECIAL_ROLLOVERS.items():
+            self.add_mode_event_handler(
+                f"{switch}_active",
+                self._special_rollover_hit,
+                gate=gate,
+            )
+
         for number, target in enumerate(self.DROP_TARGETS, start=1):
             switch = f"s_{target}"
             self.add_mode_event_handler(
@@ -106,13 +124,9 @@ class PlayfieldLights(Mode):
         if rollover_number == self._selected_500_rollover:
             self.player.score += 500
             self.machine.coils["c_chime_50"].pulse()
-            self.machine.lights[
-                f"l_500_when_lit_{rollover_number}"
-            ].off()
-            self._selected_500_rollover = None
         else:
             self.player.score += 50
-            self.machine.coils["c_chime_10"].pulse()
+            self.machine.coils["c_chime_50"].pulse()
 
     def _check_score_milestone(self, value, prev_value, **kwargs):
         del kwargs
@@ -128,17 +142,41 @@ class PlayfieldLights(Mode):
         del kwargs
         self.machine.lights[f"l_bonus_advance_{target_number}"].on()
         self._advance_bonus()
+        for gate, target_bank in self.SPECIAL_TARGET_BANKS.items():
+            if target_number in target_bank:
+                self._completed_special_targets[gate].add(target_number)
+        self._update_special_lights()
+
+    def _special_rollover_hit(self, gate, **kwargs):
+        del kwargs
+        if not self._is_special_lit(gate):
+            return
+
+        self.player.extra_balls += 1
+        self._completed_special_targets[gate].clear()
+        self._update_special_lights()
+
+    def _is_special_lit(self, gate):
+        return (
+            self._open_gates[gate]
+            and len(self._completed_special_targets[gate])
+            == len(self.SPECIAL_TARGET_BANKS[gate])
+        )
 
     def _advance_bonus(self):
-        if self._bonus_value < 10000:
-            self._bonus_value += 1000
+        self._bonus_value += 1000
+        self._show_bonus_lights(self._bonus_value)
 
-        for value in range(1000, 11000, 1000):
-            light = self.machine.lights[f"l_bonus_{value}"]
-            if value == self._bonus_value:
-                light.on()
-            else:
-                light.off()
+    def _show_bonus_lights(self, value):
+        for light_value in range(1000, 11000, 1000):
+            self.machine.lights[f"l_bonus_{light_value}"].off()
+
+        if value >= 10000:
+            self.machine.lights["l_bonus_10000"].on()
+            value %= 10000
+
+        if value:
+            self.machine.lights[f"l_bonus_{value}"].on()
 
     def _start_bonus_countdown(self, queue, **kwargs):
         del kwargs
@@ -171,7 +209,7 @@ class PlayfieldLights(Mode):
         points = min(1000, self._bonus_remaining)
         self._bonus_remaining -= points
         self.player.score += points
-        self.machine.coils["c_chime_100"].pulse()
+        self.machine.coils["c_chime_50"].pulse()
         self._show_bonus_remaining()
 
         if self._bonus_remaining:
@@ -186,13 +224,10 @@ class PlayfieldLights(Mode):
         self._bonus_queue = None
 
     def _show_bonus_remaining(self):
-        lit_value = min(self._bonus_remaining, 10000)
-        for value in range(1000, 11000, 1000):
-            light = self.machine.lights[f"l_bonus_{value}"]
-            if value == lit_value:
-                light.on()
-            else:
-                light.off()
+        lit_value = self._bonus_remaining % 10000
+        if not lit_value and self._bonus_remaining:
+            lit_value = 10000
+        self._show_bonus_lights(lit_value)
 
     def _drop_target_raised(self, target, **kwargs):
         del kwargs
@@ -237,7 +272,7 @@ class PlayfieldLights(Mode):
             ("right", "l_special_right"),
         ):
             light = self.machine.lights[light_name]
-            if self._open_gates[gate]:
+            if self._is_special_lit(gate):
                 light.on()
             else:
                 light.off()

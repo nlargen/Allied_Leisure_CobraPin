@@ -101,7 +101,11 @@ class PlayfieldLightsTest(unittest.TestCase):
                 is_active=lambda switch: switch in self.active_switches
             ),
         )
-        self.mode.player = SimpleNamespace(score=0, chime_10000_played=False)
+        self.mode.player = SimpleNamespace(
+            score=0,
+            extra_balls=0,
+            chime_10000_played=False,
+        )
         self.mode.delay = FakeDelay()
         self.mode.info_log = Mock()
         self.mode.handlers = []
@@ -197,6 +201,10 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertEqual(1000, self.mode._bonus_value)
         self.assertFalse(self.mode._double_bonus_active)
         self.assertFalse(self.mode._open_gates["left"])
+        self.assertEqual(
+            {"left": set(), "right": set()},
+            self.mode._completed_special_targets,
+        )
         self.assertEqual(set(), self.mode._completed_drop_targets)
         self.assertTrue(self.lights["l_bonus_1000"].is_on)
         self.assertTrue(self.lights["l_500_when_lit_1"].is_on)
@@ -266,7 +274,7 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertFalse(queue.waiting)
         self.assertTrue(self.mode._bonus_awarded)
 
-    def test_bonus_advances_from_rollovers_and_500_targets_and_caps(self):
+    def test_bonus_advances_from_rollovers_and_500_targets_above_10000(self):
         self.start_mode()
 
         self.post("s_50_rollover_1_active")
@@ -278,8 +286,36 @@ class PlayfieldLightsTest(unittest.TestCase):
         for _ in range(20):
             self.post("s_50_rollover_1_active")
 
-        self.assertEqual(10000, self.mode._bonus_value)
+        self.assertEqual(23000, self.mode._bonus_value)
         self.assertTrue(self.lights["l_bonus_10000"].is_on)
+        self.assertTrue(self.lights["l_bonus_3000"].is_on)
+        self.assertFalse(self.lights["l_bonus_2000"].is_on)
+
+    def test_bonus_countdown_repeats_light_cycle_for_each_10000(self):
+        self.start_mode()
+        self.mode._bonus_value = 30000
+
+        queue = FakeQueue()
+        self.post("ball_ending", queue=queue)
+        self.assertTrue(self.lights["l_bonus_10000"].is_on)
+
+        for remaining in range(29000, -1000, -1000):
+            self.mode.delay.run_next()
+            lit_value = remaining % 10000
+            if not lit_value and remaining:
+                lit_value = 10000
+
+            self.assertEqual(
+                [lit_value] if lit_value else [],
+                [
+                    value
+                    for value in range(1000, 11000, 1000)
+                    if self.lights[f"l_bonus_{value}"].is_on
+                ],
+            )
+
+        self.assertEqual(30000, self.mode.player.score)
+        self.assertFalse(queue.waiting)
 
     def test_drop_target_must_be_raised_before_it_counts(self):
         self.start_mode()
@@ -296,22 +332,57 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertTrue(self.mode._double_bonus_active)
         self.assertTrue(self.lights["l_double_bonus"].is_on)
 
-    def test_gate_and_special_lights_follow_gate_states(self):
+    def test_special_lights_require_open_gate_and_matching_target_bank(self):
         self.start_mode()
 
         self.post("open_gate_a")
-        self.assertTrue(self.lights["l_special_left"].is_on)
+        self.assertFalse(self.lights["l_special_left"].is_on)
         self.assertFalse(self.lights["l_special_right"].is_on)
         self.assertFalse(self.lights["l_gates_open"].is_on)
 
+        for number in range(1, 4):
+            self.post(f"s_500_ab_{number}_active")
+        self.assertFalse(self.lights["l_special_left"].is_on)
+
+        self.post("s_500_ab_4_active")
+        self.assertTrue(self.lights["l_special_left"].is_on)
+        self.post("s_500_rollover_2_active")
+        self.assertEqual(0, self.mode.player.extra_balls)
+
+        self.post("s_500_rollover_1_active")
+        self.assertEqual(1, self.mode.player.extra_balls)
+        self.assertFalse(self.lights["l_special_left"].is_on)
+        self.post("s_500_rollover_1_active")
+        self.assertEqual(1, self.mode.player.extra_balls)
+
+        for number in range(1, 4):
+            self.post(f"s_500_ab_{number}_active")
+        self.assertFalse(self.lights["l_special_left"].is_on)
+        self.post("s_500_rollover_1_active")
+        self.assertEqual(1, self.mode.player.extra_balls)
+
+        self.post("s_500_ab_4_active")
+        self.assertTrue(self.lights["l_special_left"].is_on)
+        self.post("s_500_rollover_1_active")
+        self.assertEqual(2, self.mode.player.extra_balls)
+        self.assertFalse(self.lights["l_special_left"].is_on)
+
         self.post("open_gate_d")
         self.assertTrue(self.lights["l_gates_open"].is_on)
+        self.assertFalse(self.lights["l_special_right"].is_on)
+
+        for number in range(5, 9):
+            self.post(f"s_500_ab_{number}_active")
         self.assertTrue(self.lights["l_special_right"].is_on)
 
         self.post("s_close_gate_1_active")
         self.assertFalse(self.lights["l_gates_open"].is_on)
         self.assertFalse(self.lights["l_special_left"].is_on)
         self.assertTrue(self.lights["l_special_right"].is_on)
+
+        self.post("s_500_rollover_2_active")
+        self.assertEqual(3, self.mode.player.extra_balls)
+        self.assertFalse(self.lights["l_special_right"].is_on)
 
     def test_coil_player_and_autofire_coils_are_declared(self):
         machine_config = YamlInterface.process(
