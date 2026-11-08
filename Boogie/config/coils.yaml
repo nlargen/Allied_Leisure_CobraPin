@@ -6,8 +6,6 @@
 
 coils:
   # Allied 264-1-155 — dual-wound flippers.
-  # Main winding previously reported as approximately 2 ohm.
-  # Verify actual resistance and driver capability before powering.
   c_flipper_left_main:
     number: "1-0-0"
     default_pulse_ms: 200
@@ -22,8 +20,6 @@ coils:
     default_pulse_power: 1
     max_pulse_power: 1.0
 
-  # Separate 17-ohm hold windings. Confirm hold-power support and safe operation.
-  # 25% is only a cautious initial software request, not a validated safe setting.
   c_flipper_left_hold:
     number: "1-0-5"
     default_hold_power: 1
@@ -98,7 +94,7 @@ coils:
     number: "0-0-11"
     default_pulse_ms: 35
     max_pulse_ms: 100
-    default_pulse_power: .9
+    default_pulse_power: 1
     max_pulse_power: 1
     default_recycle: true
 
@@ -106,7 +102,7 @@ coils:
     number: "0-0-12"
     default_pulse_ms: 35 
     max_pulse_ms: 100
-    default_pulse_power: .9
+    default_pulse_power: 1
     max_pulse_power: 1
     default_recycle: true
 
@@ -117,17 +113,17 @@ coils:
   #   max_pulse_ms: 5
   #   default_recycle: true
 
-  # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
+  # Allied 264-1-45 gate. 
   c_gate_a:
     number: "0-0-0"
     default_pulse_ms: 35
     max_pulse_ms: 40
-    default_hold_power: .30
+    default_hold_power: .20
     max_hold_power: .50
-    # Allied 264-1-45 gate. Confirm the mechanism is pulse-operated.
+    # Allied 264-1-45 gate.
   c_gate_b:
     number: "0-0-1"
     default_pulse_ms: 35
     max_pulse_ms: 40
-    default_hold_power: .30
+    default_hold_power: .20
     max_hold_power: .50
