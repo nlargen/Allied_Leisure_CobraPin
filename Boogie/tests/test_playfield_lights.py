@@ -550,8 +550,24 @@ class BoogieMachineStartupTest(MpfTestCase):
             self.machine.neoseg_displays["player1_neoseg"].config["start_channel"],
         )
         self.assertEqual(
-            "0-0-120",
+            "0-0-360",
             self.machine.neoseg_displays["player2_neoseg"].config["start_channel"],
+        )
+        self.assertEqual(
+            {"red", "green", "blue"},
+            set(
+                self.machine.neoseg_displays[
+                    "player1_neoseg"
+                ].lights[0].hw_drivers
+            ),
+        )
+        self.assertEqual(
+            {"red", "green", "blue"},
+            set(
+                self.machine.neoseg_displays[
+                    "player2_neoseg"
+                ].lights[0].hw_drivers
+            ),
         )
 
     def test_all_configured_modes_load(self):

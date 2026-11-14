@@ -49,7 +49,8 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   the two connected CobraPin NeoSeg score displays on NEO 0. Player 1 and
   player 2 scores update during play; the ball and player 3/4 display mappings
   remain commented out until those displays are connected. The player 1,
-  player 2, ball, player 3, player 4 ordering is preserved in the channel map.
+  player 2, ball, player 3, player 4 ordering is preserved in the channel map,
+  with each NeoSeg's RGB pixels mapped across three channels.
   At boot, both connected displays show repeated digits 0 through 9 for one
   second each, then clear; adding a player stops the test so score values take
   over.
