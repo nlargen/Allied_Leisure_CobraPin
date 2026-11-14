@@ -1,39 +1,39 @@
 #config_version=6
 
 # CobraPin NEO 0 is the free LED output; the playfield lamps use NEO 1.
-# An 8-digit NeoSeg uses 120 RGB pixels (360 channels); the 2-digit ball display
-# uses 30 RGB pixels (90 channels).
+# NeoSegs use one light channel per segment: 120 channels for 8 digits and 30
+# channels for 2 digits.
 # Keep these in physical chain order: player 1, player 2, ball, player 3, player 4.
 neoseg_displays:
   player1_neoseg:
     start_channel: 0-0-0
     size: 8digit
     light_template:
-      type: rgb
+      type: w
       subtype: led
   player2_neoseg:
-    start_channel: 0-0-360
+    start_channel: 0-0-120
     size: 8digit
     light_template:
-      type: rgb
+      type: w
       subtype: led
   # ball_neoseg:
-  #   start_channel: 0-0-720
+  #   start_channel: 0-0-240
   #   size: 2digit
   #   light_template:
-  #     type: rgb
+  #     type: w
   #     subtype: led
   # player3_neoseg:
-  #   start_channel: 0-0-810
+  #   start_channel: 0-0-270
   #   size: 8digit
   #   light_template:
-  #     type: rgb
+  #     type: w
   #     subtype: led
   # player4_neoseg:
-  #   start_channel: 0-0-1170
+  #   start_channel: 0-0-390
   #   size: 8digit
   #   light_template:
-  #     type: rgb
+  #     type: w
   #     subtype: led
 
 segment_displays:
