@@ -662,7 +662,13 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
                 self.assertEqual(expected, display._current_text.convert_to_str())
             for group_name in ("player1_neoseg", "player2_neoseg"):
                 group = self.machine.neoseg_displays[group_name]
-                self.assertTrue(any(light.stack for light in group.lights))
+                self.assertTrue(
+                    any(
+                        light.get_color().rgb != (0, 0, 0)
+                        for light in group.lights
+                    ),
+                    group_name,
+                )
             if digit < 9:
                 self.advance_time_and_run(1)
 
@@ -670,6 +676,15 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         for display in displays:
             self.assertEqual("        ", display._current_text.convert_to_str())
         self.assertFalse(self.machine.modes["display_startup_test"].active)
+        for group_name in ("player1_neoseg", "player2_neoseg"):
+            group = self.machine.neoseg_displays[group_name]
+            self.assertFalse(
+                any(
+                    light.get_color().rgb != (0, 0, 0)
+                    for light in group.lights
+                ),
+                group_name,
+            )
 
     def test_player_scores_reach_neoseg_platform(self):
         displays = (
@@ -698,6 +713,15 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         )
         self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
         self.assertEqual("   67890", displays[1]._current_text.convert_to_str())
+        for group_name in ("player1_neoseg", "player2_neoseg"):
+            group = self.machine.neoseg_displays[group_name]
+            self.assertTrue(
+                any(
+                    light.get_color().rgb != (0, 0, 0)
+                    for light in group.lights
+                ),
+                group_name,
+            )
         self.advance_time_and_run(1)
         self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
         self.assertEqual("   67890", displays[1]._current_text.convert_to_str())

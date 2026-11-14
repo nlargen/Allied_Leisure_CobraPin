@@ -1,4 +1,5 @@
 from mpf.core.mode import Mode
+from mpf.core.rgb_color import RGBColor
 from mpf.platforms.interfaces.segment_display_platform_interface import FlashingType
 
 
@@ -41,7 +42,7 @@ class DisplayStartupTest(Mode):
         for display_name in self.DISPLAY_NAMES:
             self.machine.segment_displays[display_name].add_text_entry(
                 text=text,
-                color=None,
+                color=[RGBColor("white")],
                 flashing=FlashingType.NO_FLASH,
                 flash_mask="",
                 transition=None,

@@ -1,5 +1,39 @@
 #config_version=6
 
+# CobraPin NEO 0 is the free LED output for the connected NeoSeg displays.
+# Keep these in physical chain order: player 1, player 2, ball, player 3, player 4.
+neoseg_displays:
+  player1_neoseg:
+    start_channel: 0-0-0
+    size: 8digit
+    light_template:
+      type: w
+      subtype: led
+  player2_neoseg:
+    start_channel: 0-0-120
+    size: 8digit
+    light_template:
+      type: w
+      subtype: led
+  # ball_neoseg:
+  #   start_channel: 0-0-240
+  #   size: 2digit
+  #   light_template:
+  #     type: w
+  #     subtype: led
+  # player3_neoseg:
+  #   start_channel: 0-0-270
+  #   size: 8digit
+  #   light_template:
+  #     type: w
+  #     subtype: led
+  # player4_neoseg:
+  #   start_channel: 0-0-390
+  #   size: 8digit
+  #   light_template:
+  #     type: w
+  #     subtype: led
+
 # CobraPin J12 / NEO 1 supports 256 addressable pixels: 1-0-0 through 1-0-255.
 # The named lights below are the game's assigned pixels; the stripe defines
 # the remaining outputs as placeholders for light testing and later mapping.
