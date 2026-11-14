@@ -45,6 +45,14 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
   Windows COM ports unchanged. It uses the two Raspberry Pi
   `/dev/serial/by-id/` device paths; update them if the connected controllers
   change.
+- [`segment_displays.yaml`](./Boogie/config/segment_displays.yaml) configures
+  the two connected CobraPin NeoSeg score displays on NEO 0. Player 1 and
+  player 2 scores update during play; the ball and player 3/4 display mappings
+  remain commented out until those displays are connected. The player 1,
+  player 2, ball, player 3, player 4 ordering is preserved in the channel map.
+  At boot, both connected displays show repeated digits 0 through 9 for one
+  second each, then clear; adding a player stops the test so score values take
+  over.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and
   cabinet switches to logical switch names and the confirmed hardware
   assignments. Tilt and credit switches are not currently configured.

@@ -7,6 +7,7 @@ config:
  - balldevices.yaml
  - lights.yaml
  - flippers.yaml
+ - segment_displays.yaml
 
 modes:
   - attract
@@ -15,6 +16,7 @@ modes:
   - drop_target_scoring
   - score_milestones
   - playfield_lights
+  - display_startup_test
 
 machine:
   balls_installed: 1
@@ -42,6 +44,7 @@ autofire_coils:
 hardware:
   platform: opp
   driverboards: gen2
+  segment_displays: light_segment_displays
 
 opp:
   ports: COM9, COM10 # Replace with the COM ports Windows assigns to your boards.

@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 from mpf.file_interfaces.yaml_interface import YamlInterface
+from mpf.tests.MpfFakeGameTestCase import MpfFakeGameTestCase
 from mpf.tests.MpfTestCase import MpfTestCase
 from modes.drop_target_scoring.code.drop_target_scoring import DropTargetScoring
 from modes.playfield_lights.code.playfield_lights import PlayfieldLights
@@ -126,7 +127,7 @@ class PlayfieldLightsTest(unittest.TestCase):
             if registered_event == event:
                 handler(**kwargs, **event_kwargs)
 
-    def test_selected_rollover_scores_500_once(self):
+    def test_selected_rollover_scores_500_while_lit(self):
         self.start_mode(selected_rollover=2)
 
         self.assertTrue(self.lights["l_500_when_lit_2"].is_on)
@@ -140,17 +141,17 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.post("s_50_rollover_1_active")
         self.assertEqual(50, self.mode.player.score)
         self.assertEqual(2000, self.mode._bonus_value)
-        self.assertEqual(1, self.coils["c_chime_10"].pulse_count)
-
-        self.post("s_50_rollover_2_active")
-        self.assertEqual(550, self.mode.player.score)
-        self.assertFalse(self.lights["l_500_when_lit_2"].is_on)
-        self.assertEqual(3000, self.mode._bonus_value)
         self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
 
         self.post("s_50_rollover_2_active")
-        self.assertEqual(600, self.mode.player.score)
-        self.assertEqual(2, self.coils["c_chime_10"].pulse_count)
+        self.assertEqual(550, self.mode.player.score)
+        self.assertTrue(self.lights["l_500_when_lit_2"].is_on)
+        self.assertEqual(3000, self.mode._bonus_value)
+        self.assertEqual(2, self.coils["c_chime_50"].pulse_count)
+
+        self.post("s_50_rollover_2_active")
+        self.assertEqual(1050, self.mode.player.score)
+        self.assertEqual(3, self.coils["c_chime_50"].pulse_count)
 
     def test_base_mode_does_not_add_duplicate_rollover_scoring(self):
         base_config = YamlInterface.process(
@@ -224,8 +225,8 @@ class PlayfieldLightsTest(unittest.TestCase):
             self.assertEqual("bonus_countdown", delay_name)
             self.assertEqual(3050 - remaining, self.mode.player.score)
             self.assertEqual(
-                3 - remaining // 1000,
-                self.coils["c_chime_100"].pulse_count,
+                1 + 3 - remaining // 1000,
+                self.coils["c_chime_50"].pulse_count,
             )
             if remaining:
                 self.assertTrue(self.lights[f"l_bonus_{remaining}"].is_on)
@@ -239,7 +240,7 @@ class PlayfieldLightsTest(unittest.TestCase):
 
         self.post("ball_ending", queue=FakeQueue())
         self.assertEqual(3050, self.mode.player.score)
-        self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
+        self.assertEqual(4, self.coils["c_chime_50"].pulse_count)
 
     def test_ball_will_end_doubles_bonus_when_double_bonus_is_lit(self):
         self.start_mode()
@@ -254,7 +255,7 @@ class PlayfieldLightsTest(unittest.TestCase):
         while self.mode.delay.pending:
             self.mode.delay.run_next()
 
-        self.assertEqual(14, self.coils["c_chime_100"].pulse_count)
+        self.assertEqual(14, self.coils["c_chime_50"].pulse_count)
         self.assertEqual(14000, self.mode.player.score)
         self.assertFalse(queue.waiting)
         self.assertTrue(self.mode._bonus_awarded)
@@ -418,9 +419,10 @@ class PlayfieldLightsTest(unittest.TestCase):
             referenced_coils.update(
                 (flipper["main_coil"], flipper["hold_coil"])
             )
-            referenced_switches.update(
-                (flipper["activation_switch"], flipper["eos_switch"])
-            )
+            referenced_switches.add(flipper["activation_switch"])
+            if flipper.get("use_eos"):
+                self.assertIn("eos_switch", flipper)
+                referenced_switches.add(flipper["eos_switch"])
         declared_switches = set(switch_config["switches"])
 
         self.assertEqual(set(), referenced_coils - declared_coils)
@@ -452,9 +454,6 @@ class PlayfieldLightsTest(unittest.TestCase):
         )
         self.assertEqual("c_chime_10", coil_player["s_10_top_active"])
         self.assertEqual("c_chime_10", coil_player["s_pop_bumper_active"])
-        self.assertEqual(
-            "c_chime_50", coil_player["s_500_ab_1_active"]
-        )
         for event in (
             "s_raise_target_a_og_active",
             "s_raise_target_d_og_active",
@@ -465,11 +464,11 @@ class PlayfieldLightsTest(unittest.TestCase):
             "s_slingshot_right_active",
         ):
             self.assertEqual("c_chime_10", coil_player[event])
-        for event in (
-            *(f"s_500_ab_{number}_active" for number in range(1, 9)),
-            "s_500_rollover_1_active",
-            "s_500_rollover_2_active",
-        ):
+        for number in range(1, 9):
+            event = f"s_500_ab_{number}_active"
+            expected_chime = "c_chime_100" if number % 2 else "c_chime_50"
+            self.assertEqual(expected_chime, coil_player[event])
+        for event in ("s_500_rollover_1_active", "s_500_rollover_2_active"):
             self.assertEqual("c_chime_50", coil_player[event])
         for number, target in enumerate("abcd", start=1):
             self.assertEqual(
@@ -541,15 +540,83 @@ class BoogieMachineStartupTest(MpfTestCase):
     def test_score_milestones_mode_loads(self):
         self.assertIn("score_milestones", self.machine.modes)
 
+    def test_only_connected_score_displays_are_active(self):
+        self.assertEqual(
+            {"player1_display", "player2_display"},
+            {display.name for display in self.machine.segment_displays.values()},
+        )
+        self.assertEqual(
+            "0-0-0",
+            self.machine.neoseg_displays["player1_neoseg"].config["start_channel"],
+        )
+        self.assertEqual(
+            "0-0-120",
+            self.machine.neoseg_displays["player2_neoseg"].config["start_channel"],
+        )
+
     def test_all_configured_modes_load(self):
         self.assertIn("attract", self.machine.modes)
         self.assertIn("drop_target_scoring", self.machine.modes)
         self.assertIn("score_milestones", self.machine.modes)
         self.assertIn("playfield_lights", self.machine.modes)
-        j12_lights = self.machine.light_stripes["l_j12_available"].lights
-        self.assertEqual(231, len(j12_lights))
-        self.assertEqual("1-0-25", j12_lights[0].config["number"])
-        self.assertEqual("1-0-255", j12_lights[-1].config["number"])
+        self.assertIn("display_startup_test", self.machine.modes)
+
+
+class BoogieScoreDisplayTest(MpfFakeGameTestCase):
+
+    def get_machine_path(self):
+        return str(BOOGIE_ROOT)
+
+    def get_config_file(self):
+        return "config.yaml"
+
+    def test_startup_test_cycles_digits_once_then_clears(self):
+        displays = (
+            self.machine.segment_displays["player1_display"].hw_display,
+            self.machine.segment_displays["player2_display"].hw_display,
+        )
+
+        for digit in range(10):
+            expected = str(digit) * 8
+            for display in displays:
+                self.assertEqual(expected, display.text)
+            if digit < 9:
+                self.advance_time_and_run(1)
+
+        self.advance_time_and_run(1)
+        for display in displays:
+            self.assertEqual("        ", display.text)
+        self.assertFalse(self.machine.modes["display_startup_test"].active)
+
+    def test_player_scores_update_connected_displays(self):
+        player1_display = self.machine.segment_displays[
+            "player1_display"
+        ].hw_display
+        player2_display = self.machine.segment_displays[
+            "player2_display"
+        ].hw_display
+
+        self.post_event(
+            "virtual_platform_add_ball_to_device",
+            ball_device="bd_drain",
+        )
+        self.advance_time_and_run()
+        self.start_game(num_balls_known=1)
+        self.assertEqual("       0", player1_display.text)
+
+        self.add_player()
+        self.assertEqual("       0", player2_display.text)
+
+        self.machine.game.player_list[0].score = 12345
+        self.machine.game.player_list[1].score = 67890
+        self.advance_time_and_run()
+
+        self.assertEqual("   12345", player1_display.text)
+        self.assertEqual("   67890", player2_display.text)
+
+        self.advance_time_and_run(10)
+        self.assertEqual("   12345", player1_display.text)
+        self.assertEqual("   67890", player2_display.text)
 
 
 if __name__ == "__main__":
