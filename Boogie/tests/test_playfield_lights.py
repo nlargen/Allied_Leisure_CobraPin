@@ -845,6 +845,26 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         self.assertEqual("   13579", displays[2]._current_text.convert_to_str())
         self.assertEqual("   24680", displays[3]._current_text.convert_to_str())
 
+    def test_ball_started_event_updates_ball_neoseg(self):
+        display = self.machine.segment_displays["ball_display"].hw_display
+        ball_group = self.machine.neoseg_displays["ball_neoseg"]
+
+        self.post_event(
+            "virtual_platform_add_ball_to_device",
+            ball_device="bd_drain",
+        )
+        self.advance_time_and_run()
+        self.start_game(num_balls_known=1)
+        self.advance_time_and_run()
+
+        self.assertEqual(
+            "1", self.machine.segment_displays["ball_display"].text.strip()
+        )
+        self.assertEqual("1", display._current_text.convert_to_str().strip())
+        self.assertTrue(
+            any(light.get_color().rgb != (0, 0, 0) for light in ball_group.lights)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

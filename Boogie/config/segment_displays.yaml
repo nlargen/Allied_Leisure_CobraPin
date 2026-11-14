@@ -97,3 +97,5 @@ segment_display_player:
   ball_started:
     ball_display:
       text: "{current_player.ball:d}"
+      color: white
+      flashing: off
