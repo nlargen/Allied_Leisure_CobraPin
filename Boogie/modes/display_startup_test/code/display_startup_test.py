@@ -11,6 +11,14 @@ class DisplayStartupTest(Mode):
     def mode_start(self, **kwargs):
         del kwargs
         self._digit = 0
+        self._set_display_text("BOOGIE")
+        self.delay.add(
+            ms=self.STEP_DURATION_MS,
+            callback=self._start_digit_test,
+            name="start_digit_test",
+        )
+
+    def _start_digit_test(self):
         self._show_digit()
         self.delay.add(
             ms=self.STEP_DURATION_MS,

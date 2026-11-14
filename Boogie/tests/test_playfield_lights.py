@@ -586,11 +586,15 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
     def get_config_file(self):
         return "config.yaml"
 
-    def test_startup_test_cycles_digits_once_then_clears(self):
+    def test_startup_test_shows_boogie_then_cycles_digits_and_clears(self):
         displays = (
             self.machine.segment_displays["player1_display"].hw_display,
             self.machine.segment_displays["player2_display"].hw_display,
         )
+
+        for display in displays:
+            self.assertEqual("  BOOGIE", display.text)
+        self.advance_time_and_run(1)
 
         for digit in range(10):
             expected = str(digit) * 8
@@ -656,6 +660,19 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
             self.machine.segment_displays["player2_display"].hw_display,
         )
         self.assertTrue(self.machine.modes["display_startup_test"].active)
+        for display in displays:
+            self.assertEqual("  BOOGIE", display._current_text.convert_to_str())
+        for group_name in ("player1_neoseg", "player2_neoseg"):
+            group = self.machine.neoseg_displays[group_name]
+            self.assertTrue(
+                any(
+                    light.get_color().rgb != (0, 0, 0)
+                    for light in group.lights
+                ),
+                group_name,
+            )
+        self.advance_time_and_run(1)
+
         for digit in range(10):
             expected = str(digit) * 8
             for display in displays:
