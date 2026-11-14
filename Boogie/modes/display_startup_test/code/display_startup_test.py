@@ -5,7 +5,13 @@ from mpf.platforms.interfaces.segment_display_platform_interface import Flashing
 
 class DisplayStartupTest(Mode):
 
-    DISPLAY_NAMES = ("player1_display", "player2_display")
+    DISPLAY_NAMES = (
+        "player1_display",
+        "player2_display",
+        "player3_display",
+        "player4_display",
+        "ball_display",
+    )
     STEP_DURATION_MS = 1000
     BOOGIE_DURATION_MS = 5000
 
@@ -33,7 +39,7 @@ class DisplayStartupTest(Mode):
 
     def _advance_digit(self):
         if self._digit == 9:
-            self.stop()
+            self._show_flashing_zeros()
             return
 
         self._digit += 1
@@ -45,14 +51,24 @@ class DisplayStartupTest(Mode):
         )
 
     def _show_digit(self):
-        self._set_display_text(str(self._digit) * 8)
+        self._set_display_text(str(self._digit))
 
-    def _set_display_text(self, text):
+    def _show_flashing_zeros(self):
+        self._set_display_text("0", FlashingType.FLASH_ALL)
+
+    def _set_display_text(self, text, flashing=FlashingType.NO_FLASH):
         for display_name in self.DISPLAY_NAMES:
-            self.machine.segment_displays[display_name].add_text_entry(
-                text=text,
+            display = self.machine.segment_displays[display_name]
+            if len(text) == 1 and text.isdigit():
+                display_text = text * display.size
+            elif display.size == 2 and text == "BOOGIE":
+                display_text = "bL"
+            else:
+                display_text = text
+            display.add_text_entry(
+                text=display_text,
                 color=[RGBColor("white")],
-                flashing=FlashingType.NO_FLASH,
+                flashing=flashing,
                 flash_mask="",
                 transition=None,
                 transition_out=None,

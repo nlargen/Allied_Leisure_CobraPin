@@ -35,26 +35,27 @@ The MPF machine configuration is in [`Boogie/config/`](./Boogie/config/), with
 game modes in [`Boogie/modes/`](./Boogie/modes/).
 
 - [`config.yaml`](./Boogie/config/config.yaml) sets up a five-ball game for up
-  to two players, loads the attract, base, drop-target-scoring,
-  score-milestones, and playfield-lights modes, and selects the OPP platform
-  with Gen2 driver boards for CobraPin. It retains the Windows `COM9, COM10`
-  ports. Tilt mode is currently disabled because no physical tilt switch is
-  configured.
+  to four players, loads the attract, base, drop-target-scoring,
+  score-milestones, playfield-lights, and display-startup-test modes, and
+  selects the OPP platform with Gen2 driver boards for CobraPin. It retains
+  the Windows `COM9, COM10` ports. Tilt mode is currently disabled because no
+  physical tilt switch is configured.
 - [`config_raspberry_pi.yaml`](./Boogie/config/config_raspberry_pi.yaml)
   overrides only `opp.ports` for Linux, leaving the shared game config and
   Windows COM ports unchanged. It uses the two Raspberry Pi
   `/dev/serial/by-id/` device paths; update them if the connected controllers
   change.
 - [`lights.yaml`](./Boogie/config/lights.yaml) defines the physical NeoSeg
-  light groups on NEO 0 in player 1, player 2, ball, player 3, player 4 order,
-  using one light channel per segment. The ball and player 3/4 groups remain
-  commented out until those displays are connected.
-- [`segment_displays.yaml`](./Boogie/config/segment_displays.yaml) maps the two
-  connected NeoSeg groups to logical player score displays. Player 1 and
-  player 2 scores update during play.
-  At boot, both connected displays show `BOOGIE` for five seconds, then repeated
-  digits 0 through 9 for one second each, then clear; adding a player stops the
-  test so score values take over.
+  light groups on NEO 0 in physical chain order: player 2 at channel 0, player
+  4 at 120, the 30-channel ball-count display at 240, player 1 at 270, and
+  player 3 at 390.
+- [`segment_displays.yaml`](./Boogie/config/segment_displays.yaml) maps all
+  five NeoSeg groups to four player score displays and the two-digit ball-count
+  display. Player scores update during play, and the ball display shows the
+  current ball number.
+  At boot, the four score displays show `BOOGIE` and the ball display shows
+  `bL` for five seconds. All displays then cycle repeated digits 0 through 9
+  for one second each, followed by flashing zeroes until a game starts.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and
   cabinet switches to logical switch names and the confirmed hardware
   assignments. Tilt and credit switches are not currently configured.
@@ -126,7 +127,7 @@ s_outhole_switch active
 
 ### Game rules
 
-- **Game setup:** Five balls per game, up to two players, and free play.
+- **Game setup:** Five balls per game, up to four players, and free play.
 - **Basic scoring:** The top 10-point target scores 10; the raise-gate targets,
   pop bumper, and slingshots score 50; the eight `s_500_ab` bank targets score
   500. The four physical drop targets score 500 when a target falls after its

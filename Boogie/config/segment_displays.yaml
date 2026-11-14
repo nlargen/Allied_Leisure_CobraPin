@@ -22,33 +22,36 @@ segment_displays:
       light_groups:
         - player2_neoseg
       type: 14segment
-  # ball_display:
-  #   number: 5
-  #   size: 2
-  #   integrated_dots: true
-  #   use_dots_for_commas: true
-  #   platform_settings:
-  #     light_groups:
-  #       - ball_neoseg
-  #     type: 14segment
-  # player3_display:
-  #   number: 3
-  #   size: 8
-  #   integrated_dots: true
-  #   use_dots_for_commas: true
-  #   platform_settings:
-  #     light_groups:
-  #       - player3_neoseg
-  #     type: 14segment
-  # player4_display:
-  #   number: 4
-  #   size: 8
-  #   integrated_dots: true
-  #   use_dots_for_commas: true
-  #   platform_settings:
-  #     light_groups:
-  #       - player4_neoseg
-  #     type: 14segment
+  ball_display:
+    number: 5
+    size: 2
+    update_method: replace
+    integrated_dots: true
+    use_dots_for_commas: true
+    platform_settings:
+      light_groups:
+        - ball_neoseg
+      type: 14segment
+  player3_display:
+    number: 3
+    size: 8
+    update_method: replace
+    integrated_dots: true
+    use_dots_for_commas: true
+    platform_settings:
+      light_groups:
+        - player3_neoseg
+      type: 14segment
+  player4_display:
+    number: 4
+    size: 8
+    update_method: replace
+    integrated_dots: true
+    use_dots_for_commas: true
+    platform_settings:
+      light_groups:
+        - player4_neoseg
+      type: 14segment
 
 segment_display_player:
   player_added{num==1}:
@@ -61,12 +64,16 @@ segment_display_player:
       text: "{players[1].score:d}"
       color: white
       flashing: off
-  # player_added{num==3}:
-  #   player3_display:
-  #     text: "{players[2].score:d}"
-  # player_added{num==4}:
-  #   player4_display:
-  #     text: "{players[3].score:d}"
+  player_added{num==3}:
+    player3_display:
+      text: "{players[2].score:d}"
+      color: white
+      flashing: off
+  player_added{num==4}:
+    player4_display:
+      text: "{players[3].score:d}"
+      color: white
+      flashing: off
   player_score{player_num==1}:
     player1_display:
       text: "{players[0].score:d}"
@@ -77,12 +84,16 @@ segment_display_player:
       text: "{players[1].score:d}"
       color: white
       flashing: off
-  # player_score{player_num==3}:
-  #   player3_display:
-  #     text: "{players[2].score:d}"
-  # player_score{player_num==4}:
-  #   player4_display:
-  #     text: "{players[3].score:d}"
-  # ball_started:
-  #   ball_display:
-  #     text: "{current_player.ball:d}"
+  player_score{player_num==3}:
+    player3_display:
+      text: "{players[2].score:d}"
+      color: white
+      flashing: off
+  player_score{player_num==4}:
+    player4_display:
+      text: "{players[3].score:d}"
+      color: white
+      flashing: off
+  ball_started:
+    ball_display:
+      text: "{current_player.ball:d}"

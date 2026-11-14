@@ -4,6 +4,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock, patch
 
 from mpf.file_interfaces.yaml_interface import YamlInterface
+from mpf.platforms.interfaces.segment_display_platform_interface import FlashingType
 from mpf.tests.MpfFakeGameTestCase import MpfFakeGameTestCase
 from mpf.tests.MpfTestCase import MpfTestCase
 from modes.drop_target_scoring.code.drop_target_scoring import DropTargetScoring
@@ -540,34 +541,34 @@ class BoogieMachineStartupTest(MpfTestCase):
     def test_score_milestones_mode_loads(self):
         self.assertIn("score_milestones", self.machine.modes)
 
-    def test_only_connected_score_displays_are_active(self):
+    def test_all_score_and_ball_displays_are_active_in_chain_order(self):
         self.assertEqual(
-            {"player1_display", "player2_display"},
+            {
+                "player1_display",
+                "player2_display",
+                "player3_display",
+                "player4_display",
+                "ball_display",
+            },
             {display.name for display in self.machine.segment_displays.values()},
         )
         self.assertEqual(
-            "0-0-0",
-            self.machine.neoseg_displays["player1_neoseg"].config["start_channel"],
+            {
+                "player2_neoseg": "0-0-0",
+                "player4_neoseg": "0-0-120",
+                "ball_neoseg": "0-0-240",
+                "player1_neoseg": "0-0-270",
+                "player3_neoseg": "0-0-390",
+            },
+            {
+                group_name: group.config["start_channel"]
+                for group_name, group in self.machine.neoseg_displays.items()
+            },
         )
+        for group in self.machine.neoseg_displays.values():
+            self.assertEqual({"white"}, set(group.lights[0].hw_drivers))
         self.assertEqual(
-            "0-0-120",
-            self.machine.neoseg_displays["player2_neoseg"].config["start_channel"],
-        )
-        self.assertEqual(
-            {"white"},
-            set(
-                self.machine.neoseg_displays[
-                    "player1_neoseg"
-                ].lights[0].hw_drivers
-            ),
-        )
-        self.assertEqual(
-            {"white"},
-            set(
-                self.machine.neoseg_displays[
-                    "player2_neoseg"
-                ].lights[0].hw_drivers
-            ),
+            30, len(self.machine.neoseg_displays["ball_neoseg"].lights)
         )
 
     def test_all_configured_modes_load(self):
@@ -586,32 +587,67 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
     def get_config_file(self):
         return "config.yaml"
 
-    def test_startup_test_shows_boogie_then_cycles_digits_and_clears(self):
-        displays = (
-            self.machine.segment_displays["player1_display"].hw_display,
-            self.machine.segment_displays["player2_display"].hw_display,
+    def test_startup_test_flashes_zeroes_until_game_starts(self):
+        display_names = (
+            "player1_display",
+            "player2_display",
+            "player3_display",
+            "player4_display",
+            "ball_display",
+        )
+        displays = tuple(
+            self.machine.segment_displays[name].hw_display
+            for name in display_names
         )
 
-        for display in displays:
-            self.assertEqual("  BOOGIE", display.text)
+        for name, display in zip(display_names, displays):
+            self.assertEqual(
+                "bL" if name == "ball_display" else "  BOOGIE",
+                display.text,
+            )
         for _ in range(4):
             self.advance_time_and_run(1)
             for display in displays:
-                self.assertEqual("  BOOGIE", display.text)
+                self.assertIn(display.text, ("  BOOGIE", "bL"))
         self.advance_time_and_run(1)
-        for display in displays:
-            self.assertEqual("00000000", display.text)
+        for name, display in zip(display_names, displays):
+            expected = "00" if name == "ball_display" else "00000000"
+            self.assertEqual(expected, display.text)
 
         for digit in range(10):
-            expected = str(digit) * 8
-            for display in displays:
+            for name, display in zip(display_names, displays):
+                expected = str(digit) * (2 if name == "ball_display" else 8)
                 self.assertEqual(expected, display.text)
             if digit < 9:
                 self.advance_time_and_run(1)
 
         self.advance_time_and_run(1)
-        for display in displays:
-            self.assertEqual("        ", display.text)
+        for name, display in zip(display_names, displays):
+            expected = "00" if name == "ball_display" else "00000000"
+            self.assertEqual(expected, display.text)
+            self.assertEqual(
+                FlashingType.FLASH_ALL,
+                self.machine.segment_displays[name].flashing,
+            )
+        self.assertTrue(self.machine.modes["display_startup_test"].active)
+
+        self.advance_time_and_run(3)
+        for name in display_names:
+            self.assertEqual(
+                FlashingType.FLASH_ALL,
+                self.machine.segment_displays[name].flashing,
+            )
+        self.post_event(
+            "virtual_platform_add_ball_to_device",
+            ball_device="bd_drain",
+        )
+        self.advance_time_and_run()
+        self.start_game(num_balls_known=1)
+        for name in display_names:
+            self.assertNotEqual(
+                FlashingType.FLASH_ALL,
+                self.machine.segment_displays[name].flashing,
+            )
         self.assertFalse(self.machine.modes["display_startup_test"].active)
 
     def test_player_scores_update_connected_displays(self):
@@ -621,6 +657,13 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
         player2_display = self.machine.segment_displays[
             "player2_display"
         ].hw_display
+        player3_display = self.machine.segment_displays[
+            "player3_display"
+        ].hw_display
+        player4_display = self.machine.segment_displays[
+            "player4_display"
+        ].hw_display
+        ball_display = self.machine.segment_displays["ball_display"].hw_display
 
         self.post_event(
             "virtual_platform_add_ball_to_device",
@@ -629,20 +672,31 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
         self.advance_time_and_run()
         self.start_game(num_balls_known=1)
         self.assertEqual("       0", player1_display.text)
-
+        self.assertEqual("1", ball_display.text.strip())
         self.add_player()
         self.assertEqual("       0", player2_display.text)
+        self.add_player()
+        self.add_player()
+        self.assertEqual(4, len(self.machine.game.player_list))
+        self.assertEqual("       0", player3_display.text)
+        self.assertEqual("       0", player4_display.text)
 
         self.machine.game.player_list[0].score = 12345
         self.machine.game.player_list[1].score = 67890
+        self.machine.game.player_list[2].score = 13579
+        self.machine.game.player_list[3].score = 24680
         self.advance_time_and_run()
 
         self.assertEqual("   12345", player1_display.text)
         self.assertEqual("   67890", player2_display.text)
+        self.assertEqual("   13579", player3_display.text)
+        self.assertEqual("   24680", player4_display.text)
 
         self.advance_time_and_run(10)
         self.assertEqual("   12345", player1_display.text)
         self.assertEqual("   67890", player2_display.text)
+        self.assertEqual("   13579", player3_display.text)
+        self.assertEqual("   24680", player4_display.text)
 
 
 class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
@@ -664,11 +718,21 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         displays = (
             self.machine.segment_displays["player1_display"].hw_display,
             self.machine.segment_displays["player2_display"].hw_display,
+            self.machine.segment_displays["player3_display"].hw_display,
+            self.machine.segment_displays["player4_display"].hw_display,
+            self.machine.segment_displays["ball_display"].hw_display,
         )
         self.assertTrue(self.machine.modes["display_startup_test"].active)
-        for display in displays:
-            self.assertEqual("  BOOGIE", display._current_text.convert_to_str())
-        for group_name in ("player1_neoseg", "player2_neoseg"):
+        for index, display in enumerate(displays):
+            expected = "bL" if index == 4 else "  BOOGIE"
+            self.assertEqual(expected, display._current_text.convert_to_str())
+        for group_name in (
+            "player1_neoseg",
+            "player2_neoseg",
+            "ball_neoseg",
+            "player3_neoseg",
+            "player4_neoseg",
+        ):
             group = self.machine.neoseg_displays[group_name]
             self.assertTrue(
                 any(
@@ -678,14 +742,21 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
                 group_name,
             )
         self.advance_time_and_run(5)
-        for display in displays:
-            self.assertEqual("00000000", display._current_text.convert_to_str())
+        for index, display in enumerate(displays):
+            expected = "00" if index == 4 else "00000000"
+            self.assertEqual(expected, display._current_text.convert_to_str())
 
         for digit in range(10):
-            expected = str(digit) * 8
-            for display in displays:
+            for index, display in enumerate(displays):
+                expected = str(digit) * (2 if index == 4 else 8)
                 self.assertEqual(expected, display._current_text.convert_to_str())
-            for group_name in ("player1_neoseg", "player2_neoseg"):
+            for group_name in (
+                "player1_neoseg",
+                "player2_neoseg",
+                "ball_neoseg",
+                "player3_neoseg",
+                "player4_neoseg",
+            ):
                 group = self.machine.neoseg_displays[group_name]
                 self.assertTrue(
                     any(
@@ -698,23 +769,25 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
                 self.advance_time_and_run(1)
 
         self.advance_time_and_run(1)
-        for display in displays:
-            self.assertEqual("        ", display._current_text.convert_to_str())
-        self.assertFalse(self.machine.modes["display_startup_test"].active)
-        for group_name in ("player1_neoseg", "player2_neoseg"):
-            group = self.machine.neoseg_displays[group_name]
-            self.assertFalse(
-                any(
-                    light.get_color().rgb != (0, 0, 0)
-                    for light in group.lights
-                ),
-                group_name,
+        for display_name in (
+            "player1_display",
+            "player2_display",
+            "player3_display",
+            "player4_display",
+            "ball_display",
+        ):
+            self.assertEqual(
+                FlashingType.FLASH_ALL,
+                self.machine.segment_displays[display_name].flashing,
             )
+        self.assertTrue(self.machine.modes["display_startup_test"].active)
 
     def test_player_scores_reach_neoseg_platform(self):
         displays = (
             self.machine.segment_displays["player1_display"].hw_display,
             self.machine.segment_displays["player2_display"].hw_display,
+            self.machine.segment_displays["player3_display"].hw_display,
+            self.machine.segment_displays["player4_display"].hw_display,
         )
         self.post_event(
             "virtual_platform_add_ball_to_device",
@@ -723,9 +796,13 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         self.advance_time_and_run()
         self.start_game(num_balls_known=1)
         self.add_player()
+        self.add_player()
+        self.add_player()
 
         self.machine.game.player_list[0].score = 12345
         self.machine.game.player_list[1].score = 67890
+        self.machine.game.player_list[2].score = 13579
+        self.machine.game.player_list[3].score = 24680
         self.advance_time_and_run()
 
         self.assertEqual(
@@ -736,9 +813,24 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
             "   67890",
             self.machine.segment_displays["player2_display"].text,
         )
+        self.assertEqual(
+            "   13579",
+            self.machine.segment_displays["player3_display"].text,
+        )
+        self.assertEqual(
+            "   24680",
+            self.machine.segment_displays["player4_display"].text,
+        )
         self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
         self.assertEqual("   67890", displays[1]._current_text.convert_to_str())
-        for group_name in ("player1_neoseg", "player2_neoseg"):
+        self.assertEqual("   13579", displays[2]._current_text.convert_to_str())
+        self.assertEqual("   24680", displays[3]._current_text.convert_to_str())
+        for group_name in (
+            "player1_neoseg",
+            "player2_neoseg",
+            "player3_neoseg",
+            "player4_neoseg",
+        ):
             group = self.machine.neoseg_displays[group_name]
             self.assertTrue(
                 any(
@@ -750,6 +842,8 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
         self.advance_time_and_run(1)
         self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
         self.assertEqual("   67890", displays[1]._current_text.convert_to_str())
+        self.assertEqual("   13579", displays[2]._current_text.convert_to_str())
+        self.assertEqual("   24680", displays[3]._current_text.convert_to_str())
 
 
 if __name__ == "__main__":

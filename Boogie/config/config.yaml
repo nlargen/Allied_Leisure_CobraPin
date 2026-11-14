@@ -23,7 +23,7 @@ machine:
 
 game:
   balls_per_game: 5
-  max_players: 2
+  max_players: 4
 
 credits:
   free_play: true
