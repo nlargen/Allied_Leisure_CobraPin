@@ -635,5 +635,73 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
         self.assertEqual("   67890", player2_display.text)
 
 
+class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
+
+    def setUp(self):
+        self.machine_config_patches["hardware"] = {"platform": "virtual"}
+        super().setUp()
+
+    def get_platform(self):
+        return None
+
+    def get_machine_path(self):
+        return str(BOOGIE_ROOT)
+
+    def get_config_file(self):
+        return "config.yaml"
+
+    def test_startup_test_drives_neoseg_light_groups(self):
+        displays = (
+            self.machine.segment_displays["player1_display"].hw_display,
+            self.machine.segment_displays["player2_display"].hw_display,
+        )
+        self.assertTrue(self.machine.modes["display_startup_test"].active)
+        for digit in range(10):
+            expected = str(digit) * 8
+            for display in displays:
+                self.assertEqual(expected, display._current_text.convert_to_str())
+            for group_name in ("player1_neoseg", "player2_neoseg"):
+                group = self.machine.neoseg_displays[group_name]
+                self.assertTrue(any(light.stack for light in group.lights))
+            if digit < 9:
+                self.advance_time_and_run(1)
+
+        self.advance_time_and_run(1)
+        for display in displays:
+            self.assertEqual("        ", display._current_text.convert_to_str())
+        self.assertFalse(self.machine.modes["display_startup_test"].active)
+
+    def test_player_scores_reach_neoseg_platform(self):
+        displays = (
+            self.machine.segment_displays["player1_display"].hw_display,
+            self.machine.segment_displays["player2_display"].hw_display,
+        )
+        self.post_event(
+            "virtual_platform_add_ball_to_device",
+            ball_device="bd_drain",
+        )
+        self.advance_time_and_run()
+        self.start_game(num_balls_known=1)
+        self.add_player()
+
+        self.machine.game.player_list[0].score = 12345
+        self.machine.game.player_list[1].score = 67890
+        self.advance_time_and_run()
+
+        self.assertEqual(
+            "   12345",
+            self.machine.segment_displays["player1_display"].text,
+        )
+        self.assertEqual(
+            "   67890",
+            self.machine.segment_displays["player2_display"].text,
+        )
+        self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
+        self.assertEqual("   67890", displays[1]._current_text.convert_to_str())
+        self.advance_time_and_run(1)
+        self.assertEqual("   12345", displays[0]._current_text.convert_to_str())
+        self.assertEqual("   67890", displays[1]._current_text.convert_to_str())
+
+
 if __name__ == "__main__":
     unittest.main()

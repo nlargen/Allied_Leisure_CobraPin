@@ -89,9 +89,11 @@ segment_display_player:
   player_added{num==1}:
     player1_display:
       text: "{players[0].score:d}"
+      flashing: off
   player_added{num==2}:
     player2_display:
       text: "{players[1].score:d}"
+      flashing: off
   # player_added{num==3}:
   #   player3_display:
   #     text: "{players[2].score:d}"
@@ -101,9 +103,11 @@ segment_display_player:
   player_score{player_num==1}:
     player1_display:
       text: "{players[0].score:d}"
+      flashing: off
   player_score{player_num==2}:
     player2_display:
       text: "{players[1].score:d}"
+      flashing: off
   # player_score{player_num==3}:
   #   player3_display:
   #     text: "{players[2].score:d}"

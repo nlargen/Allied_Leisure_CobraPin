@@ -1,4 +1,5 @@
 from mpf.core.mode import Mode
+from mpf.platforms.interfaces.segment_display_platform_interface import FlashingType
 
 
 class DisplayStartupTest(Mode):
@@ -41,8 +42,8 @@ class DisplayStartupTest(Mode):
             self.machine.segment_displays[display_name].add_text_entry(
                 text=text,
                 color=None,
-                flashing=None,
-                flash_mask=None,
+                flashing=FlashingType.NO_FLASH,
+                flash_mask="",
                 transition=None,
                 transition_out=None,
                 priority=100,
