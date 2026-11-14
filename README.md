@@ -52,7 +52,7 @@ game modes in [`Boogie/modes/`](./Boogie/modes/).
 - [`segment_displays.yaml`](./Boogie/config/segment_displays.yaml) maps the two
   connected NeoSeg groups to logical player score displays. Player 1 and
   player 2 scores update during play.
-  At boot, both connected displays show `BOOGIE` for one second, then repeated
+  At boot, both connected displays show `BOOGIE` for five seconds, then repeated
   digits 0 through 9 for one second each, then clear; adding a player stops the
   test so score values take over.
 - [`switches.yaml`](./Boogie/config/switches.yaml) maps the playfield and

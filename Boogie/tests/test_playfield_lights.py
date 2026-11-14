@@ -594,7 +594,13 @@ class BoogieScoreDisplayTest(MpfFakeGameTestCase):
 
         for display in displays:
             self.assertEqual("  BOOGIE", display.text)
+        for _ in range(4):
+            self.advance_time_and_run(1)
+            for display in displays:
+                self.assertEqual("  BOOGIE", display.text)
         self.advance_time_and_run(1)
+        for display in displays:
+            self.assertEqual("00000000", display.text)
 
         for digit in range(10):
             expected = str(digit) * 8
@@ -671,7 +677,9 @@ class BoogieLightSegmentDisplayTest(MpfFakeGameTestCase):
                 ),
                 group_name,
             )
-        self.advance_time_and_run(1)
+        self.advance_time_and_run(5)
+        for display in displays:
+            self.assertEqual("00000000", display._current_text.convert_to_str())
 
         for digit in range(10):
             expected = str(digit) * 8

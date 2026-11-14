@@ -7,13 +7,14 @@ class DisplayStartupTest(Mode):
 
     DISPLAY_NAMES = ("player1_display", "player2_display")
     STEP_DURATION_MS = 1000
+    BOOGIE_DURATION_MS = 5000
 
     def mode_start(self, **kwargs):
         del kwargs
         self._digit = 0
         self._set_display_text("BOOGIE")
         self.delay.add(
-            ms=self.STEP_DURATION_MS,
+            ms=self.BOOGIE_DURATION_MS,
             callback=self._start_digit_test,
             name="start_digit_test",
         )
