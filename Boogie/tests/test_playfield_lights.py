@@ -142,17 +142,17 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.post("s_50_rollover_1_active")
         self.assertEqual(50, self.mode.player.score)
         self.assertEqual(2000, self.mode._bonus_value)
-        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(1, self.coils["c_chime_10"].pulse_count)
 
         self.post("s_50_rollover_2_active")
         self.assertEqual(550, self.mode.player.score)
         self.assertTrue(self.lights["l_500_when_lit_2"].is_on)
         self.assertEqual(3000, self.mode._bonus_value)
-        self.assertEqual(2, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(1, self.coils["c_chime_50"].pulse_count)
 
         self.post("s_50_rollover_2_active")
         self.assertEqual(1050, self.mode.player.score)
-        self.assertEqual(3, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(2, self.coils["c_chime_50"].pulse_count)
 
     def test_base_mode_does_not_add_duplicate_rollover_scoring(self):
         base_config = YamlInterface.process(
@@ -205,7 +205,7 @@ class PlayfieldLightsTest(unittest.TestCase):
         self.assertFalse(self.lights["l_bonus_advance_1"].is_on)
         self.assertFalse(self.lights["l_special_left"].is_on)
 
-    def test_ball_ending_counts_bonus_down_and_chimes_each_thousand(self):
+    def test_ball_ending_counts_bonus_down_with_100_point_chime_each_thousand(self):
         self.start_mode(selected_rollover=3)
         self.post("s_50_rollover_1_active")
         self.post("s_500_ab_1_active")
@@ -226,8 +226,8 @@ class PlayfieldLightsTest(unittest.TestCase):
             self.assertEqual("bonus_countdown", delay_name)
             self.assertEqual(3050 - remaining, self.mode.player.score)
             self.assertEqual(
-                1 + 3 - remaining // 1000,
-                self.coils["c_chime_50"].pulse_count,
+                3 - remaining // 1000,
+                self.coils["c_chime_100"].pulse_count,
             )
             if remaining:
                 self.assertTrue(self.lights[f"l_bonus_{remaining}"].is_on)
@@ -238,10 +238,12 @@ class PlayfieldLightsTest(unittest.TestCase):
             for value in range(1000, 11000, 1000)
         )))
         self.assertEqual([], self.mode.delay.pending)
+        self.assertEqual(1, self.coils["c_chime_10"].pulse_count)
+        self.assertEqual(0, self.coils["c_chime_50"].pulse_count)
 
         self.post("ball_ending", queue=FakeQueue())
         self.assertEqual(3050, self.mode.player.score)
-        self.assertEqual(4, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(3, self.coils["c_chime_100"].pulse_count)
 
     def test_ball_will_end_doubles_bonus_when_double_bonus_is_lit(self):
         self.start_mode()
@@ -256,7 +258,7 @@ class PlayfieldLightsTest(unittest.TestCase):
         while self.mode.delay.pending:
             self.mode.delay.run_next()
 
-        self.assertEqual(14, self.coils["c_chime_50"].pulse_count)
+        self.assertEqual(14, self.coils["c_chime_100"].pulse_count)
         self.assertEqual(14000, self.mode.player.score)
         self.assertFalse(queue.waiting)
         self.assertTrue(self.mode._bonus_awarded)
@@ -454,23 +456,24 @@ class PlayfieldLightsTest(unittest.TestCase):
             coil_player["ball_drain"],
         )
         self.assertEqual("c_chime_10", coil_player["s_10_top_active"])
-        self.assertEqual("c_chime_10", coil_player["s_pop_bumper_active"])
+        self.assertEqual("c_chime_50", coil_player["s_pop_bumper_active"])
         for event in (
             "s_raise_target_a_og_active",
             "s_raise_target_d_og_active",
+        ):
+            self.assertEqual("c_chime_50", coil_player[event])
+        for event in (
             "s_raise_target_b_active",
             "s_raise_target_c_active",
-            "s_pop_bumper_active",
             "s_slingshot_left_active",
             "s_slingshot_right_active",
         ):
             self.assertEqual("c_chime_10", coil_player[event])
         for number in range(1, 9):
             event = f"s_500_ab_{number}_active"
-            expected_chime = "c_chime_100" if number % 2 else "c_chime_50"
-            self.assertEqual(expected_chime, coil_player[event])
-        for event in ("s_500_rollover_1_active", "s_500_rollover_2_active"):
             self.assertEqual("c_chime_50", coil_player[event])
+        for event in ("s_500_rollover_1_active", "s_500_rollover_2_active"):
+            self.assertEqual("c_chime_100", coil_player[event])
         for number, target in enumerate("abcd", start=1):
             self.assertEqual(
                 f"c_drop_target_{number}",

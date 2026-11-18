@@ -122,7 +122,7 @@ class PlayfieldLights(Mode):
             self.machine.coils["c_chime_50"].pulse()
         else:
             self.player.score += 50
-            self.machine.coils["c_chime_50"].pulse()
+            self.machine.coils["c_chime_10"].pulse()
 
     def _bonus_advance_target_hit(self, target_number, **kwargs):
         del kwargs
@@ -195,7 +195,7 @@ class PlayfieldLights(Mode):
         points = min(1000, self._bonus_remaining)
         self._bonus_remaining -= points
         self.player.score += points
-        self.machine.coils["c_chime_50"].pulse()
+        self.machine.coils["c_chime_100"].pulse()
         self._show_bonus_remaining()
 
         if self._bonus_remaining:

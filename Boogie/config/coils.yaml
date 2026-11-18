@@ -49,19 +49,19 @@ coils:
   # Chimes are not connected yet.
   c_chime_10:
      number: "0-0-7"
-     default_pulse_ms: 30
+     default_pulse_ms: 20   
      max_pulse_ms: 200  
      default_recycle: true
      default_pulse_power: .85 
   c_chime_50:
      number: "0-0-15"
-     default_pulse_ms: 30
+     default_pulse_ms: 20
      max_pulse_ms: 200
      default_recycle: true
      default_pulse_power: .85
   c_chime_100:
      number: "0-0-5"
-     default_pulse_ms: 30
+     default_pulse_ms: 20
      max_pulse_ms: 200
      default_recycle: true
      default_pulse_power: .85 
