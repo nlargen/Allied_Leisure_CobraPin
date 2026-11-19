@@ -8,16 +8,16 @@ coils:
   # Allied 264-1-155 — dual-wound flippers.
   c_flipper_left_main:
     number: "1-0-0"
-    default_pulse_ms: 200
+    default_pulse_ms: 45
     max_pulse_ms: 250
-    default_pulse_power: .85
+    default_pulse_power: 1
     max_pulse_power: 1.0
     
   c_flipper_right_main:
     number: "1-0-7"
-    default_pulse_ms: 200
+    default_pulse_ms: 45
     max_pulse_ms: 250
-    default_pulse_power: .85
+    default_pulse_power: 1
     max_pulse_power: 1.0
 
   c_flipper_left_hold:
@@ -55,13 +55,13 @@ coils:
      default_pulse_power: 1 
   c_chime_50:
      number: "0-0-15"
-     default_pulse_ms: 20
+     default_pulse_ms: 25
      max_pulse_ms: 200
      default_recycle: true
      default_pulse_power: 1
   c_chime_100:
      number: "0-0-5"
-     default_pulse_ms: 20
+     default_pulse_ms: 30
      max_pulse_ms: 200
      default_recycle: true
      default_pulse_power: 1 
@@ -121,12 +121,12 @@ coils:
     number: "0-0-0"
     default_pulse_ms: 35
     max_pulse_ms: 40
-    default_hold_power: .15 
+    default_hold_power: .10 
     max_hold_power: .45
     # Allied 264-1-45 gate.
   c_gate_b:
     number: "0-0-1"
     default_pulse_ms: 35
     max_pulse_ms: 40
-    default_hold_power: .15
+    default_hold_power: .10
     max_hold_power: .45
